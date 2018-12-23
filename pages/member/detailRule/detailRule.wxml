@@ -1,0 +1,4 @@
+<import src="../../../plugs/wxParse/wxParse.wxml" />
+<view class='detailList paddingBox'>
+  <template is="wxParse" data="{{wxParseData:details.nodes}}" />
+</view>

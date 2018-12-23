@@ -1,0 +1,29 @@
+<view class='flexColumnH groupListBox'>
+  <block wx:for='{{groupListData}}' wx:key='id'>
+    <view style=' position:relative;'>
+      <view class='paddingBox groupItem flexRow' data-type='1' data-product_id='{{item.product_id}}' data-id='{{item.id}}' bindtap='skinpTo' data-isJoin='{{item.isJoin}}'>
+        <view class='groupImg'>
+          <image src='{{item.imgurl}}'></image>
+        </view>
+        <view class='flexColumnH groupListText'>
+          <view class='titles hiddenLien'>{{item.product_title}}</view>
+          <view class='flexRow' style='margin-top:20rpx'>
+            <view class='nowPrice'>￥{{item.group_price?item.group_price:0}}</view>
+            <view class='oldPrice'>￥{{item.max_price?item.max_price:0}}</view>
+          </view>
+          <view class='flexRow justBetween' style='margin-top:18rpx;'>
+            <view class='nums'>已拼{{item.buyNum?item.buyNum:0}}件</view>
+            <view class='flexRow opactions'>
+              <view class='numsPeople'>{{item.success_num?item.success_num:0}}人拼</view>
+              <view class='goBuy' wx:if="{{item.type==1}}">立即开团</view>
+              <view class='goBuy'  wx:if="{{item.type==2}}">线下开团</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:300rpx;top:0rpx' open-type="getPhoneNumber" data-type='card' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+    </view>
+
+  </block>
+
+</view>

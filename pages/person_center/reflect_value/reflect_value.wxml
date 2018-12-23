@@ -1,0 +1,20 @@
+<view class='paddingBox'>
+  <view class="flexRow paddingBox bgColor">
+    <view class='account'>账户余额</view>
+    <view class='searchText' style='font-size:38rpx'>{{money}}</view>
+    <!-- <input type='text' placeholder='请输入提现金额' value="{{searchText}}" data-type="2" bindconfirm="searchProduct" bindblur="setSearchText" placeholder-style='text-align:center' class='searchText' /> -->
+    <view class='account'>元</view>
+  </view>
+  <view  class='account paddingBox' >提现金额</view>
+  <view class='flexRow paddingBox bottom_line'>
+      <view class='account2'>¥</view>
+      <input type='digit' placeholder='请输入提现金额' value="{{getMoney}}"  bindinput="setMoney" placeholder-style='text-align:center' class='searchText searchText2' />
+      <view class='account'>元</view>
+  </view>
+  <view class='flexRow allMoney'>
+    <view>提现到微信钱包--</view>
+    <view class='toReflect' bindtap='totalMomeny'>全部提现</view>
+  </view>
+  <view class='toGetMoney' bindtap='getMoney'>提现</view>
+  <view class='arrive'>约1~3个工作日到账</view>
+</view>

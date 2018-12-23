@@ -1,0 +1,57 @@
+.searchText{
+  width:200rpx;
+  font-size:34rpx;
+  text-align:center;
+ line-height:60rpx;
+ margin:0 20rpx;
+ font-weight:bold;
+}
+.searchText2{
+  width:400rpx;
+  margin-left:102rpx;
+  text-align:center;
+  border-bottom:2rpx solid #fdfdfd;
+}
+.account{
+  font-size: 34rpx;
+  line-height:60rpx;
+}
+.bgColor{
+  margin-top:50rpx;
+  width:100%;
+  background:#fdfdfd;
+}
+.account2{
+  font-size:44rpx;
+  line-height:60rpx;
+  font-weight:bold;
+}
+.allMoney view{
+  font-size:26rpx;
+  color:#999;
+}
+.allMoney{
+  font-size:34rpx;
+  margin-left:20rpx;
+}
+.allMoney .toReflect{
+  color:red;
+}
+.toGetMoney{
+ width:600rpx;
+ height:80rpx;
+ line-height:80rpx;
+ text-align:center;
+ color:#fff;
+ background:#439057;
+ font-size:34rpx;
+ border-radius:20rpx;
+ margin:40rpx auto 0;
+}
+.arrive{
+  font-size:26rpx;
+  color:#999;
+  margin-top:200rpx;
+  width:100%;
+  text-align:center;
+}

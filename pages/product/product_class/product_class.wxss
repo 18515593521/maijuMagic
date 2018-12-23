@@ -1,0 +1,42 @@
+page {
+  background-color: #FFFFFF;
+  border-top: 2rpx solid #F3F3F3;
+}
+
+.title {
+    padding: 30rpx 20rpx 20rpx;
+    font-size: 24rpx;
+    color: #555555;
+}
+.classContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+.classContainer .item{
+    width: 371rpx;
+    border: 2rpx solid #F6F6F6;
+    text-align: center;
+    line-height: 80rpx;
+    font-size: 24rpx;
+    color: #555555;
+}
+.classContainer .active{
+    border: 2rpx solid #4ABDC2;
+    color: #4ABDC2;
+    font-weight: bold;
+}
+
+/*按钮*/
+.button{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color:#4ABDC2;
+  color: #FFFFFF;
+  font-size: 34rpx;
+  line-height: 88rpx;
+  text-align: center;
+}
+
+
+

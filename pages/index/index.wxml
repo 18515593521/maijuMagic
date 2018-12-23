@@ -1,0 +1,1734 @@
+<import src="../../template/modalBox/modalBox.wxml" />
+<!--基础版本-->
+<view wx:if='{{appModel==1}}'>
+  <!--地址信息-->
+  <view class="topBackground" bindlongtap="toggleDebugTool">
+    <view class="location">
+      <image src="/images/position.png"></image>
+    </view>
+    <view class="address">{{address}}</view>
+  </view>
+  <!--轮播图-->
+  <swiper indicator-dots="true" autoplay="true" current='{{currentIndex}}' circular="true" interval="3000" duration="1000" class="swiper" style='height:{{Height}}'>
+    <view wx:for="{{imgUrls}}" wx:key="id">
+      <swiper-item class='swipersImage'>
+       <image src="{{item.imgurl}}" bindload='imageHeight' style='height:{{Height}}' class="swiper_item_image"  data-urls='{{item.link}}' bindtap='bannerSkip' data-types='{{item.type}}' data-activityid="{{item.activity_id}}"   />
+        <button hidden='{{isAuthorizePhone}}' class="phoneButton" open-type="getPhoneNumber" data-type='banner' data-param='{{item.activity_id}}' bindgetphonenumber="authorizePhone"></button>
+      </swiper-item>
+    </view>
+  </swiper>
+  <!-- 店铺信息 -->
+  <view class='shopInfo' hidden='{{!showShopInfo.name}}'>
+    <view class='top'>
+      <image src='{{showShopInfo.imgurl}}'></image>
+      <view class='indexShopInfo'>
+        <view class='name'>{{showShopInfo.name}}</view>
+        <view class='address'>详细地址：{{showShopInfo.addr}}</view>
+      </view>
+    </view>
+    <!-- <view class='phone' bindtap="phoneServer">
+      <image src='/images/phone_2.png'></image>
+      <text>{{showShopInfo.phone_num}}</text>
+    </view> -->
+  </view>
+  <view wx:if='{{isHasSeller}}' class="search1 sellerText1 ">
+      <view class='sellerText' >专<text class='textBorder'>属顾</text>问</view>
+  </view>
+  <view wx:if='{{isHasSeller}}' class="search1 sellerInfo">
+      <view class=' sellerCoin' >
+        <image src='/images/icon/seller.png'></image>
+        <text>{{sellerInfo.sellerName}}</text>
+      </view>
+      <view class=' sellerCoin'bindtap='callSellerPhone' >
+        <image src='/images/icon/phone.png' bindtap='callSellerPhone'></image>
+        <text bindtap='callSellerPhone'>{{sellerInfo.sellerPhone}}</text>
+      </view>
+      <view class=' sellerCoin' >
+        <image src='/images/icon/weixin.png'></image>
+        <text>{{sellerInfo.weixinhao}}</text>
+        <text class="copy" bindtap="copy">复制</text>
+      </view>
+    </view>
+  <!--搜索-->
+  <view class="search">
+    <view>
+      <image src="/images/search.png" data-type="1" bindtap="searchProduct"></image>
+      <input type="text" class="searchClass" placeholder="输入产品标题搜索" placeholder-class="searchTips" value="{{searchText}}" data-type="2" bindconfirm="searchProduct" bindblur="setSearchText" />
+    </view>
+    <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:710rpx;height:60rpx;top:0;z-index:10000' open-type="getPhoneNumber" data-type='search' data-param='' bindgetphonenumber="authorizePhone"></button>
+  </view>
+  <!--菜单-->
+  <view class="menu">
+    <view wx:for="{{iconData}}" wx:key="*this">
+      <view class="item" data-url="{{item.url}}" data-type="1" catchtap="pageSkip">
+        <view>
+          <image src="{{item.image}}"></image>
+        </view>
+        <view class="text">{{item.name}}</view>
+      </view>
+      <!-- <view class='isNeedPay' hidden='{{!(item.name=="个人中心" && isNeedPay==1)}}'></view> -->
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:250rpx;height:160rpx;margin-top:-160rpx;z-index:10000' open-type="getPhoneNumber" data-type='menu' data-param='{{index+1}}' bindgetphonenumber="authorizePhone"></button>
+      <!--授权头像-->
+      <view wx:if='{{index==(iconData.length-1)}}'>
+        <button class="phoneButton" hidden='{{isAuthorizeInfo}}' style='width:160rpx;height:160rpx;margin-top:-160rpx;z-index:1' open-type="getUserInfo" bindgetuserinfo='getUserInfos' data-type='menu' data-param='3'></button>
+      </view>
+
+    </view>
+  </view>
+  <!--店铺卡券-->
+  <view hidden="{{!shopCardList.length}}">
+    <scroll-view class="cardContainer" scroll-x="true">
+      <block wx:for="{{shopCardList}}" wx:key="couponsId">
+        <view class="card">
+          <block wx:if="{{item.isGet==1}}">
+            <image class="cardImage" src="/images/card/bg_gray.png"></image>
+          </block>
+          <block wx:else>
+            <image class="cardImage" src="/images/card/{{cardType[item.card_tpye].backGroundImage}}"></image>
+          </block>
+          <view class="cardInfo" data-url="/pages/card/card_details/card_details?cardId={{item.couponsId}}" data-type="1" bindtap="pageSkip">
+            <view class="area1 {{item.isGet==1 ? 'bg_gray' : cardType[item.card_tpye].backGroundColor}}">
+              <view>{{cardType[item.card_tpye].name}}</view>
+            </view>
+            <view class="area2">
+              <view class="{{item.isGet==1 ? 'color_gray_1' : cardType[item.card_tpye].fontColor}}">
+                <block wx:if="{{item.card_tpye<3}}">
+                  <text style="font-size:24rpx;">¥</text>
+                  <text style="font-size:36rpx;">{{item.denomination}}</text>
+                </block>
+                <block wx:else>
+                  <text style="font-size:36rpx;">{{item.denomination}}折</text>
+                </block>
+              </view>
+              <block wx:if="{{item.card_tpye!=2}}">
+                <view class="color_gray_1" style="font-size:18rpx;"> 满{{item.use_condition?item.use_condition:0}}元使用</view>
+              </block>
+              <view class="color_gray_1">有效期：{{item.end_time}}</view>
+            </view>
+            <view class="area3">
+              <view class="free {{item.isGet==1 ? 'color_gray_1' : cardType[item.card_tpye].fontColor}}">
+                <view>{{item.isGet==1 ? '我已' :'免费'}}</view>
+                <view>领取</view>
+              </view>
+              <view class="use">已抢:{{item.getNum?item.getNum:0}}%</view>
+            </view>
+          </view>
+          <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:450rpx;height:120rpx;' open-type="getPhoneNumber" data-type='card' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+        </view>
+      </block>
+    </scroll-view>
+    <view class="more" data-url="/pages/card/card_list/card_list" data-type="1" bindtap="pageSkip">查看更多卡券</view>
+  </view>
+  <!--附近店铺推荐-->
+  <view wx:if='{{show_near_shop==1?true:false}}'>
+    <view hidden='{{storeShowHide}}'>
+      <view class='flexColumnH nearByInfo'>
+        <view class='storeNear flexRow' style='border-bottom:2rpx solid #f9f9f9'>
+          <image src='/images/menu/store.png' class='store1'></image>
+          <view class='storeTitle'>附近店铺推荐</view>
+        </view>
+        <!--服务商户-->
+        <view hidden='{{serverShowHide}}'>
+          <view class='flexColumnH ' style='border-bottom:10rpx solid #f6f6f6'>
+            <view class='paddingBox1 flexRow' data-indexs='server' bindtap='getToShop' data-title='{{serverInfo.name}}'>
+              <view class='flexColumnH shopBox'>
+                <view class='flexRow'>
+                  <view class='nearStore' style=' background:red;'>专属</view>
+                  <view class='titleStore hiddenLien2'>{{serverInfo.name}}</view>
+                </view>
+                <view class='flexRow touchBox'>
+                  <view class='callBox'>联系方式：</view>
+                  <view class='callPhone'>{{serverInfo.phone_num}}</view>
+                </view>
+                <view class='flexRow touchAdress'>
+                  <view class='callBox'>地理位置：</view>
+                  <view class='callPhone hiddenLien2'>{{serverInfo.addr}}</view>
+                </view>
+              </view>
+              <view class='rights'>
+                <image src='/images/arrows_right.png'></image>
+              </view>
+            </view>
+            <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='height:230rpx;margin-top:20rpx;' open-type="getPhoneNumber" data-type='shop' data-param='{{}}' bindgetphonenumber="authorizePhone"></button>
+          </view>
+        </view>
+        <!--就近店铺-->
+        <view hidden='{{shopBoxShowHide}}'>
+          <block wx:for='{{nearInfo}}' wx:key='*this' wx:for-item='shop' data-indexs='index'>
+            <view hidden='{{shopShowHide[index]}}'>
+              <view class='flexColumnH ' style='border-bottom:10rpx solid #f6f6f6'>
+                <view class='paddingBox1 flexRow' data-indexs='{{index}}' bindtap='getToShop' data-title='{{shop.name}}'>
+                  <view class='flexColumnH shopBox'>
+                    <view class='flexRow'>
+                      <view class='nearStore' style=' background:#4abcc2;'>附近</view>
+                      <view class='titleStore hiddenLien2'>{{shop.name}}</view>
+                    </view>
+                    <view class='flexRow touchBox'>
+                      <view class='callBox'>联系方式：</view>
+                      <view class='callPhone'>{{shop.phone_num}}</view>
+                    </view>
+                    <view class='flexRow touchAdress'>
+                      <view class='callBox'>地理位置：</view>
+                      <view class='callPhone hiddenLien2'>{{shop.addr}}</view>
+                    </view>
+                  </view>
+                  <view class='rights'>
+                    <image src='/images/arrows_right.png'></image>
+                  </view>
+                </view>
+                <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:230rpx;margin-top:20rpx;' open-type="getPhoneNumber" data-type='shop' data-param='{{}}' bindgetphonenumber="authorizePhone"></button>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- 爆款产品 -->
+  <view hidden="{{!hotProductList.length}}">
+    <view class='bigTitle'>
+      <image src='/images/icon/3.png'></image>
+      <text>爆款随心选</text>
+    </view>
+    <scroll-view class="hotProductContainer" scroll-x="true">
+      <block wx:for="{{hotProductList}}" wx:key="id">
+        <view class='item'>
+          <view data-url="/pages/product/hot_product_list/hot_product_list?productId={{item.id}}" data-type="1" bindtap="pageSkip">
+            <image src='{{item.imgurl}}'></image>
+            <input type='text' value='{{item.product_title}}' disabled='true' maxlength='12' class='name out_hidden_2 productsName'></input>
+            <!-- <view class='name out_hidden_2'>{{item.product_title}}</view> -->
+            <view class='price'>
+              <text class='now productsName'>￥{{item.hot_price}}</text>
+              <text class='old productsName'>￥{{item.max_price}}</text>
+            </view>
+          </view>
+          <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:250rpx;height:370rpx;margin-top:-370rpx;' open-type="getPhoneNumber" data-type='hotProduct' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  <!--拼团-->
+  <view wx:if='{{groupListData.length>0}}'>
+    <view class='bigTitle'>
+      <image src='/images/menu/grops.png' class='groupImgd'></image>
+      <text>拼团</text>
+    </view>
+  </view>
+
+  <!--拼团-->
+  <view class='flexColumnH groupListBox' wx:if='{{groupListData.length>0}}'>
+    <block wx:for='{{groupListData}}' wx:key='id'>
+      <view style='position:relative'>
+        <view class='paddingBox groupItem flexRow' data-type='1' data-url="/pages/group/group_info/product_details?product_id={{item.product_id}}&id={{item.id}}&isJoin={{item.isJoin}}" data-type="1" bindtap="pageSkip">
+          <view class='groupImg'>
+            <image src='{{item.imgurl}}'></image>
+          </view>
+          <view class='flexColumnH groupListText'>
+            <input type='text' value='{{item.product_title}}' disabled='true' maxlength='12' class='titles hiddenLien productsName'></input>
+            <!-- <view class='titles hiddenLien'>{{item.product_title}}</view> -->
+            <view class='nums' style='margin-top:10rpx'>已售{{item.buyNum?item.buyNum:0}}件</view>
+
+            <view class='flexRow justBetween' style='margin-top:10rpx;'>
+              <view class='flexRow'>
+                <view class='nowPrice productsName'>￥{{item.group_price?item.group_price:0}}</view>
+                <view class='oldPrice productsName'>￥{{item.max_price?item.max_price:0}}</view>
+              </view>
+              <view class='flexRow opactions'>
+                <view class='numsPeople productsName'>{{item.success_num?item.success_num:0}}人拼</view>
+                <view class='goBuy'>立即开团</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:260rpx;top:0' open-type="getPhoneNumber" data-type='group' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+      </view>
+    </block>
+  </view>
+  <view wx:if='{{groupListData.length>0}}' style='margin:20rpx 0'>
+    <view style='position:relative'>
+      <view class='bigTitle' data-url="/pages/group/group_list/group_list" data-type="1" bindtap="pageSkip">
+        <image src='{{item.imgurl}}' class='productImg' />
+        <text>查看更多拼团</text>
+      </view>
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:260rpx;top:0' open-type="getPhoneNumber" data-type='groupList' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+    </view>
+  </view>
+  <!-- 活动信息 -->
+  <block wx:if="{{setInfo.activity_is_show==1 && currentActivityInfo.length>0}}">
+    <block wx:for='{{currentActivityInfo}}'>
+      <view class="activityInfo" data-activity_id='{{item.id}}' data-activityType='{{item.type}}' data-type="1" bindtap="activitySkip">
+        <view class="image">
+          <image src="{{item.image}}" mode='widthFix'></image>
+        </view>
+        <view class="name">{{item.title}}</view>
+        <view class="time">{{item.generalize_start_time}}
+          <text class='link'>至</text>{{item.end_time}}</view>
+      </view>
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='height:480rpx;margin-top:-480rpx;' open-type="getPhoneNumber" data-type='activity' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+    </block>
+
+  </block>
+  <!-- 全景 -->
+  <block wx:if="{{setInfo.h5_is_show==1 &&H5Info.h5_image &&H5Info.h5_name}}">
+    <view class='panorama' data-url="/pages/web/vr?webUrl={{H5Info.h5_url}}" data-type="1" bindtap="pageSkip">
+      <image mode='widthFix' src='{{H5Info.h5_image}}'></image>
+      <view class='name'>{{H5Info.h5_name}}</view>
+    </view>
+    <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:460rpx;margin-top:-480rpx;' open-type="getPhoneNumber" data-type='panorama' data-param='{{H5Info.h5_url}}' bindgetphonenumber="authorizePhone"></button>
+  </block>
+  <!--产品列表-->
+  <block wx:if="{{setInfo.product_is_show==1 && productList.length}}">
+    <view class="productContainer">
+      <block wx:for="{{productList}}" wx:key="id">
+        <view class="item">
+          <view data-productid="{{item.id}}" data-hotProductVersion='{{item.hot_version}}' data-type="1" bindtap="pageSkipdetail">
+            <view class="image">
+              <image src="{{item.imgurl}}"></image>
+              <view class='presell idents' wx:if='{{item.presell==2&&!item.hot_price}}'>预售</view>
+              <view class='hotProducts2 idents' wx:if='{{item.hot_price&&item.publish==1}}'>爆款</view>
+            </view>
+            <input type='text' value='{{item.product_title}}' disabled='true' maxlength='12' class="name out_hidden_2 productsName"></input>
+            <!-- <view class="name out_hidden_2">{{item.product_title}}</view> -->
+
+            <block wx:if="{{item.hot_price&&item.publish==1}}">
+              <block wx:if="{{item.residue_num>0 && item.buyNum<item.limitation_num&&item.publish==1&&item.reserveNum<=0}}">
+                <view class="money">
+                  <text class='now productsName'>￥{{item.hot_price}}</text>
+                  <text class='old productsName'>￥{{item.max_price}}</text>
+                </view>
+              </block>
+              <block wx:else>
+              
+                <view class="money productsName">￥{{item.min_price}}</view>
+              </block>
+            </block>
+            <block wx:else>
+              <block wx:if="{{payState==1||payState==2}}">
+                <block wx:if="{{payStatusInfo.isOpen==1}}">
+                  <block wx:if="{{payStatusInfo.pay_status==1}}">
+                    <block wx:if="{{item.isOpen==1}}">
+                      <block wx:if="{{item.pay_status==1}}">
+                        <view class="price1 price productsName" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                      </block>
+                      <block wx:else>
+                        <view class="price1 price productsName" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                      </block>
+                    </block>
+                    <block wx:else>
+                      <view class="price1 price productsName" style='color:{{appColor}}'>到店咨询</view>
+                    </block>
+                  </block>
+                  <block wx:else>
+                    <block wx:if='{{item.isOpen==1}}'>
+                      <view class="price1 price productsName" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                    </block>
+                    <block wx:else>
+                      <view class="price1 price productsName" style='color:{{appColor}}'>到店咨询</view>
+                    </block>
+                  </block>
+                </block>
+                <block wx:else>
+                  <view class="price1 price productsName" style='color:{{appColor}}'>到店咨询</view>
+                </block>
+              </block>
+
+            </block>
+          </view>
+          <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:350rpx;height:470rpx;margin-top:-470rpx;' open-type="getPhoneNumber" data-type='recommendProduct' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+        </view>
+      </block>
+    </view>
+  </block>
+  <!-- 购物车 -->
+  <view wx:if="{{payState==1}}">
+    <image class='shoppingCart' src='/images/menu/shoppingCart.png' data-url="/pages/shopping_cart/shopping_cart" data-type="1" bindtap="pageSkip"></image>
+    <view class='cartProductCount'>{{cartProductCount}}</view>
+  </view>
+</view>
+
+
+
+<!--第三款-->
+<view wx:if='{{appModel==3}}' style='width:750rpx;overflow:hidden'>
+  <view class='box' style='background:{{appColor}};position:relative;'>
+    <view class="searchBox paddingBox  flexRow">
+      <view class='address3'>{{city}}</view>
+      <view class='searchBoxs flexRow searchBoxs22'>
+        <view class='searchImg' data-type="1" bindtap="searchProduct">
+          <image src='/images/main2/search.png'></image>
+        </view>
+        <input type='text' placeholder='请输入产品标题搜索' placeholder-style='text-align:center' class='searchText' value="{{searchText}}" data-type="2" bindconfirm="searchProduct" bindblur="setSearchText" />
+      </view>
+      <view class='phone4' bindtap="phoneServer">
+        <image src='/images/main2/phone.png'></image>
+      </view>
+    </view>
+    <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:100rpx;top:0;z-index:1000' open-type="getPhoneNumber" data-type='search' data-param='' bindgetphonenumber="authorizePhone"></button>
+  </view>
+  <!-- 店铺信息 -->
+  <view class='box paddingBox infos' style='background:{{appColor}}' hidden='{{!showShopInfo.name}}'>
+    <view class='box2'>
+      <view class='shopInfo'>
+        <view class='top' style='padding:10rpx;border-sizing:border-box'>
+          <image src='{{showShopInfo.imgurl}}'></image>
+          <view style='margin-left:20rpx;width:610rpx'>
+            <view class='name'>{{showShopInfo.name}}</view>
+            <view class='address'>详细地址：{{showShopInfo.addr}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--菜单-->
+  <view style='position:relative;background:#f6f6f6' class=' {{shopCardList.length?"menusImg":"menusImg2"}}'>
+    <view class='bgBox' style='background:{{appColor}}'></view>
+    <view class='menusBox'>
+      <view class='flexRow menusList paddingBox '>
+        <block wx:for='{{iconData}}' wx:key='*this'>
+          <view>
+            <view class='items flexColumnH' data-url="{{item.url}}" data-type="1" bindtap="pageSkip">
+              <image src="{{item.image}}"></image>
+              <view class='itemText'>{{item.name}}</view>
+            </view>
+            <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:250rpx;height:160rpx;margin-top:-160rpx;z-index:10000' open-type="getPhoneNumber" data-type='menu' data-param='{{index+1}}' bindgetphonenumber="authorizePhone"></button>
+            <!--授权头像-->
+            <view wx:if='{{index==(iconData.length-1)}}'>
+              <button class="phoneButton" hidden='{{isAuthorizeInfo}}' style='width:250rpx;height:160rpx;margin-top:-160rpx;z-index:1' open-type="getUserInfo" bindgetuserinfo='getUserInfos' data-type='menu' data-param='3'></button>
+            </view>
+          </view>
+        </block>
+      </view>
+      <!--红包-->
+      <view class='cardBox flexRow' hidden="{{!shopCardList.length}}">
+        <scroll-view scroll-x='true' class='cardContainer'>
+          <block wx:for="{{shopCardList}}" wx:key="id">
+            <view class='pagRed' wx:if='{{item.card_tpye==2}}'>
+              <!--红包-->
+              <block wx:if="{{item.isGet==1}}">
+                <image src='/images/main2/already2.png' class='cards'></image>
+              </block>
+              <block wx:else>
+                <image src='/images/main2/redPag.png' class='cards'></image>
+              </block>
+              <view class='redTextsBox flexColumnH' data-url="/pages/card/card_details/card_details?cardId={{item.couponsId}}" data-type="1" bindtap="pageSkip">
+                <view class='redPrice1 redPrice12'>
+                  <view class='flexRow redPrices5'>
+                    <view style='font-size:40rpx' class='yuan'>￥</view>
+                    <view>{{item.denomination}}</view>
+                  </view>
+                </view>
+                <view class='redTime'>{{item.start_time}}~{{item.end_time}}</view>
+                <view class='getFire' hidden='{{item.isGet==1}}'>免费领取-红包</view>
+                <view class='getFire' wx:if='{{item.isGet==1}}'>已经领取-红包</view>
+              </view>
+              <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:330rpx;height:168rpx;margin-top:-176rpx' open-type="getPhoneNumber" data-type='card' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+            </view>
+            <view class='pagRed' wx:if='{{item.card_tpye==1}}'>
+              <!--优惠券-->
+              <block wx:if="{{item.isGet==1}}">
+                <image src='/images/main2/already2.png' class='cards'></image>
+              </block>
+              <block wx:else>
+                <image src='/images/main2/sale.png' class='cards'></image>
+              </block>
+
+              <view class='redTextsBox flexColumnH' data-url="/pages/card/card_details/card_details?cardId={{item.couponsId}}" data-type="1" bindtap="pageSkip">
+                <view class='redPrice1 flexRow'>
+                  <view class='flexRow redPrices1' style='justify-content:center;'>
+                    <view class='yuan'>￥</view>
+                    <view>{{item.denomination?item.denomination:0}}</view>
+                  </view>
+                  <view class='redPrice2'>
+                    <view>满{{item.use_condition?item.use_condition:0}}元</view>
+                    <view>使用</view>
+                  </view>
+                </view>
+                <view class='redTime'>{{item.start_time}}~{{item.end_time}}</view>
+                <view class='getFire' hidden='{{item.isGet==1}}'>免费领取-优惠券</view>
+                <view class='getFire' wx:if='{{item.isGet==1}}'>已经领取-优惠券</view>
+              </view>
+              <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:330rpx;height:168rpx;margin-top:-176rpx' open-type="getPhoneNumber" data-type='card' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+            </view>
+            <view class='pagRed' wx:if='{{item.card_tpye==3}}'>
+              <!--折扣券-->
+              <block wx:if="{{item.isGet==1}}">
+                <image src='/images/main2/already2.png' class='cards'></image>
+              </block>
+              <block wx:else>
+                <image src='/images/main2/coupon.png' class='cards'></image>
+              </block>
+              <view class='redTextsBox flexColumnH' data-url="/pages/card/card_details/card_details?cardId={{item.couponsId}}" data-type="1" bindtap="pageSkip">
+                <view class='redPrice1 flexRow'>
+                  <view class='flexRow redPrices4'>
+                    <view style='font-size:72rpx'>{{item.denomination}}</view>
+                    <view style='font-size:20rpx;padding-top:46rpx;border-sizing:border-box;'>折</view>
+                  </view>
+                  <view class='redPrice2'>
+                    <view>满{{item.use_condition}}元</view>
+                    <view>{{item.denomination}}折</view>
+                  </view>
+                </view>
+                <view class='redTime'>{{item.start_time}}~{{item.end_time}}</view>
+                <view class='getFire' hidden='{{item.isGet==1}}'>免费领取-折扣券</view>
+                <view class='getFire' wx:if='{{item.isGet==1}}'>已经领取-折扣券</view>
+              </view>
+              <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:330rpx;height:168rpx;margin-top:-176rpx' open-type="getPhoneNumber" data-type='card' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+            </view>
+          </block>
+        </scroll-view>
+      </view>
+      <view class='lookCard' style='background:{{appColor}}' data-url="/pages/card/card_list/card_list" data-type="1" bindtap="pageSkip" hidden="{{!shopCardList.length}}">查看更多的卡券</view>
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='right:0;top:350rpx;width:700rpx;height:120rpx;' open-type="getPhoneNumber" data-type='cardList' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+    </view>
+  </view>
+<view wx:if='{{isHasSeller}}' class="search1 sellerText2 ">
+      <view class='sellerText' >专<text class='textBorder'>属顾</text>问</view>
+  </view>
+  <view wx:if='{{isHasSeller}}' class="search1 sellerInfo">
+      <view class=' sellerCoin' >
+        <image src='/images/icon/seller.png'></image>
+        <text>{{sellerInfo.sellerName}}</text>
+      </view>
+      <view class=' sellerCoin'bindtap='callSellerPhone' >
+        <image src='/images/icon/phone.png' bindtap='callSellerPhone'></image>
+        <text bindtap='callSellerPhone'>{{sellerInfo.sellerPhone}}</text>
+      </view>
+      <view class=' sellerCoin' >
+        <image src='/images/icon/weixin.png'></image>
+        <text>{{sellerInfo.weixinhao}}</text>
+        <text class="copy" bindtap="copy">复制</text>
+      </view>
+    </view>
+  <!--轮播图-->
+  <swiper indicator-dots="true" autoplay="true" circular="true" current='{{currentIndex}}' interval="3000" duration="1000" class="swiper swiper2 " style='height:{{Height}}'>
+    <view wx:for="{{imgUrls}}" wx:key="id">
+      <swiper-item class='swipersImage'>
+
+        <image src="{{item.imgurl}}" bindload='imageHeight' style='height:{{Height}}' class="swiper_item_image"  data-urls='{{item.link}}' bindtap='bannerSkip'  data-types='{{item.type}}' data-activityid="{{item.activity_id}}"   />
+
+        <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx' open-type="getPhoneNumber" data-type='banner' data-param='{{item.activity_id}}' bindgetphonenumber="authorizePhone"></button>
+      </swiper-item>
+    </view>
+  </swiper>
+  <!-- 全景 -->
+  <block wx:if="{{setInfo.h5_is_show==1 && H5Info.h5_url&&H5Info.h5_name}}">
+    <view style='position:relitive'>
+      <view class='panorama' data-url="/pages/web/vr?webUrl={{H5Info.h5_url}}" data-type="1" bindtap="pageSkip">
+        <image mode='widthFix' src='{{H5Info.h5_image}}'></image>
+        <view class='name'>{{H5Info.h5_name}}</view>
+      </view>
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:460rpx;margin-top:-480rpx;' open-type="getPhoneNumber" data-type='panorama' data-param='{{H5Info.h5_url}}' bindgetphonenumber="authorizePhone"></button>
+    </view>
+
+  </block>
+  <!--附近店铺推荐-->
+  <view wx:if='{{show_near_shop==1?true:false}}'>
+    <view hidden='{{storeShowHide}}'>
+      <view class='listText flexColumnH  listText222' style='background:{{appColor}}'>
+        <view class='flexRow'>
+          <image src='/images/main2/store.png' class='listImg' style='width:32rpx;height:29rpx'></image>
+          <view class='titel_name'>附近店铺推荐</view>
+        </view>
+        <view class='flexRow justBetween marginTop2'>
+          <view class='activityNew'>店铺多多 精彩多多哦！</view>
+        </view>
+      </view>
+    </view>
+    <!--附近店铺推荐-->
+    <view class='flexColumnH nearByInfo' hidden='{{storeShowHide}}' style='width:750rpx'>
+      <!--服务商户-->
+      <view hidden='{{serverShowHide}}'>
+        <view class='flexColumnH ' style='border-bottom:10rpx solid #f6f6f6;width:750rpx'>
+          <view class='paddingBox1 flexRow' data-indexs='server' bindtap='getToShop' data-title='{{serverInfo.name}}'>
+            <view class='flexColumnH shopBox'>
+              <view class='flexRow'>
+                <view class='nearStore' style=' background:red;'>专属</view>
+                <view class='titleStore hiddenLien2 nearName'>{{serverInfo.name}}</view>
+              </view>
+              <view class='flexRow touchBox'>
+                <view class='callBox'>联系方式：</view>
+                <view class='callPhone'>{{serverInfo.phone_num}}</view>
+              </view>
+              <view class='flexRow touchAdress'>
+                <view class='callBox'>地理位置：</view>
+                <view class='callPhone hiddenLien2'>{{serverInfo.addr}}</view>
+              </view>
+            </view>
+            <view class='rights'>
+              <image src='/images/arrows_right.png'></image>
+            </view>
+          </view>
+          <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:230rpx;margin-top:20rpx;' open-type="getPhoneNumber" data-type='shop' data-param='{{}}' bindgetphonenumber="authorizePhone"></button>
+        </view>
+      </view>
+      <!--就近店铺-->
+      <view hidden='{{shopBoxShowHide}}'>
+        <block wx:for='{{nearInfo}}' wx:key='*this' wx:for-item='shop' data-indexs='index'>
+          <view hidden='{{shopShowHide[index]}}'>
+            <view class='flexColumnH ' style='border-bottom:10rpx solid #f6f6f6;width:750rpx'>
+              <view class='paddingBox1 flexRow' data-indexs='{{index}}' bindtap='getToShop' data-title='{{shop.name}}'>
+                <view class='flexColumnH shopBox'>
+                  <view class='flexRow'>
+                    <view class='nearStore' style=' background:#4abcc2;'>附近</view>
+                    <view class='titleStore hiddenLien2 nearName'>{{shop.name}}</view>
+                  </view>
+                  <view class='flexRow touchBox'>
+                    <view class='callBox'>联系方式：</view>
+                    <view class='callPhone'>{{shop.phone_num}}</view>
+                  </view>
+                  <view class='flexRow touchAdress'>
+                    <view class='callBox'>地理位置：</view>
+                    <view class='callPhone hiddenLien2'>{{shop.addr}}</view>
+                  </view>
+                </view>
+                <view class='rights'>
+                  <image src='/images/arrows_right.png'></image>
+                </view>
+              </view>
+              <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:230rpx;margin-top:20rpx;' open-type="getPhoneNumber" data-type='shop' data-param='{{}}' bindgetphonenumber="authorizePhone"></button>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!--精彩活动-->
+  <block wx:if="{{setInfo.activity_is_show==1 && currentActivityInfo.length>0}}">
+    <block wx:for='{{currentActivityInfo}}'>
+
+      <view class='listText flexColumnH  listText222' style='background:{{appColor}};width:750rpx'>
+        <view class='flexRow' data-activityType="{{item.type}}" data-activity_id='{{item.id}}' data-type="1" bindtap="activitySkip" bindtap="activitySkip">
+          <image src='/images/main2/splendid.png' class='listImg'></image>
+          <view class='titel_name'>{{setInfo.column1_name}}</view>
+          <!-- <image src='/images/main2/jingcai.png' class='listImg2'></image> -->
+          <view class='lines'>-</view>
+          <view class='activityTitle'>{{item.title}}</view>
+        </view>
+        <view class='flexRow justBetween marginTop2'>
+          <view class='activityNew'>{{item.generalize_start_time}}至{{item.end_time}}</view>
+          <view class='activityNew' style='font-weight:700'>NEW</view>
+        </view>
+      </view>
+      <view style='background:#f6f6f6'>
+        <image src='{{item.image}}' mode='widthFix' class='activityImg'  data-activityType="{{item.type}}" data-activity_id='{{item.id}}' data-type="1" bindtap="activitySkip" ></image>
+      </view>
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:460rpx;margin-top:-480rpx;' open-type="getPhoneNumber" data-type='activity' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+
+    </block>
+
+  </block>
+
+  <!--今日爆款-->
+  <view class='listText flexColumnH paddingBox listText2222' style='background:{{appColor}}' hidden="{{!hotProductList.length}}">
+    <view class='flexRow'>
+      <image src='/images/main2/hot.png' class='listImg'></image>
+      <image src='/images/main2/hottext.png' class='listImg2'></image>
+    </view>
+    <view class='flexRow justBetween marginTop'>
+      <view class='activityNew '>你想要的应有尽有 还不快快行动抢购吧!</view>
+      <view class='activityNew flexRow' style='font-weight:700' data-url="/pages/product/hot_product_list/hot_product_list" data-type="1" bindtap="pageSkip">
+        <view>查看更多</view>
+        <image src='/images/main2/go.png' class='go'></image>
+      </view>
+    </view>
+    <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:120rpx;margin-top:-4rpx;left:0' open-type="getPhoneNumber" data-type='hotProduct' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+  </view>
+  <!--今日爆款-->
+  <view class='flexColumnH' hidden="{{!hotProductList.length}}" style='width:750rpx'>
+    <block wx:for="{{hotProductList}}" wx:key="id">
+      <view>
+        <view class='flexRow hotProductss hotLIists' data-url="/pages/product/hot_product_list/hot_product_list?productId={{item.id}}" data-type="1" bindtap="pageSkip">
+          <image src='{{item.imgurl}}' class='productImg33'> </image>
+          <view class='productTitle33 flexColumnH '>
+            <view class='flexRow justBetween'>
+              <view></view>
+              <image src='/images/main2/hots.png' class='hots'></image>
+            </view>
+            <view class='  producttitlesBox'>
+              <input type='text' value='{{item.product_title}}' disabled='true' maxlength='12' class='producttitles hiddenLien productsName'></input>
+              <!-- <view class='producttitles hiddenLien'>{{item.product_title}}</view> -->
+              <view class='flexRow opaction2'>
+                <view class='flexRow '>
+                  <view class='now1 productsName' style='color:#FE6165'>￥{{item.hot_price}}</view>
+                  <view class='old1 old111 productsName'>￥{{item.max_price}}</view>
+                </view>
+                <block wx:if="{{payState==1&&payStatusInfo.isOpen==1&&payStatusInfo.pay_status==1&&item.isOpen==1&&item.pay_status==1}}">
+                  <view class='buyNew buyNew2' style='margin-left:10rpx'>马上抢购</view>
+                </block>
+                <block wx:else>
+                  <view class='buyNew buyNew2' style='margin-left:10rpx'>预约到店</view>
+                </block>
+              </view>
+            </view>
+          </view>
+        </view>
+        <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:306rpx;margin-top:-300rpx;' open-type="getPhoneNumber" data-type='hotProduct' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+      </view>
+    </block>
+  </view>
+  <!--拼团-->
+  <view class='listText flexColumnH paddingBox listText32' style='background:{{appColor}}' wx:if='{{groupListData.length>0}}'>
+    <view class='flexRow'>
+      <image src='/images/main2/productImage.png' class='listImg'></image>
+      <view class='titel_name'>拼团</view>
+      <!-- <image src='/images/main2/productcenters.png' class='listImg2'></image> -->
+    </view>
+    <view class='flexRow justBetween marginTop'>
+      <view class='activityNew '>拼团优惠多多 好礼相送 快来行动吧!</view>
+      <view class='activityNew flexRow' style='font-weight:700' data-url="/pages/group/group_list/group_list" data-type="1" bindtap="pageSkip">
+        <view>查看更多</view>
+        <image src='/images/main2/go.png' class='go'></image>
+      </view>
+    </view>
+    <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:100rpx;' open-type="getPhoneNumber" data-type='groupList' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+  </view>
+  <!--拼团-->
+  <view class='flexRow' wx:if='{{groupListData.length>0}}'>
+    <scroll-view scroll-x='true' style='height:600rpx;overflow:hidden;white-space:nowrap;'>
+      <!-- <view class='flexRow'> -->
+      <block wx:for="{{groupListData}}" wx:key="id">
+        <view style='position:relative;width:370rpx;display:inline-block;'>
+          <view class='item2Box flexColumnH' data-url="/pages/group/group_info/product_details?product_id={{item.product_id}}&id={{item.id}}&isJoin={{item.isJoin}}" data-type="1" bindtap="pageSkip">
+            <image src='{{item.imgurl}}'></image>
+            <input type='text' value='{{item.product_title}}' disabled='true' maxlength='12' class='name nameHot out_hidden_2 productsName'></input>
+            <!-- <view class='name nameHot out_hidden_2'>{{item.product_title}}</view> -->
+            <view class='soldNum'>已售{{item.buyNum?item.buyNum:0}}</view>
+            <view class='flexRow justAround' style='margin-top:20rpx;'>
+              <view class='price ' style='margin-right:10rpx'>
+                <text class='now productsName'>￥{{item.group_price?item.group_price:0}}</text>
+                <text class='oldPrice productsName'>￥{{item.max_price?item.max_price:0}}</text>
+              </view>
+              <view class='buyNew22'>立即开团</view>
+            </view>
+          </view>
+          <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:380rpx;height:600rpx;top:0rpx;' open-type="getPhoneNumber" data-type='group' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+        </view>
+      </block>
+      <!-- </view> -->
+
+    </scroll-view>
+  </view>
+  <!--产品中心-->
+  <view class='listText flexColumnH paddingBox listText32' style='background:{{appColor}}' wx:if="{{setInfo.product_is_show==1 && productList.length}}">
+    <view class='flexRow'>
+      <image src='/images/main2/productImage.png' class='listImg'></image>
+      <view class='titel_name'>{{setInfo.column2_name}}</view>
+      <!-- <image src='/images/main2/productcenters.png' class='listImg2'></image> -->
+    </view>
+    <view class='flexRow justBetween marginTop'>
+      <view class='activityNew '>物美价廉 快来看看吧!</view>
+      <view class='activityNew flexRow' style='font-weight:700' data-url="" data-type="1" bindtap="productSkip">
+        <view>查看更多</view>
+        <image src='/images/main2/go.png' class='go'></image>
+      </view>
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:120rpx;left:0;margin-top:-68rpx;' open-type="getPhoneNumber" data-type='ProductList' data-param='{{setInfo.id}}' bindgetphonenumber="authorizePhone"></button>
+    </view>
+  </view>
+  <!--产品中心-->
+  <view class='flexRowH paddingBox' style='width:750rpx' wx:if="{{setInfo.product_is_show==1 && productList.length}}">
+    <block wx:for="{{productList}}" wx:key="id">
+      <view>
+        <view class='productItem flexColumnH' data-productid="{{item.id}}" data-hotProductVersion='{{item.hot_version}}' data-type="1" bindtap="pageSkipdetail">
+          <view class='productsImg'>
+            <image src='{{item.imgurl}}'></image>
+            <view class='presell idents' wx:if='{{item.presell==2&&!item.hot_price}}'>预售</view>
+            <view class='hotProducts2 idents' wx:if='{{item.publish==1&&item.hot_price}}'>爆款</view>
+          </view>
+          <!-- <view class='productTitle2 hiddenLien'>{{item.product_title}}</view> -->
+          <input type='text' value='{{item.product_title}}' disabled='true' maxlength='12' class='productTitle2 hiddenLien productsName'></input>
+          <view class='flexRow marginMoney'>
+            <block wx:if="{{item.hot_price&&item.publish==1}}">
+              <block wx:if="{{item.residue_num>0 && item.buyNum<item.limitation_num&&item.publish==1&&item.reserveNum<=0}}">
+                <view class="money">
+                  <text class='now productsName' style='color:#FE6165'>￥{{item.hot_price}}</text>
+                  <text class='oldss productsName'>￥{{item.max_price}}</text>
+                </view>
+              </block>
+              <block wx:else>
+                <view class="now1 now12 productsName">￥{{item.min_price}}</view>
+              </block>
+            </block>
+            <block wx:else>
+              <block wx:if="{{payState==1||payState==2}}">
+                <block wx:if="{{payStatusInfo.isOpen==1}}">
+                  <block wx:if="{{payStatusInfo.pay_status==1}}">
+                    <block wx:if="{{item.isOpen==1}}">
+                      <block wx:if="{{item.pay_status==1}}">
+                        <view class="price1 price productsName" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                      </block>
+                      <block wx:else>
+                        <view class="price1 price productsName" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                      </block>
+                    </block>
+                    <block wx:else>
+                      <view class="price1 price productsName" style='color:{{appColor}}'>到店咨询</view>
+                    </block>
+                  </block>
+                  <block wx:else>
+                    <block wx:if='{{item.isOpen==1}}'>
+                      <view class="price1 price productsName" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                    </block>
+                    <block wx:else>
+                      <view class="price1 price productsName" style='color:{{appColor}}'>到店咨询</view>
+                    </block>
+                  </block>
+                </block>
+                <block wx:else>
+                  <view class="price1 price productsName" style='color:{{appColor}}'>到店咨询</view>
+                </block>
+              </block>
+              
+            </block>
+          </view>
+        </view>
+        <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:220rpx;height:360rpx;margin-top:-372rpx;' open-type="getPhoneNumber" data-type='recommendProduct' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+      </view>
+    </block>
+  </view>
+  <!-- 购物车 -->
+  <view wx:if="{{payState==1}}">
+    <image class='shoppingCart' src='/images/menu/shoppingCart.png' data-url="/pages/shopping_cart/shopping_cart" data-type="1" bindtap="pageSkip"></image>
+    <view class='cartProductCount'>{{cartProductCount}}</view>
+  </view>
+
+</view>
+<!--第二个版本-->
+<view wx:if='{{appModel==2}}'>
+  <view class="searchBox7 searchBox2 ">
+    <view class='flexRow'>
+      <view class='address3' style='color:#1f1f1f'>{{city}}</view>
+      <view class='searchBoxs flexRow'>
+        <view class='searchImg'>
+          <image src='/images/main1/search.png' data-type="1" bindtap="searchProduct"></image>
+        </view>
+        <input type='text' placeholder='请输入产品标题搜索' value="{{searchText}}" data-type="2" bindconfirm="searchProduct" bindblur="setSearchText" placeholder-style='text-align:center' class='searchText' />
+      </view>
+      <view class='phone2' bindtap="phoneServer">
+        <image src='/images/main1/phone.png'></image>
+      </view>
+    </view>
+    <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:700rpx;top:0;z-index:1000' open-type="getPhoneNumber" data-type='search' data-param='' bindgetphonenumber="authorizePhone"></button>
+  </view>
+  <!--定位-->
+  <view class='location2 flexRow' style='background:{{appColor}}'>
+    <view class='locationImg2'>
+      <image src='/images/main1/opaction.png'></image>
+    </view>
+    <view class='locationText'>{{address}}</view>
+  </view>
+  
+  <!--轮播图-->
+  <swiper indicator-dots="true" autoplay="true" current='{{currentIndex}}' circular="true" interval="3000" duration="1000" class="swiper " style='height:{{Height}}'>
+    <view wx:for="{{imgUrls}}" wx:key="id">
+      <swiper-item class='swipersImage'>
+
+        <image src="{{item.imgurl}}" bindload='imageHeight' style='height:{{Height}}' class="swiper_item_image" data-urls='{{item.link}}' bindtap='bannerSkip'  data-types='{{item.type}}' data-activityid="{{item.activity_id}}"    />
+        <button hidden='{{isAuthorizePhone}}' class="phoneButton" open-type="getPhoneNumber" data-type='banner' data-param='{{item.activity_id}}' style='width:750rpx' bindgetphonenumber="authorizePhone"></button>
+      </swiper-item>
+    </view>
+  </swiper>
+
+  <!-- 店铺信息 -->
+  <view class='shopInfo shopInfo22' hidden='{{!showShopInfo.name}}'>
+    <view class='top'>
+      <image src='{{showShopInfo.imgurl}}'></image>
+      <view style='margin-left:42rpx;width:610rpx'>
+        <view class='name'>{{showShopInfo.name}}</view>
+        <view class='address'>详细地址：{{showShopInfo.addr}}</view>
+      </view>
+    </view>
+  </view>
+  
+  <!--红包专栏-->
+  <view class='columnBg' wx:if='{{shopCardList.length>0}}'>
+    <view class='columnBgBorder'>
+      <view class='flexRow column columnss'>
+        <view class='redPag'>
+          <image src='/images/main1/redPag.png'></image>
+        </view>
+        <view class='title'>优惠卡券</view>
+        <view class='add add2' data-url="/pages/card/card_list/card_list" data-type="1" bindtap="pageSkip">
+          <image src='/images/main1/add.png'></image>
+        </view>
+        <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='right:0;width:600rpx;height:120rpx;' open-type="getPhoneNumber" data-type='cardList' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+      </view>
+      <!--红包选择-->
+      <view class='cardBox222'>
+        <scroll-view scroll-x='true' style='height:168rpx'>
+          <block wx:for="{{shopCardList}}" wx:key="couponsId">
+            <view class='pagBorder flexRow' wx:if='{{item.card_tpye==2}}'>
+              <block wx:if='{{item.isGet==1}}'>
+                <!--领取了-->
+                <image src='/images/main1/already.png' class='cards'></image>
+              </block>
+              <block wx:else>
+                <image src='/images/main1/redPage.png' class='cards'></image>
+              </block>
+              <view class='redTextsBox flexRow' data-url="/pages/card/card_details/card_details?cardId={{item.couponsId}}" data-type="1" bindtap="pageSkip">
+                <view class='flexColumnH redPages'>
+                  <view class='flexRow moneyBox moneyBox22'>
+                    <view class='moneys moneys22'>￥</view>
+                    <view class=' money222'>{{item.denomination}}</view>
+                  </view>
+                  <view class='pagTime'>{{item.start_time}}~{{item.end_time}}</view>
+                </view>
+                <view class='flexColumnH freeBox paddingBoxH'>
+                  <view class='free' hidden='{{item.isGet==1}}'>免费</view>
+                  <view class='free' wx:if='{{item.isGet==1}}'>已经</view>
+                  <view class='free'>领取</view>
+                  <view class='freePag'>红包</view>
+                </view>
+              </view>
+              <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:330rpx;height:160rpx;top:0' open-type="getPhoneNumber" data-type='card' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhoe"></button>
+            </view>
+            <view class='pagBorder flexRow' wx:if='{{item.card_tpye==1}}'>
+              <!--优惠券-->
+              <block wx:if='{{item.isGet==1}}'>
+                <!--领取了-->
+                <image src='/images/main1/already.png' class='cards'></image>
+              </block>
+              <block wx:else>
+                <image src='/images/main1/sale.png' class='cards'></image>
+              </block>
+              <view class='redTextsBox flexRow' data-url="/pages/card/card_details/card_details?cardId={{item.couponsId}}" data-type="1" bindtap="pageSkip">
+                <view class='flexColumnH' style='width:273rpx'>
+                  <view class='flexRow moneyBox'>
+                    <view class='moneys'>￥</view>
+                    <view class='money222 '>{{item.denomination}}</view>
+                  </view>
+                  <view class='pagTime pagTime22'>购买满{{item.use_condition}}元使用</view>
+                  <view class='pagTime'>{{item.start_time}}~{{item.end_time}}</view>
+                </view>
+                <view class='flexColumnH freeBox paddingBoxH' style='width:130rpx'>
+                  <view class='free' hidden='{{item.isGet==1}}'>免费</view>
+                  <view class='free' wx:if='{{item.isGet==1}}'>已经</view>
+                  <view class='free'>领取</view>
+                  <view class='freePag'>优惠券</view>
+                </view>
+              </view>
+              <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:330rpx;height:160rpx;top:0' open-type="getPhoneNumber" data-type='card' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+            </view>
+            <view class='pagBorder flexRow' wx:if='{{item.card_tpye==3}}'>
+              <!--折扣-->
+              <block wx:if='{{item.isGet==1}}'>
+                <!--领取了-->
+                <image src='/images/main1/already.png' class='cards'></image>
+              </block>
+              <block wx:else>
+                <image src='/images/main1/coupon.png' class='cards'></image>
+              </block>
+              <view class='redTextsBox flexRow' data-url="/pages/card/card_details/card_details?cardId={{item.couponsId}}" data-type="1" bindtap="pageSkip">
+                <view class='flexColumnH' style='width:273rpx'>
+                  <view class='flexRow moneyBox'>
+                    <view class='money222'>{{item.denomination}}</view>
+                    <view class='moneys' style='margin-top:50rpx;font-size:24rpx;margin-left:10rpx'>折</view>
+                  </view>
+                  <view class='pagTime pagTime22'>购买满{{item.use_condition}}元{{item.denomination}}折</view>
+                  <view class='pagTime'>{{item.start_time}}~{{item.end_time}}</view>
+                </view>
+                <view class='flexColumnH freeBox paddingBoxH' style='width:130rpx'>
+                  <view class='free' hidden='{{item.isGet==1}}'>免费</view>
+                  <view class='free' wx:if='{{item.isGet==1}}'>已经</view>
+                  <view class='free'>领取</view>
+                  <view class='freePag'>折扣券</view>
+                </view>
+              </view>
+              <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:330rpx;height:160rpx;top:0' open-type="getPhoneNumber" data-type='card' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+            </view>
+          </block>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+  <view wx:if='{{isHasSeller}}' class="search1 sellerText2 magrnTop1">
+      <view class='sellerText' >专<text class='textBorder'>属顾</text>问</view>
+  </view>
+  <view wx:if='{{isHasSeller}}' class="search1 sellerInfo magrnBot1">
+      <view class=' sellerCoin' >
+        <image src='/images/icon/seller.png'></image>
+        <text>{{sellerInfo.sellerName}}</text>
+      </view>
+      <view class=' sellerCoin'bindtap='callSellerPhone' >
+        <image src='/images/icon/phone.png' bindtap='callSellerPhone'></image>
+        <text bindtap='callSellerPhone'>{{sellerInfo.sellerPhone}}</text>
+      </view>
+      <view class=' sellerCoin' >
+        <image src='/images/icon/weixin.png'></image>
+        <text>{{sellerInfo.weixinhao}}</text>
+        <text class="copy" bindtap="copy">复制</text>
+      </view>
+    </view>
+  <!-- 全景 -->
+  <block wx:if="{{setInfo.h5_is_show==1 && H5Info.h5_url&&H5Info.h5_name}}">
+    <view class='panorama' data-url="/pages/web/vr?webUrl={{H5Info.h5_url}}" data-type="1" bindtap="pageSkip">
+      <image mode='widthFix' src='{{H5Info.h5_image}}'></image>
+      <view class='name'>{{H5Info.h5_name}}</view>
+    </view>
+    <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:460rpx;margin-top:-480rpx;' open-type="getPhoneNumber" data-type='panorama' data-param='{{H5Info.h5_url}}' bindgetphonenumber="authorizePhone"></button>
+  </block>
+  <view wx:if='{{show_near_shop==1?true:false}}'>
+    <!--附近店铺推荐-->
+    <view hidden='{{storeShowHide}}'>
+      <view class='flexRow column '>
+        <!--column2-->
+        <view class='redPag'>
+          <image src='/images/main1/activity.png'></image>
+        </view>
+        <view class='title title2'>附近店铺推荐</view>
+      </view>
+    </view>
+    <!--附近店铺推荐-->
+    <view hidden='{{storeShowHide}}'>
+      <view class='flexColumnH nearByInfo'>
+        <!--服务商户-->
+        <view hidden='{{serverShowHide}}'>
+          <view class='flexColumnH ' style='border-bottom:10rpx solid #f6f6f6'>
+            <view class='paddingBox1 flexRow' data-indexs='server' bindtap='getToShop' data-title='{{serverInfo.name}}'>
+
+              <view class='flexColumnH shopBox' style='border-bottom:5rpx solid #f6f6f6'>
+                <view class='flexRow'>
+                  <view class='nearStore' style=' background:red;'>专属</view>
+                  <view class='titleStore hiddenLien2 nearName'>{{serverInfo.name}}</view>
+                </view>
+                <view class='flexRow touchBox'>
+                  <view class='callBox'>联系方式：</view>
+                  <view class='callPhone'>{{serverInfo.phone_num}}</view>
+                </view>
+                <view class='flexRow touchAdress'>
+                  <view class='callBox'>地理位置：</view>
+                  <view class='callPhone hiddenLien2'>{{serverInfo.addr}}</view>
+                </view>
+              </view>
+              <view class='rights'>
+                <image src='/images/arrows_right.png'></image>
+              </view>
+            </view>
+            <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:230rpx;margin-top:20rpx;' open-type="getPhoneNumber" data-type='shop' data-param='{{}}' bindgetphonenumber="authorizePhone"></button>
+          </view>
+        </view>
+        <!--就近店铺-->
+        <view hidden='{{shopBoxShowHide}}'>
+          <block wx:for='{{nearInfo}}' wx:key='*this' wx:for-item='shop' data-indexs='index'>
+            <view hidden='{{shopShowHide[index]}}'>
+              <view class='flexColumnH ' style='border-bottom:10rpx solid #f6f6f6'>
+                <view class='paddingBox1 flexRow' data-indexs='{{index}}' data-title bindtap='getToShop' data-title='{{shop.name}}'>
+
+                  <view class='flexColumnH shopBox'>
+                    <view class='flexRow'>
+                      <view class='nearStore' style=' background:#4abcc2;'>附近</view>
+                      <view class='titleStore hiddenLien2 nearName'>{{shop.name}}</view>
+                    </view>
+                    <view class='flexRow touchBox'>
+                      <view class='callBox'>联系方式：</view>
+                      <view class='callPhone'>{{shop.phone_num}}</view>
+                    </view>
+                    <view class='flexRow touchAdress'>
+                      <view class='callBox'>地理位置：</view>
+                      <view class='callPhone hiddenLien2'>{{shop.addr}}</view>
+                    </view>
+                  </view>
+                  <view class='rights'>
+                    <image src='/images/arrows_right.png'></image>
+                  </view>
+                </view>
+                <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:230rpx;margin-top:20rpx;' open-type="getPhoneNumber" data-type='shop' data-param='{{}}' bindgetphonenumber="authorizePhone"></button>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--精彩活动-->
+  <view wx:if="{{setInfo.activity_is_show==1 && currentActivityInfo.length>0}}">
+    <view class='flexRow column '>
+      <!--column2-->
+      <view class='redPag'>
+        <image src='/images/main1/activity.png'></image>
+      </view>
+      <view class='title title2'>{{setInfo.column1_name}}</view>
+    </view>
+  </view>
+  <!--精彩活动-->
+  <block wx:if="{{setInfo.activity_is_show==1 && currentActivityInfo.length>0}}">
+    <block wx:for='{{currentActivityInfo}}'>
+      <view>
+        <view class='flexColumnH' data-activityType="{{item.type}}" data-activity_id='{{item.id}}' data-type="1" bindtap="activitySkip">
+          <image src="{{item.image}}" mode='widthFix' class='activityImg'></image>
+          <view class='activitysTitles'>
+            <view class='flexRow justAround '>
+              <view class='activityTitle5 '>{{item.title}} </view>
+              <view class='new'>NEW</view>
+            </view>
+            <view class='activityNew222'>{{item.generalize_start_time}}至{{item.end_time}}</view>
+          </view>
+
+          <!-- <view class='activityIntro paddingBoxL'>老房采暖不过万，舒舒服服过冬天，我们不仅推出明装暖气片套餐。还推出了明装新风活动。</view> -->
+        </view>
+        <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:480rpx;margin-top:-480rpx;' open-type="getPhoneNumber" data-type='activity' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+      </view>
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:480rpx;margin-top:-480rpx;' open-type="getPhoneNumber" data-type='activity' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+    </block>
+
+  </block>
+
+  <!--今日爆款-->
+  <view>
+    <view class='flexRow column ' hidden="{{!hotProductList.length}}">
+      <view class='redPag'>
+        <image src='/images/main1/hotss.png'></image>
+      </view>
+      <view class='title'>今日爆款</view>
+      <view class='add' data-url="/pages/product/hot_product_list/hot_product_list" data-type="1" bindtap="pageSkip">
+        <image src='/images/main1/add.png'></image>
+      </view>
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:300rpx;height:120rpx;right:2rpx;' open-type="getPhoneNumber" data-type='hotProduct' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+    </view>
+  </view>
+  <!--今日爆款-->
+  <view class='flexRow' hidden="{{!hotProductList.length}}">
+    <scroll-view class="hotProductContainer2" scroll-x="true">
+      <block wx:for="{{hotProductList}}" wx:key="id">
+        <view class='item2 flexColumnH'>
+          <view data-url="/pages/product/hot_product_list/hot_product_list?productId={{item.id}}" data-type="1" bindtap="pageSkip">
+            <image src='{{item.imgurl}}'></image>
+            <input type='text' value='{{item.product_title}}' disabled='true' maxlength='12' class=' nameHot productsName'></input>
+            <!-- <view class=' nameHot '>{{item.product_title}}</view> -->
+            <view class='price priceAll'>
+              <text class='now '>￥{{item.hot_price}}</text>
+              <text class='old '>￥{{item.max_price}}</text>
+            </view>
+          </view>
+          <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:350rpx;height:565rpx;margin-top:-540rpx;' open-type="getPhoneNumber" data-type='hotProduct' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  <!--拼团-->
+  <view wx:if='{{groupListData.length>0}}'>
+    <view class='flexRow column ' style='border-bottom:2rpx solid #f6f6f6'>
+      <view class='redPag'>
+        <image src='/images/main1/activity.png'></image>
+      </view>
+      <view class='title'>拼团</view>
+      <view class='add' data-url="/pages/group/group_list/group_list" data-type="1" bindtap="pageSkip">
+        <image src='/images/main1/add.png'></image>
+      </view>
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:120rpx' open-type="getPhoneNumber" data-type='groupList' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+    </view>
+  </view>
+  <!--拼团-->
+  <view class='flexColumnH' wx:if='{{groupListData.length>0}}'>
+    <block wx:for="{{groupListData}}" wx:key="id">
+      <view style='position:relative'>
+        <view class='flexRow productBoxs' data-url="/pages/group/group_info/product_details?product_id={{item.product_id}}&id={{item.id}}&isJoin={{item.isJoin}}" data-type="1" bindtap="pageSkip">
+          <image src='{{item.imgurl}}' class='productImg'> </image>
+          <view class='productTitle flexColumnH products33'>
+            <input type='text' value='{{item.product_title}}' disabled='true' maxlength='12' class='producttitles hiddenLien productsName'></input>
+            <!-- <view class='producttitles hiddenLien'>{{item.product_title}}</view> -->
+            <view class='flexRow justBetween' style='margin-top:36rpx'>
+              <view class="price1 price productsName">￥{{item.group_price?item.group_price:0}}</view>
+              <view class="oldPrice productsName">￥{{item.max_price?item.max_price:0}}</view>
+              <view class='already'>已售{{item.buyNum?item.buyNum:0}}</view>
+              <view class='buyNew22'>立即开团</view>
+            </view>
+          </view>
+        </view>
+        <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:260rpx;top:0rpx;' open-type="getPhoneNumber" data-type='group' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+      </view>
+    </block>
+  </view>
+  <!--产品中心-->
+  <view wx:if="{{setInfo.product_is_show==1 && productList.length}}">
+    <view class='flexRow column ' style='border-bottom:2rpx solid #f6f6f6'>
+      <view class='redPag'>
+        <image src='/images/main1/activity.png'></image>
+      </view>
+      <view class='title'>{{setInfo.column2_name}}</view>
+      <view class='add' data-type="1" bindtap="productSkip">
+        <image src='/images/main1/add.png'></image>
+      </view>
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:100rpx;margin-top:-3rpx;right:0;' open-type="getPhoneNumber" data-type='ProductList' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+    </view>
+  </view>
+  <block wx:if="{{setInfo.product_is_show==1 && productList.length}}">
+    <!--产品中心-->
+    <view class='flexColumnH'>
+      <block wx:for="{{productList}}" wx:key="id">
+        <view>
+          <view class='flexRow productBoxs' data-productid="{{item.id}}" data-hotProductVersion='{{item.hot_version}}' data-type="1" bindtap="pageSkipdetail">
+            <view class='productImg'>
+              <image src='{{item.imgurl}}'> </image>
+              <view class='presell idents' wx:if='{{item.presell==2&&!item.hot_price}}'>预售</view>
+              <view class='hotProducts2 idents' wx:if='{{item.hot_price&&item.publish==1}}'>爆款</view>
+            </view>
+            <view class='productTitle flexColumnH products33'>
+              <input type='text' value='{{item.product_title}}' disabled='true' maxlength='12' class='producttitles hiddenLien productsName'></input>
+              <!-- <view class='producttitles hiddenLien'>{{item.product_title}}</view> -->
+
+              <view class='flexRow justBetween' style='margin-top:36rpx'>
+                <block wx:if="{{item.hot_price&&item.publish==1}}">
+                  <block wx:if="{{item.residue_num>0 && item.buyNum<item.limitation_num&&item.publish==1&&item.reserveNum<=0}}">
+                    <view class='flexRow'>
+                      <text class='now1 productsName' style='color:#FE6165'>￥{{item.hot_price}}</text>
+                      <text class='old1 old111 productsName'>￥{{item.max_price}}</text>
+                    </view>
+                  </block>
+                  <block wx:else>
+                    <view class="price price1 productsName">￥{{item.min_price}}</view>
+                  </block>
+                  <view class='buyNew'>立即抢购</view>
+                </block>
+                <block wx:else>
+                  <block wx:if="{{payState==1||payState==2}}">
+                    <block wx:if="{{payStatusInfo.isOpen==1}}">
+                      <block wx:if="{{payStatusInfo.pay_status==1}}">
+                        <block wx:if="{{item.isOpen==1}}">
+                          <block wx:if="{{item.pay_status==1}}">
+                            <view class="price1 price productsName" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                          </block>
+                          <block wx:else>
+                            <view class="price1 price productsName" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                          </block>
+                        </block>
+                        <block wx:else>
+                          <view class="price1 price productsName" style='color:{{appColor}}'>到店咨询</view>
+                        </block>
+                      </block>
+                      <block wx:else>
+                        <block wx:if='{{item.isOpen==1}}'>
+                          <view class="price1 price productsName" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                        </block>
+                        <block wx:else>
+                          <view class="price1 price productsName" style='color:{{appColor}}'>到店咨询</view>
+                        </block>
+                      </block>
+                    </block>
+                    <block wx:else>
+                      <view class="price1 price productsName" style='color:{{appColor}}'>到店咨询</view>
+                    </block>
+                  </block>
+                  <!-- <block wx:else>
+                    <block wx:if='{{payStatusInfo.isOpen==1}}'>
+                      <view class="price1 price">￥{{item.min_price}}</view>
+                    </block>
+                    <block wx:else>
+                      <view class="price1 price">到店咨询</view>
+                    </block>
+                  </block> -->
+                </block>
+              </view>
+            </view>
+          </view>
+          <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:245rpx;margin-top:-243rpx;' open-type="getPhoneNumber" data-type='recommendProduct' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+
+        </view>
+      </block>
+    </view>
+  </block>
+
+  <!--菜单-->
+  <view class='menuList justAround flexRow'>
+    <view wx:for="{{iconData}}" wx:key="*this">
+      <view class="ListItem flexColumnH" data-url="{{item.url}}" data-type="1" catchtap="pageSkip">
+        <view>
+          <image src="{{item.image}}"></image>
+        </view>
+        <view class="itemText2">{{item.name}}</view>
+      </view>
+      <!-- <view class='isNeedPay' hidden='{{!(item.name=="个人中心" && isNeedPay==1)}}'></view> -->
+
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:150rpx;height:160rpx;z-index:10000;top:0' open-type="getPhoneNumber" data-type='menu' data-param='{{index}}' bindgetphonenumber="authorizePhone"></button>
+      <!--授权头像-->
+      <view wx:if='{{index==(iconData.length-1)}}'>
+        <button class="phoneButton" hidden='{{isAuthorizeInfo}}' style='width:150rpx;height:160rpx;top:0;z-index:1' open-type="getUserInfo" bindgetuserinfo='getUserInfos' data-type='menu' data-param='3'></button>
+      </view>
+    </view>
+  </view>
+  <!-- 购物车 -->
+  <view wx:if="{{payState==1}}">
+    <image class='shoppingCart' src='/images/menu/shoppingCart.png' data-url="/pages/shopping_cart/shopping_cart" data-type="1" bindtap="pageSkip"></image>
+    <view class='cartProductCount'>{{cartProductCount}}</view>
+  </view>
+
+</view>
+
+<!-- 第四个版本 -->
+<view wx:if='{{appModel==4}}' style='width:750rpx;overflow:hidden'>
+  <!--地址信息-->
+  <view class="topBackground" bindlongtap="toggleDebugTool">
+    <view class="location">
+      <image src="/images/position.png"></image>
+    </view>
+    <view class="address">{{showShopInfo.name}}</view>
+  </view>
+  <!--轮播图-->
+  <swiper indicator-dots="true" autoplay="true" circular="true" current='{{currentIndex}}' interval="3000" duration="1000" class="swiper" style='height:{{Height}}'>
+    <view wx:for="{{imgUrls}}" wx:key="id">
+      <swiper-item class='swipersImage'>
+
+        <image src="{{item.imgurl}}" bindload='imageHeight' style='height:{{Height}}' class="swiper_item_image"  data-urls='{{item.link}}' bindtap='bannerSkip'  data-types='{{item.type}}' data-activityid="{{item.activity_id}}"    />
+        <button hidden='{{isAuthorizePhone}}' class="phoneButton" open-type="getPhoneNumber" data-type='banner' data-param='{{item.activity_id}}' style='width:750rpx' bindgetphonenumber="authorizePhone"></button>
+      </swiper-item>
+    </view>
+  </swiper>
+  <view wx:if='{{isHasSeller}}' class="search1 sellerText2 marginTop4">
+      <view class='sellerText' >专<text class='textBorder'>属顾</text>问</view>
+  </view>
+  <view wx:if='{{isHasSeller}}' class="search1 sellerInfo marginTop4">
+      <view class=' sellerCoin' >
+        <image src='/images/icon/seller.png'></image>
+        <text>{{sellerInfo.sellerName}}</text>
+      </view>
+      <view class=' sellerCoin'bindtap='callSellerPhone' >
+        <image src='/images/icon/phone.png' bindtap='callSellerPhone'></image>
+        <text bindtap='callSellerPhone'>{{sellerInfo.sellerPhone}}</text>
+      </view>
+      <view class=' sellerCoin' >
+        <image src='/images/icon/weixin.png'></image>
+        <text>{{sellerInfo.weixinhao}}</text>
+        <text class="copy" bindtap="copy">复制</text>
+      </view>
+    </view>
+  <!-- 卡券专栏 -->
+  <view class='columnBg' style="height:200px" wx:if='{{shopCardList.length>0}}'>
+    <view class='flexRow titleFourBox'>
+      <view class='bgLine'>
+        <image src='/images/fourimg/title_line.png'></image>
+      </view>
+      <view class='titleFour'>
+        <view class='titleFour_First'>卡券专栏</view>
+        <view class='titleFour_Second'>CARD VOUCHER</view>
+      </view>
+
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='right:0;width:600rpx;height:120rpx;' open-type="getPhoneNumber" data-type='cardList' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+    </view>
+    <!--红包选择-->
+    <view class='cardBox222'>
+      <scroll-view scroll-x='true' style='height:168rpx;margin-bottom:20rpx'>
+        <block wx:for="{{shopCardList}}" wx:key="couponsId">
+          <view class='pagBorder flexRow' wx:if='{{item.card_tpye==2}}'>
+            <block wx:if='{{item.isGet==1}}'>
+              <!--领取了-->
+              <image src='/images/main1/already.png' class='cards'></image>
+            </block>
+            <block wx:else>
+              <image src='/images/main1/redPage.png' class='cards'></image>
+            </block>
+            <view class='redTextsBox flexRow' data-url="/pages/card/card_details/card_details?cardId={{item.couponsId}}" data-type="1" bindtap="pageSkip">
+              <view class='flexColumnH redPages'>
+                <view class='flexRow moneyBox moneyBox22'>
+                  <view class='moneys moneys22'>￥</view>
+                  <view class=' money222'>{{item.denomination}}</view>
+                </view>
+                <view class='pagTime'>{{item.start_time}}~{{item.end_time}}</view>
+              </view>
+              <view class='flexColumnH freeBox paddingBoxH'>
+                <view class='free' hidden='{{item.isGet==1}}'>免费</view>
+                <view class='free' wx:if='{{item.isGet==1}}'>已经</view>
+                <view class='free'>领取</view>
+                <view class='freePag'>红包</view>
+              </view>
+            </view>
+            <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:330rpx;height:160rpx;top:0' open-type="getPhoneNumber" data-type='card' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+
+          </view>
+          <view class='pagBorder flexRow' wx:if='{{item.card_tpye==1}}'>
+            <!--优惠券-->
+            <block wx:if='{{item.isGet==1}}'>
+              <!--领取了-->
+              <image src='/images/main1/already.png' class='cards'></image>
+            </block>
+            <block wx:else>
+              <image src='/images/fourimg/cardbg.png' class='cards'></image>
+            </block>
+            <view class='redTextsBox flexRow' data-url="/pages/card/card_details/card_details?cardId={{item.couponsId}}" data-type="1" bindtap="pageSkip">
+              <view class='flexColumnH' style='width:273rpx'>
+                <view class='flexRow moneyBox'>
+                  <view class='moneys'>￥</view>
+                  <view class='money222 '>{{item.denomination}}</view>
+                </view>
+                <view class='pagTime pagTime22'>购买满{{item.use_condition}}元使用</view>
+                <view class='pagTime'>{{item.start_time}}~{{item.end_time}}</view>
+              </view>
+              <view class='flexColumnH freeBox paddingBoxH' style='width:130rpx'>
+                <view class='free' hidden='{{item.isGet==1}}'>免费</view>
+                <view class='free' wx:if='{{item.isGet==1}}'>已经</view>
+                <view class='free'>领取</view>
+                <view class='freePag'>优惠券</view>
+              </view>
+            </view>
+            <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:330rpx;height:160rpx;top:0' open-type="getPhoneNumber" data-type='card' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+
+          </view>
+          <view class='pagBorder flexRow' wx:if='{{item.card_tpye==3}}'>
+            <!--折扣-->
+            <block wx:if='{{item.isGet==1}}'>
+              <!--领取了-->
+              <image src='/images/main1/already.png' class='cards'></image>
+            </block>
+            <block wx:else>
+              <image src='/images/main1/coupon.png' class='cards'></image>
+            </block>
+            <view class='redTextsBox flexRow' data-url="/pages/card/card_details/card_details?cardId={{item.couponsId}}" data-type="1" bindtap="pageSkip">
+              <view class='flexColumnH' style='width:273rpx'>
+                <view class='flexRow moneyBox'>
+                  <view class='money222'>{{item.denomination}}</view>
+                  <view class='moneys' style='margin-top:50rpx;font-size:24rpx;margin-left:10rpx'>折</view>
+                </view>
+                <view class='pagTime pagTime22'>购买满{{item.use_condition}}元{{item.denomination}}折</view>
+                <view class='pagTime'>{{item.start_time}}~{{item.end_time}}</view>
+              </view>
+              <view class='flexColumnH freeBox paddingBoxH' style='width:130rpx'>
+                <view class='free' hidden='{{item.isGet==1}}'>免费</view>
+                <view class='free' wx:if='{{item.isGet==1}}'>已经</view>
+                <view class='free'>领取</view>
+                <view class='freePag'>折扣券</view>
+              </view>
+            </view>
+            <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:330rpx;height:160rpx;top:0' open-type="getPhoneNumber" data-type='card' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+
+          </view>
+        </block>
+      </scroll-view>
+      <view class="more" data-url="/pages/card/card_list/card_list" data-type="1" bindtap="pageSkip">查看更多卡券</view>
+    </view>
+  </view>
+  <!-- 爆款专卖 -->
+  <view hidden="{{!hotProductList.length}}">
+    <view class='flexRowH paddingBox4 nearStyles'>
+      <view class='flexRow titleFourBox'>
+        <view class='bgLine'>
+          <image src='/images/fourimg/title_line.png'></image>
+        </view>
+        <view class='titleFour'>
+          <view class='titleFour_First'>爆款专卖</view>
+          <view class='titleFour_Second'>HOST SALE</view>
+        </view>
+      </view>
+      <!-- 可滑动的爆款产品展示 -->
+      <scroll-view class="hotProductContainer" scroll-x="true">
+        <block wx:for="{{hotProductList}}" wx:key="id">
+          <view class='item'>
+            <view data-url="/pages/product/hot_product_list/hot_product_list?productId={{item.id}}" data-type="1" bindtap="pageSkip">
+              <image src='{{item.imgurl}}'></image>
+              <input type='text' value='{{item.product_title}}' disabled='true' maxlength='12' class='name out_hidden_2 productsName'></input>
+
+
+
+              <view class='price'>
+                <text class='now productsName'>￥{{item.hot_price}}</text>
+                <text class='old productsName'>￥{{item.max_price}}</text>
+              </view>
+            </view>
+            <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:250rpx;height:370rpx;margin-top:-370rpx;' open-type="getPhoneNumber" data-type='hotProduct' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+          </view>
+        </block>
+      </scroll-view>
+      <view class="more" style="width:750rpx;padding:0 0" data-url="/pages/product/hot_product_list/hot_product_list" data-type="1" bindtap="pageSkip">查看更多爆款</view>
+    </view>
+  </view>
+  <!-- 限时抢购 -->
+  <view hidden="{{!limitBuyProductList.length}}">
+    <view class='flexRowH paddingBox4 nearStyles'>
+      <view class='flexRow titleFourBox'>
+        <view class='bgLine'>
+          <image src='/images/fourimg/title_line.png'></image>
+        </view>
+        <view class='titleFour'>
+          <view class='titleFour_First'>限时抢购</view>
+          <view class='titleFour_Second'>FLASH SALE</view>
+        </view>
+      </view>
+      <!-- 可滑动的限时抢购产品展示 -->
+      <scroll-view class="hotProductContainer limitBuyProductContainer" scroll-x="true">
+        <block wx:for="{{limitBuyProductList}}" wx:key="id">
+          <view class='item'>
+            <view data-url="/pages/limitbuy/product_details/product_details?productId={{item.product_id}}&limitId={{item.id}}&limit_buy_time={{item.limit_buy_time}}&limit_type={{limit_buy_type}}" data-type="1" bindtap="pageSkip">
+              <image src='{{item.imgurl}}'></image>
+              <input type='text' value='{{item.product_title}}' disabled='true' maxlength='12' class='name out_hidden_2 productsName'></input>
+              <!-- <view class='name out_hidden_2'>{{item.product_title}}</view> -->
+              <view class='price'>
+                <view class='price12'>
+                  <view class='now productsName'>￥{{item.price}}</view>
+                  <view class='limitButton'>抢购</view>
+                </view>
+              </view>
+
+            </view>
+            <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:250rpx;height:370rpx;margin-top:-370rpx;' open-type="getPhoneNumber" data-type='hotProduct' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+          </view>
+        </block>
+      </scroll-view>
+      <view class="more" style="width:750rpx;padding:0 0" data-url="/pages/limitbuy/product_list/product_list" data-type="1" bindtap="pageSkip">查看更多抢购产品</view>
+    </view>
+  </view>
+  <!-- 产品拼团 -->
+  <view wx:if='{{groupListData.length>0}}'>
+    <view class='flexRowH paddingBox4 nearStyles'>
+      <view class='flexRow titleFourBox'>
+        <view class='bgLine'>
+          <image src='/images/fourimg/title_line.png'></image>
+        </view>
+        <view class='titleFour'>
+          <view class='titleFour_First'>产品拼团</view>
+          <view class='titleFour_Second'>PRODUCT FIGHT</view>
+        </view>
+      </view>
+      <scroll-view class="hotProductContainer" scroll-x="true">
+        <block wx:for="{{groupListData}}" wx:key="id">
+          <view class='item'>
+            <view data-type='1' data-url="/pages/group/group_info/product_details?product_id={{item.product_id}}&id={{item.id}}&isJoin={{item.isJoin}}" bindtap="pageSkip">
+              <image src='{{item.imgurl}}'></image>
+              <input type='text' value='{{item.product_title}}' disabled='true' maxlength='12' class='name4 out_hidden_2 productsName'></input>
+              <!-- <view class='name4 out_hidden_2'>{{item.product_title}}</view> -->
+              <view class='price'>
+                <text class='now productsName'>￥{{item.group_price}}</text>
+                <text class='old productsName'>￥{{item.max_price}}</text>
+              </view>
+            </view>
+            <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:250rpx;height:370rpx;margin-top:-370rpx;' open-type="getPhoneNumber" data-type='hotProduct' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+          </view>
+        </block>
+      </scroll-view>
+      <view class="more" style="width:750rpx;padding:0 0" data-url="/pages/group/group_list/group_list" data-type="1" bindtap="pageSkip">查看更多拼团</view>
+    </view>
+  </view>
+  <!--附近店铺推荐-->
+  <view class='flexRowH  nearStyles'>
+    <view wx:if='{{show_near_shop==1?true:false}}'>
+      <view hidden='{{storeShowHide}}'>
+        <view class='flexColumnH nearByInfo'>
+          <!-- <view class='storeNear flexRow' style='border-bottom:2rpx solid #f9f9f9'>
+            <image src='/images/menu/store.png' class='store1'></image>
+            <view class='storeTitle'>附近店铺推荐</view>
+          </view> -->
+          <!-- 标题 -->
+          <view class='flexRow titleFourBox'>
+            <view class='bgLine'>
+              <image src='/images/fourimg/title_line.png'></image>
+            </view>
+            <view class='titleFour'>
+              <view class='titleFour_First'>店铺推荐</view>
+              <view class='titleFour_Second'>STORE REMMENDATION</view>
+            </view>
+          </view>
+          <!--服务商户-->
+          <view hidden='{{serverShowHide}}'>
+            <view class='flexColumnH ' style='border-bottom:10rpx solid #f6f6f6'>
+              <view class='paddingBox1 flexRow' data-indexs='server' bindtap='getToShop' data-title='{{serverInfo.name}}'>
+                <view class='flexColumnH shopBox'>
+                  <view class='flexRow'>
+                    <view class='nearStore' style=' background:red;'>专属</view>
+                    <view class='titleStore hiddenLien2'>{{serverInfo.name}}</view>
+                  </view>
+                  <view class='flexRow touchBox'>
+                    <view class='callBox'>联系方式：</view>
+                    <view class='callPhone'>{{serverInfo.phone_num}}</view>
+                  </view>
+                  <view class='flexRow touchAdress'>
+                    <view class='callBox'>地理位置：</view>
+                    <view class='callPhone hiddenLien2'>{{serverInfo.addr}}</view>
+                  </view>
+                </view>
+                <view class='rights'>
+                  <image src='/images/arrows_right.png'></image>
+                </view>
+              </view>
+              <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='height:230rpx;margin-top:20rpx;' open-type="getPhoneNumber" data-type='shop' data-param='{{}}' bindgetphonenumber="authorizePhone"></button>
+            </view>
+          </view>
+          <!--就近店铺-->
+          <view hidden='{{shopBoxShowHide}}'>
+            <block wx:for='{{nearInfo}}' wx:key='*this' wx:for-item='shop' data-indexs='index'>
+              <view hidden='{{shopShowHide[index]}}'>
+                <view class='flexColumnH ' style='border-bottom:10rpx solid #f6f6f6'>
+                  <view class='paddingBox1 flexRow' data-indexs='{{index}}' bindtap='getToShop' data-title='{{shop.name}}'>
+                    <view class='flexColumnH shopBox'>
+                      <view class='flexRow'>
+                        <view class='nearStore' style=' background:#4abcc2;'>附近</view>
+                        <view class='titleStore hiddenLien2'>{{shop.name}}</view>
+                      </view>
+                      <view class='flexRow touchBox'>
+                        <view class='callBox'>联系方式：</view>
+                        <view class='callPhone'>{{shop.phone_num}}</view>
+                      </view>
+                      <view class='flexRow touchAdress'>
+                        <view class='callBox'>地理位置：</view>
+                        <view class='callPhone hiddenLien2'>{{shop.addr}}</view>
+                      </view>
+                    </view>
+                    <view class='rights'>
+                      <image src='/images/arrows_right.png'></image>
+                    </view>
+                  </view>
+                  <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:230rpx;margin-top:20rpx;' open-type="getPhoneNumber" data-type='shop' data-param='{{}}' bindgetphonenumber="authorizePhone"></button>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 产品推荐 -->
+  <view class='productsRecommend' wx:if="{{setInfo.product_is_show==1 && productList.length}}">
+    <!-- 产品推荐标题 -->
+    <view class='flexRow titleFourBox  paddingBox4'>
+      <view class='bgLine'>
+        <image src='/images/fourimg/title_line.png'></image>
+      </view>
+      <view class='titleFour' style='top:10rpx'>
+        <view class='titleFour_First'>产品推荐</view>
+        <view class='titleFour_Second'>PRODUCTS RECOMMEND</view>
+      </view>
+    </view>
+    <!-- 产品展示 -->
+    <block wx:if="{{setInfo.product_is_show==1 && productList.length}}">
+      <view class="productContainer">
+        <block wx:for="{{productList}}" wx:key="id">
+          <view class="item">
+            <view data-productid="{{item.id}}" data-hotProductVersion='{{item.hot_version}}' data-type="1" bindtap="pageSkipdetail">
+              <view class="image">
+                <image src="{{item.imgurl}}"></image>
+                <view class='presell idents' wx:if='{{item.presell==2&&!item.hot_price}}'>预售</view>
+                <view class='hotProducts2 idents' wx:if='{{item.hot_price&&item.publish==1}}'>爆款</view>
+              </view>
+             
+              <input type='text' value='{{item.product_title}}' disabled='true' maxlength='12' class="name4 out_hidden_2 productsName"></input>
+              <block wx:if="{{item.hot_price&&item.publish==1}}">
+                <block wx:if="{{item.residue_num>0 && item.buyNum<item.limitation_num&&item.publish==1&&item.reserveNum<=0}}">
+                  <view class="money4">
+                    <text class='now productsName'>￥{{item.hot_price}}</text>
+                    <text class='old productsName'>￥{{item.max_price}}</text>
+                  </view>
+                </block>
+                <block wx:else>
+                  <view class="money4 productsName">￥{{item.min_price}}</view>
+                </block>
+              </block>
+              <block wx:else>
+                <block wx:if="{{payState==1||payState==2}}">
+                  <block wx:if="{{payStatusInfo.isOpen==1}}">
+                    <block wx:if="{{payStatusInfo.pay_status==1}}">
+                      <block wx:if="{{item.isOpen==1}}">
+                        <block wx:if="{{item.pay_status==1}}">
+                          <view class="price1 price productsName" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                        </block>
+                        <block wx:else>
+                          <view class="price1 price productsName" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                        </block>
+                      </block>
+                      <block wx:else>
+                        <view class="price1 price productsName" style='color:{{appColor}}'>到店咨询</view>
+                      </block>
+                    </block>
+                    <block wx:else>
+                      <block wx:if='{{item.isOpen==1}}'>
+                        <view class="price1 price productsName" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                      </block>
+                      <block wx:else>
+                        <view class="price1 price productsName" style='color:{{appColor}}'>到店咨询</view>
+                      </block>
+                    </block>
+                  </block>
+                  <block wx:else>
+                    <view class="price1 price productsName" style='color:{{appColor}}'>到店咨询</view>
+                  </block>
+                </block>
+              </block>
+            </view>
+            <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:350rpx;height:470rpx;margin-top:-470rpx;' open-type="getPhoneNumber" data-type='recommendProduct' data-param='{{item.id}}' bindgetphonenumber="authorizePhone"></button>
+          </view>
+        </block>
+      </view>
+    </block>
+  </view>
+  <!-- 菜单栏 -->
+  <view class='menuList justAround flexRow'>
+    <view wx:for="{{iconData}}" wx:key="*this">
+      <view class="ListItem flexColumnH" data-url="{{item.url}}" data-type="1" catchtap="pageSkip">
+        <view>
+          <image src="{{item.image}}"></image>
+        </view>
+        <view class="itemText2">{{item.name}}</view>
+      </view>
+      <!-- <view class='isNeedPay' hidden='{{!(item.name=="个人中心" && isNeedPay==1)}}'></view> -->
+      <!-- 授权电话 -->
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:150rpx;height:160rpx;z-index:10000;top:0' open-type="getPhoneNumber" data-type='menu' data-param='{{index+1}}' bindgetphonenumber="authorizePhone"></button>
+      <!--授权头像-->
+      <view wx:if='{{index==(iconData.length-1)}}'>
+        <button class="phoneButton" hidden='{{isAuthorizeInfo}}' style='width:150rpx;height:160rpx;top:0;z-index:1' open-type="getUserInfo" bindgetuserinfo='getUserInfos' data-type='menu' data-param='3'></button>
+      </view>
+    </view>
+  </view>
+    <!-- 购物车 -->
+  <view wx:if="{{payState==1}}">
+    <image class='shoppingCart' src='/images/menu/shoppingCart.png' data-url="/pages/shopping_cart/shopping_cart" data-type="1" bindtap="pageSkip"></image>
+    <view class='cartProductCount'>{{cartProductCount}}</view>
+  </view>
+</view>
+
+
+
+
+
+
+<!--模态框-->
+<import src="../../template/modalBox/modalBox.wxml" />
+<template is="bottomImg" />
+<!--等待的菊花-->
+<view hidden='{{wait}}'>
+  <template is="waitImg" />
+</view>
+<!--新用户卡券-->
+<view class='newcardBox' wx:if='{{isNew&&justOne&&newUserInfos.length>0}}'>
+  <!-- 1是新用户  2不是新用户 wx:if='{{isNew==1}}'-->
+  <block wx:for='{{newUserInfos}}' wx:key='*this'>
+    <view class='closeCards' hidden='{{newInfoShow[index]}}' animation="{{animationData}}">
+      <image src='http://www.kaolaj.com/file/upload/icon/bgHot.png' catchtap='closeCards' data-indexs='{{index}}'></image>
+    </view>
+    <view class='bgCardBoxs' hidden='{{newInfoShow[index]}}' animation="{{animationData}}">
+      <image src='/images/newCard/bgHot.png' class='newHotCard' mode='widthFix'></image>
+      <view class='makeList '>
+        <view class='saleValue' wx:if='{{item.card_tpye==2}}'>{{item.denomination}}元</view>
+        <!--红包-->
+        <view class='saleValue' wx:if='{{item.card_tpye==1}}'>满{{item.use_condition}}减{{item.denomination}}</view>
+        <!--优惠券-->
+        <view class='saleValue' wx:if='{{item.card_tpye==3}}'>满{{item.use_condition}} {{item.denomination}}折</view>
+        <!--折扣券class='goToGet' -->
+        <button class='goToGet' hidden='{{isAuthorizePhone}}' style='width:330rpx;top:0;opacity:1;' open-type="getPhoneNumber" data-type='newUserCard' data-cardId='{{item.card_id}}' data-indexs='{{index}}' data-exclusiveId='{{item.exclusive_id}}' bindgetphonenumber="authorizePhone">立即领取</button>
+        <view class='goToGet' wx:if='{{isAuthorizePhone}}' data-cardId='{{item.card_id}}' data-indexs='{{index}}' data-exclusiveId='{{item.exclusive_id}}' bindtap='getCoupon2'>立即领取</view>
+      </view>
+
+    </view>
+  </block>
+
+</view>
+
+
+<!--佣金模块-->
+<view class='newcardBox' wx:if='{{lookCommission}}'>
+   <view class="delete">
+    <image src="/images/delete.png" bindtap="hideCodeImage"></image>
+  </view>
+    <view class='commissionImage'  animation="{{animationData}}" bindtap='skipTocenter'>
+      <image class='image'  src='{{orderImage.image}}' ></image>
+    </view>
+    <button hidden='{{isAuthorizePhone}}' class="phoneButton" open-type="getPhoneNumber"  bindgetphonenumber="authorizePhone"></button>
+</view>
+
+
+<!-- 客服 wx:if="{{server==1}}"-->
+<view wx:if="{{server==1}}">
+  <button open-type='contact' session-from="weapp" class='shoppingCart2 ' style='bottom:312rpx'>
+    <image class='shoppingCart' src='/images/menu/server.png'  style='bottom:315rpx'></image>
+  </button>
+</view>
+
+
+<view class="space"></view>

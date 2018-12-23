@@ -1,0 +1,56 @@
+<import src="../../../template/modalBox/modalBox.wxml" />
+<!--index.wxml-->
+<view class="pannel menu" wx:if='{{activityType==2}}'>
+  <view class="menuCell {{activeArr[0]}}" style='border-color:{{activeArr[0]?active:""}};color:{{activeArr[0]?active:""}}' data-value="0" bindtap="chooseMenu">当前活动</view>
+  <view class="menuCell {{activeArr[1]}}" style='border-color:{{activeArr[1]?active:""}};color:{{activeArr[1]?active:""}}' data-value="1" bindtap="chooseMenu">往期活动</view>
+</view>
+
+<block wx:for='{{menuContentHiddenArr}}' wx:for-item='shops' wx:for-index='indexs' wx:key='*this'>
+  <view class="{{activity_boxsss[activityType]}}" hidden='{{menuContentHiddenArr[indexs]}}'>
+    <block wx:for="{{activityList}}" wx:for-item="item" wx:key="image">
+      <view style='position:relative'>
+        <view class='activit_list' data-activity_id="{{item.id}}" data-type='1' data-activityType='{{item.type}}' bindtap='skipUpTo'>
+          <image src='{{item.image}}' class='activity_img' mode='widthFix'></image>
+          <view class='activity_name'>{{item.title}}</view>
+
+          <view class='activity_time  flexRow justAround'>
+            <view class='activity_text'>{{item.generalize_start_time}}---{{item.end_time}}</view>
+            <view class='icon_look_num flexRow'>
+              <image src='/images/eye2.png' class='icon_eye'></image>
+              <view class='look_num'>{{item.look?item.look:0}}</view>
+            </view>
+          </view>
+        </view>
+        <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:540rpx;z-index:10000;top:0' open-type="getPhoneNumber" data-type='' bindgetphonenumber="authorizePhone"></button>
+      </view>
+
+    </block>
+  </view>
+
+</block>
+
+
+
+<!--无活动-->
+<block wx:if='{{activityType==1}}'>
+  <view hidden='{{noActivity}}'>
+    <view class='Cover' style='top:85rpx'>
+      <image src='/images/nodata/activity.png'  mode='widthFix' style='width:750rpx;height:667px'></image>
+    </view>
+  </view>
+
+</block>
+<block wx:else>
+  <block wx:if='{{isType==1}}'>
+    <!--暂无当前活动-->
+    <view class='Cover' wx:if='{{isOne}}' style='top:85rpx'>
+      <image src='/images/nodata/activity_join.jpg' mode='widthFix' class='joins'></image>
+    </view>
+  </block>
+  <block wx:else>
+    <!--暂无往期的-->
+    <view class='Cover' wx:if='{{isTwo}}' style='top:85rpx'>
+      <image src='/images/nodata/activity_join.jpg' mode='widthFix' class='joins'></image>
+    </view>
+  </block>
+</block>

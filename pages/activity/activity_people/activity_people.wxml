@@ -1,0 +1,10 @@
+<block wx:if="{{signPeopleArr.length==0}}">
+    <image class="noData" src="/images/nodata/data.png"></image>
+</block>
+<block wx:else>
+    <view class="peopleList">
+        <block wx:for="{{signPeopleArr}}" wx:key="*this">
+          <image src="{{item}}"></image>
+        </block>
+    </view>
+</block> 

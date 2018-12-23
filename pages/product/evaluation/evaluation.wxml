@@ -1,0 +1,67 @@
+<!-- 订单信息 -->
+<view class='order'>
+  <view>订单编号：{{orderInfo.order_code}}</view>
+  <view>订单状态：<text class='color_red'>{{orderStateObj[orderInfo.order_state]}}</text></view>
+</view>
+
+<block wx:for="{{orderInfo.productInfo}}" wx:key="*this">
+    <view class='product'>
+      <image class='picture' src='{{item.image_url}}'></image>
+      <view class='info'>
+        <view>
+          <view class='name out_hidden_2'>{{item.product_title}}</view>
+          <view class='property'>
+            <view>颜色:{{item.color}}；型号:{{item.product_model}}；规格:{{item.size}};</view>
+          </view>
+        </view>
+        <view class='price'>
+          <view class='color_red'>￥{{item.price}}</view>
+          <view>×{{item.num}}</view>
+        </view>
+      </view>
+    </view>
+</block> 
+<!-- 评论 -->
+<view class="content">
+  <textarea class="input" placeholder="在1-500字之间，写下体验，可以为其他小伙伴提供参考~" placeholder-class="searchTips" maxlength="500" bindinput="setContent" value='{{orderInfo.details}}' disabled='{{state==3}}'/>
+</view>
+<!--评分-->
+<view class="scoreContainer">
+  <view class="score">
+    <view class="name">整体评分</view>
+    <view class="area">
+      <view class='item' data-score='3' bindtap='setScore'>
+        <block wx:if="{{score==3}}">
+            <image src="/images/evaluation/level_1_yes.png"></image>
+            <view class="text_yes">好评</view>
+        </block>
+        <block wx:else>
+            <image src="/images/evaluation/level_1_no.png"></image>
+            <view class="text_no">好评</view>
+        </block>
+      </view>
+      <view class='item' data-score='2' bindtap='setScore'>
+        <block wx:if="{{score==2}}">
+            <image src="/images/evaluation/level_2_yes.png"></image>
+            <view class="text_yes">中评</view>
+        </block>
+        <block wx:else>
+            <image src="/images/evaluation/level_2_no.png"></image>
+            <view class="text_no">中评</view>
+        </block>
+      </view>
+      <view class='item' data-score='1' bindtap='setScore'>
+        <block wx:if="{{score==1}}">
+            <image src="/images/evaluation/level_3_yes.png"></image>
+            <view class="text_yes">差评</view>
+        </block>
+        <block wx:else>
+            <image src="/images/evaluation/level_3_no.png"></image>
+            <view class="text_no">差评</view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 提交 -->
+<view class="submit" bindtap="submit" hidden='{{state==3}}'>提交</view>

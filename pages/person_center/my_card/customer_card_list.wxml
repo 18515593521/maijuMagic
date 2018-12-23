@@ -1,0 +1,62 @@
+<!--菜单-->
+<view class="menu">
+  <view class="item {{menuClassArr[0]}}" style='color:{{menuClassArr[0]?active:""}};border-color:{{menuClassArr[0]?active:""}}' data-param="0" bindtap="chooseCardType">优惠券</view>
+  <view class="item {{menuClassArr[1]}}"  style='color:{{menuClassArr[1]?active:""}};border-color:{{menuClassArr[1]?active:""}}' data-param="1" bindtap="chooseCardType">红包</view>
+  <view class="item {{menuClassArr[2]}}" style='color:{{menuClassArr[2]?active:""}};border-color:{{menuClassArr[2]?active:""}}' data-param="2" bindtap="chooseCardType">折扣券</view>
+</view>
+<!--卡券列表-->
+<view class="cardList">
+    <block wx:for="{{cardList}}" wx:key="id">
+        <view class="item">
+          <block wx:if="{{item.state==1}}">
+              <image class="image" src="/images/card/{{cardType[item.card_tpye].backGroundImage}}"></image>
+          </block>
+          <block wx:else>
+              <image class="image" src="/images/card/{{cardType[item.card_tpye].backGroundImage2}}"></image>
+          </block> 
+          <view class="info">
+            <view class="left {{item.state==1 ? cardType[item.card_tpye].trueClass : cardType[item.card_tpye].falseClass}}"> 
+            <block wx:if="{{item.card_tpye==1 || item.card_tpye==2}}">
+                <view class="moneyContainer">
+                    <text class="sign">￥</text>
+                    <text class="money">{{item.denomination}}</text> 
+                </view>              
+            </block>
+            <block wx:if="{{item.card_tpye==3}}">
+                <view class="discount">
+                  <view class="number">{{item.denomination}}折</view>
+                </view>                
+            </block>  
+            </view>
+            <view class="right">
+              <view class="shopName">{{item.shopName}}</view>
+              <view class="time">使用时间:{{item.start_time}}至{{item.end_time}}</view>
+              <block wx:if="{{item.card_tpye!=2}}">
+                  <view class="condition">
+                    <text>满{{item.use_condition?item.use_condition:0}}使用</text>
+                  </view>
+              </block>
+              <view class="codeContainer">
+                <view>
+                  <text class="codeTitle">兑换码:</text>
+                  <text class="code_1 {{item.state==1 ? 'color_green_2' : 'color_gray_1'}}">{{item.code}}</text>
+                </view>
+                <block wx:if="{{item.state==1}}">
+                    <view class="timeLimit_2">有效</view>       
+                </block>  
+                <block wx:if="{{item.state==2}}">
+                    <view class="timeLimit_3">已使用</view>           
+                </block> 
+                <block wx:if="{{item.state==3}}">
+                    <view class="timeLimit_3">已过期</view>       
+                </block> 
+                <block wx:if="{{item.state==4}}">
+                    <view class="timeLimit_1">即将到期</view>       
+                </block> 
+              </view>
+            </view>
+          </view> 
+        </view>
+    </block>
+
+</view>

@@ -1,0 +1,109 @@
+<view class='container'>
+<view class='showLimitTime {{showLimitTimeStyle}}'>
+  <block wx:for="{{limit_buy_time}}" wx:key="id">
+  <view class='limit_time'style="color:{{item.color}};font-size:{{item.size}}">
+   <view class='limit_time1' style='margin-top:{{item.top}}'>{{item.start_time1}}</view>
+    <view class='limit_time2' >
+      <block wx:if="{{item.type ==2}}">抢购中</block>
+      <block wx:elif="{{item.type ==1}}">即将开始</block>
+       <block wx:elif="{{item.type ==10}}">马上开始</block>
+      <block wx:else>已结束</block>
+    </view>
+   </view>
+  </block>
+  
+</view>
+  <view class='textShow'>
+    <view class='name'>
+    <block wx:if="{{map.type ==1}}">马上开始啦！！！</block>
+    <block wx:if="{{map.type ==2}}">抢购中,先下单先得哦</block>
+    </view>
+    <view class='name end'>
+      <view>
+        <block wx:if="{{map.type ==1}}">距开始</block>
+        <block wx:if="{{map.type ==2}}">距结束</block>
+      </view>
+    <view class='time'>
+      <view class='text'>{{time.h}}</view>:
+      <view class='text'>{{time.m}}</view>:
+      <view class='text'>{{time.s}}</view>
+    </view>
+    </view>
+  </view>
+
+  <block wx:for="{{productList}}" wx:key="id">
+    <view class='item'>
+      <view class='left'>
+        <image src='{{item.imgurl}}'></image>
+      </view>
+      <view class='right'>
+        <view>
+          <view class='name out_hidden_2 title'>{{item.product_title}}</view>
+        </view>
+        <view class='price'>
+          <view class='priceshow'>
+          <view>
+          <text class='now'>￥{{item.price}}</text>
+          </view>
+            <view class='priceOld'>
+             <view class='text'>原价</view>
+             <text class='old'>￥{{item.max_price}}</text>
+            </view>
+          </view>
+        
+  <view class='priceshow'>
+        <view class='sell1'>
+        
+          <block wx:if="{{map.type ==2}}">
+            <block wx:if="{{item.buy_num==0}}">
+              <block wx:if="{{item.residue_num>0}}">
+                  <block wx:if="{{payState==1&&payStatusInfo.isOpen==1&&payStatusInfo.pay_status==1&&item.isOpen==1&&item.pay_status==1}}">
+                    <view class='look' data-url="/pages/limitbuy/product_details/product_details?productId={{item.product_id}}&limitId={{item.id}}&limit_buy_time={{item.limit_buy_time}}&limit_type={{limit_buy_type}}" data-type="1" bindtap="pageSkip">马上抢购</view>
+                  </block>
+                  <block wx:else>
+                    <view class='look' data-url="/pages/limitbuy/product_details/product_details?productId={{item.product_id}}&limitId={{item.id}}&limit_buy_time={{item.limit_buy_time}}&limit_type={{limit_buy_type}}" data-type="1" bindtap="pageSkip">预订到店</view>
+                  </block> 
+              </block>
+              <block wx:else>
+                <view class='look' style='background-color: red;color: white;'>已抢光</view>
+              </block>
+            </block>
+            <block wx:else>
+              <block wx:if="{{payState==1&&payStatusInfo.isOpen==1&&payStatusInfo.pay_status==1&&item.isOpen==1&&item.pay_status==1}}">
+                  <view class='look' style='background-color: #EEEEEE;color: #999999;'>已抢购</view>
+              </block>
+              <block wx:else>
+                  <view class='look' style='background-color:#EEEEEE;color: #999999;'>已预订</view>
+              </block>
+              
+            </block>
+          </block>
+          <block wx:elif="{{map.type ==1}}">
+          <view class='look' style='background-color: red;color: white;'data-url="/pages/limitbuy/product_details/product_details?productId={{item.product_id}}&limitId={{item.id}}&limit_buy_time={{item.limit_buy_time}}&limit_type={{limit_buy_type}}" data-type="1" bindtap="pageSkip">即将开始</view>
+          </block>
+
+        <view class='count'>
+          <view class='sale'>{{payState==1&&payStatusInfo.isOpen==1&&payStatusInfo.pay_status==1&&item.isOpen==1&&item.pay_status==1 ? '已售' : '预订'}}{{item.percent}}%</view>
+            <view class='percent'>
+              <view class='all'>
+                <block wx:if="{{item.pmgressbar>0}}">
+                  <view class='remain' style='width:{{item.pmgressbar*150}}rpx;'></view>
+                </block>
+              </view>
+             
+            </view>
+            
+          </view>
+        
+        </view>
+        
+      </view>
+        </view>
+        
+      </view>
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:260rpx;top:0' open-type="getPhoneNumber" data-type='' data-param='' bindgetphonenumber="authorizePhone"></button>
+    </view>
+  </block>
+</view>
+
+

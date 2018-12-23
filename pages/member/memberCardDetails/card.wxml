@@ -1,0 +1,116 @@
+<view class='vipBox paddingBox'>
+  <image src='{{cardInfo.image}}' class='vipbg'></image>
+  <view class='vipTextBox flexColumnH'>
+    <view class='vipName'>{{cardInfo.name}}</view>
+    <view class='vipNumber'>{{cardInfo.vip_code}}</view>
+  </view>
+</view>
+
+<view class='paddingBox'>
+  <view class='flexRow ' style='width:90%;'>
+  <view class='flexRow' style='width:90%;'>
+       <block wx:if="{{cardInfo1.type==2}}" >
+          <view class='ruleDetai1'>有效期：</view>
+          <block wx:if="{{cardInfo1.the_period_of_validity > 0}}">
+            <view class='ruleDetai1 fontcolor' >{{cardInfo1.the_period_of_validity}}年</view>
+          </block>
+          <block wx:else>
+            <view class='ruleDetai1 fontcolor' >长期</view>
+          </block>
+       </block>
+       <view class='flexRow sellNum'>
+        <view>{{cardInfo1.number}}/</view>
+        <view class='reNum'>{{cardInfo1.reNum}}</view>
+       </view>
+    </view>
+  </view>
+    
+    <view class='flexRow' >
+          <view class='ruleDetai1'>售卡时间段：</view>
+          <block wx:if="{{cardInfo1.buy_end_time =='3018/08/01 00:00:00'}}">
+          <view class="buytime">{{cardInfo1.buy_start_time}}--长期</view>
+          </block>
+          <block wx:else>
+            <view class="buytime">{{cardInfo1.buy_start_time}}--{{cardInfo1.buy_end_time}}</view>
+          </block>
+    </view>
+</view>
+
+<view class='paddingBox'>
+    <view class='flexRow'>
+      <image src='/images/member/youhui.png' class='rule'></image>
+      <view class='ruleDetai'>优惠方式</view>
+    </view>
+    <view class='flexRow'>
+      <block wx:if="{{cardInfo1.type == 2}}">
+          <view class='ruleDetai1'>折扣：</view>
+          <view class='ruleDetai1 fontcolor'>{{cardInfo1.balance}}</view>
+          <view class="utilcolor"> 折</view>
+          <block wx:if="{{cardInfo1.use_type == 2}}">
+            <view class='ruleDetai1 ruleDetai2'>可使用金额：</view>
+            <view class='ruleDetai1 fontcolor '>{{cardInfo1.money}}元</view>
+          </block>
+      </block>
+      <block wx:if="{{cardInfo1.type == 3}}">
+          <view class='ruleDetai1 ruleDetai2'>可使用金额：</view>
+          <view class='ruleDetai1 fontcolor '>{{cardInfo1.money}}</view>
+          <block wx:if="{{cardInfo1.use_type == 1}}">
+            <view>次</view>
+          </block>
+          <block wx:if="{{cardInfo1.use_type == 2}}">
+            <view>元</view>
+          </block>
+      </block>
+    </view>
+</view>
+
+<!-- <block wx:if="{{cardInfo1.type == 3 && cardInfo1.add_type == 1}}"> -->
+  <view class='paddingBox'>
+      <view class='flexRow'>
+        <image src='/images/member/diejia.png' class='rule'></image>
+        <view class='ruleDetai'>是否可叠加</view>
+      </view>
+      <view class='flexRow'>
+      <view class='diejia'>可叠加</view>
+      <view class='goumai'>(购买新卡后，原卡内次数/余额叠加到新卡)</view>
+      </view>
+  </view>
+<!-- </block> -->
+
+<view class='paddingBox'>
+    <view class='flexRow' style='width:90%;'>
+      <image src='/images/member/usedatil.png' class='rule'></image>
+       <block wx:if="{{vipType==2}}" >
+          <view class='ruleDetai'>使用说明</view>
+       </block>
+      <block wx:elif="{{vipType==3}}" >
+        <view class='ruleDetai'>储值说明</view>
+      </block>
+    </view>
+    <view class='texta'>
+      {{cardInfo.direction}}
+    </view>
+</view>
+<!-- 底部 -->
+<view class='thisBottom'>
+ 
+  <block wx:if="{{cardInfo.buyType==1}}">
+    <view class='pay'>
+      <view  class='paynow'>已购买</view>
+    </view>
+  </block>
+  <block wx:elif="{{cardInfo.sellType==1}}">
+    <view class='pay'  bindtap='payMoney'>
+      <view  class='paynow'>购买/￥{{cardInfo.buy_price}}</view>
+    </view>
+  </block>
+  <block wx:elif="{{cardInfo.sellType==2}}">
+    <view class='pay' >
+      <view  class='paynow'>已抢光</view>
+    </view>
+  </block>
+</view>
+
+<modal hidden="{{hidden}}" title="提示" confirm-text="确认"  bindcancel="cancel" bindconfirm="confirm" no-cancel="true">
+    暂未开能线上支付，请线下交易。
+</modal>

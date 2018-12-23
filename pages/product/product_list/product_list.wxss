@@ -1,0 +1,122 @@
+ @import "/template/modalBox/modalBox.wxss";
+page {
+  background-color: #FFFFFF;
+}
+
+/*搜索*/
+.searchContainer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 750rpx;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    padding: 30rpx;
+    z-index:-1000;
+}
+.productsName{
+  padding-left:10px;
+  box-sizing:border-box;
+}
+.searchContainer .class{
+    height: 60rpx;
+}
+.searchContainer .class image{
+    width: 45rpx;
+    height: 60rpx;   
+}
+.searchContainer .search{
+    width: 595rpx;
+    height: 60rpx;
+    margin-left: 50rpx;
+}
+.searchContainer .search image{
+    position: absolute;
+    width: 35rpx;
+    height: 35rpx; 
+    margin: 15rpx 20rpx;
+    z-index: 99;
+}
+.searchContainer .search .searchClass{
+    border: 2rpx solid #F5F5F5;
+    border-radius: 10rpx;
+    padding: 0 20rpx 0 70rpx;
+    font-size: 10pt;
+    color: grey;
+    height: 100%;
+}
+.searchContainer .search .searchTips{
+    text-align: center;
+    font-size: 22rpx;
+    color: #DADADA;
+}
+/*产品列表*/
+.productContainer{
+    margin-top: 120rpx;
+    display: flex;
+    flex-wrap: wrap;
+    z-index:100000;
+    background:#fff;
+}
+.productContainer .item{
+    width: 350rpx;
+    margin: 0 10rpx 20rpx;
+    border: 2rpx solid #F9F9F9;
+}
+.productContainer .item .image{
+    height: 350rpx;
+    position:relative;
+}
+.productContainer .item .image image{
+    width: 100%;
+    height: 100%;
+    border-radius: 5rpx;
+}
+.productContainer .item .name{
+    height: 34px;
+    font-size: 26rpx;
+    color: #6E6E6E;
+}
+.productContainer .item .money{
+    padding: 0 15rpx;
+    font-size: 34rpx;
+    color: #4ABDC2;
+}
+.productContainer .item .money .now{
+    color: #FE6165;
+    font-size:34rpx;
+}
+.productContainer .item .money .old{
+    font-size: 20rpx;
+    color: #A0A0A0;
+    text-decoration: line-through;
+    padding-left: 10rpx;
+}
+.idents{
+  width:60rpx;
+  height:40rpx;
+  text-align:center;
+  line-height:40rpx;
+  color:#fff;
+  font-size:24rpx;
+    position:absolute;
+  margin:auto;
+  right:0;
+  bottom:0;
+}
+.presell{
+   background:#ffd600;
+}
+.hotProducts2{
+ background:#fd0036;
+}
+.price{
+  color:#ff6464;
+  line-height:60rpx;
+}
+.price1{
+  font-size:34rpx;
+  padding-left:15rpx;
+  box-sizing:border-box;
+}

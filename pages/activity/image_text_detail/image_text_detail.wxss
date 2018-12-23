@@ -1,0 +1,221 @@
+ @import "/template/modalBox/modalBox.wxss"; 
+.cover image{
+  width: 750rpx;
+  display: block;
+}
+.title{
+  padding: 10rpx 20rpx;
+  font-size: 30rpx;
+  color: #333333;
+}
+.lookNumber{
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx 10rpx;
+  font-size: 24rpx;
+  color: #666666;
+}
+.lookNumber image{
+  width: 30rpx;
+  height: 18rpx;
+  display: block;
+  margin-right: 10rpx;
+}
+/*报名人员*/
+.signPeople{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15rpx 20rpx;
+  line-height: 45rpx;
+}
+.signPeople .people{
+  display: flex;
+  align-items: center;
+}
+.signPeople .people .count{
+  font-size: 26rpx;
+  color: #4ABDC2;
+  text-align: center;
+  padding-right: 20rpx;
+}
+.signPeople .people .list{
+
+}
+.signPeople .people .list image{
+  width: 70rpx;
+  height: 70rpx;
+  display: inline-block;
+  border-radius: 50%;
+  margin: 0 10rpx;
+}
+.signPeople .look{
+  padding: 20rpx 0 20rpx 30rpx;
+}
+.signPeople .look image{
+  width: 15rpx;
+  height: 30rpx;
+  display: block;
+}
+/* 信息 */
+.info{
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  font-size: 26rpx;
+  color: #666666;
+  border-top: 2rpx solid #F6F6F6;
+}
+.info image{
+  width: 25rpx;
+  height: 25rpx;
+  display: block;
+  margin-right: 20rpx;
+}
+/* 模块 */
+.module{
+  padding: 20rpx;
+}
+.module .moduleTitle{
+  font-size: 26rpx;
+  /* color: #4ABDC2; */
+  padding-left: 10rpx;
+  /* border-left: 6rpx solid #4ABDC2; */
+  margin-bottom: 20rpx;
+}
+/* 往期活动 */
+.history{
+  width: 710rpx;
+  height: 150rpx;
+  display: flex;
+  white-space: nowrap;
+}
+.history .item{
+  width: 217rpx;
+  display: inline-block;
+}
+.history .item + .item{
+  margin-left: 30rpx;
+}
+.history .item image{
+  width: 217rpx;
+  height: 150rpx;
+  display: block;
+}
+.history .item .name{
+  margin-top: -34rpx;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 5rpx;
+  font-size: 22rpx;
+  color: #FFFFFF; 
+}
+
+/*底部*/
+.thisBottom{
+  width: 750rpx;
+  height: 80rpx;
+  position: fixed;
+  bottom: 0;
+  /* background-color:#4ABDC2; */
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36rpx;
+  color: #FFFFFF;
+}
+.sign{
+  width: 40rpx;
+  height: 40rpx;
+  display: block;
+  margin-right: 20rpx;
+}
+.phoneButton{
+  width: 750rpx;
+  height: 80rpx;
+  position: fixed;
+  bottom: 0;
+  opacity: 0;
+}
+/* 预约信息 */
+.bookingPannel{
+  position:fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 210;
+}
+.bookingPannel .box{
+  /* margin: 200rpx 100rpx; */
+  background-color: #FFFFFF;
+  border-radius: 10rpx;
+  margin:auto;
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  width:600rpx;
+  height:280rpx;
+  overflow:hidden;
+}
+.bookingPannel .title{
+  font-size: 26rpx;
+  text-align: center;
+  padding-top: 20rpx;
+}
+.bookingPannel .line{
+  margin: 8rpx 210rpx 30rpx;
+  height: 4rpx;
+  background-color: #43BFBC;
+}
+.bookingPannel .input{
+  display: flex;
+  align-items: center;
+  padding: 10rpx 90rpx 20rpx;
+  box-sizing:border-box;
+  margin-top:20rpx;
+}
+.bookingPannel .input .time{
+  width: 180rpx;
+  padding: 10rpx;
+  font-size: 22rpx;
+  color: #AAAAAA;
+  border: 2rpx solid #E7E7E7;
+  border-radius: 10rpx;
+  margin-right: 10rpx;
+}
+.bookingPannel .input .name{
+  font-size: 22rpx;
+  color: #AAAAAA;
+  padding: 0 10rpx;
+}
+.bookingPannel .operate{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 2rpx solid  #E7E7E7;
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 80rpx;
+  margin-top: 22rpx;
+  overflow:hidden;
+}
+.bookingPannel .operate .cancel{
+  width: 50%; 
+}
+.bookingPannel .operate .submit{
+  width: 50%;
+  color: #FFFFFF;
+  background-color: #43BFBD;
+  border-bottom-right-radius: 10rpx;
+}
+.items{
+  width:45%;
+}
+.presell{
+  font-size:22rpx;
+  color:red;
+  margin-bottom:10rpx;
+}

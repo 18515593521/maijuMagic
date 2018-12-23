@@ -1,0 +1,87 @@
+{
+  "pages":[
+    "pages/index/index",
+
+    "pages/web/vr",
+    "pages/person_center/reflect_value/reflect_value",
+    "pages/activity/image_text_detail/image_text_detail",
+    "pages/activity/activity_details/activity_details",
+    "pages/activity/activity_list/activity_list",
+    "pages/activity/activity_sign/activity_sign",
+    "pages/activity/activity_people/activity_people",
+    "pages/person_center/invitation_friend/invitation_friend",
+    "pages/product/other_product_detail/other_product_detail",
+    "pages/product/otherproduct_list/product_list",
+    "pages/person_center/details/details",
+    "pages/person_center/detailed/detailed",
+    "pages/person_center/redextension/redextension",
+  
+
+    "pages/product/product_list/product_list",
+    "pages/product/product_class/product_class",
+    "pages/product/product_details/product_details",
+    "pages/product/evaluation_all/evaluation_all",
+    "pages/product/evaluation/evaluation",
+    "pages/product/hot_product_list/hot_product_list",
+
+    "pages/shopping_cart/shopping_cart",
+
+    "pages/order/order_confirm/order_confirm",
+
+    "pages/card/card_list/card_list",
+    "pages/card/card_details/card_details",
+
+    "pages/person_center/center/center/center",
+    "pages/person_center/center/commission_center/commission_center",
+    "pages/person_center/my_activity/my_activity",
+    "pages/person_center/my_order/my_order",
+    "pages/person_center/order_details/order_details",
+    "pages/person_center/my_card/customer_card_list",
+    "pages/person_center/booking/booking_list/booking_list",
+    "pages/person_center/booking/limit_buy_booking_list/limit_buy_booking_list",
+    "pages/person_center/address/address_list/address_list",
+    "pages/person_center/address/address_add/address_add",
+    "pages/person_center/collection/collection",
+    "pages/person_center/history/history",
+    "pages/person_center/adviser/adviser",
+    "pages/person_center/invite/invite",
+    "pages/person_center/extension/extension",
+
+    "pages/user_validate/user_validate",
+    "pages/authorize_fail/authorize_fail",
+    "pages/group/group_list/group_list",
+    "pages/group/group_info/product_details",
+    "pages/group/my_group/my_group",
+    "pages/group/part_in_group/part_in_group",
+    "pages/group/rule_list/rule_list",
+    "pages/limitbuy/product_list/product_list",
+    "pages/limitbuy/product_details/product_details",
+    "pages/member/member/member",
+    "pages/member/detailRule/detailRule",
+    "pages/member/memberCard/card",
+    "pages/member/memberCardDetails/card",
+    "pages/member/consumelist/detailList",
+    "pages/enterprise/enterprise",
+    "pages/media/videoList/media",
+    "pages/media/videoDetail/videoDetail"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "魔方云智慧门店集客平台",
+
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F5F5F5",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": false
+  },
+  "networkTimeout": {
+    "request": 60000,
+    "connectSocket": 60000,
+    "uploadFile": 60000,
+    "downloadFile": 60000
+  },
+  "debug": false,
+  "navigateToMiniProgramAppIdList": [
+    "wx563e863bfd512553"
+  ]
+}

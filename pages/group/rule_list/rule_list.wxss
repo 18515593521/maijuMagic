@@ -1,0 +1,10 @@
+/* pages/group/rule_list/rule_list.wxss */
+.ruleImage{
+  width:750rpx;
+  height:auto;
+}
+.ruleImage image{
+  width:100%;
+  height:100%;
+  display:block;
+}

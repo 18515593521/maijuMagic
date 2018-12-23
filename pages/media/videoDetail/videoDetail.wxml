@@ -1,0 +1,39 @@
+<view style='width:750rpx'>
+  <!-- 视频/音频 -->
+  <view class='topVideo flexColumnH'>
+    <video id="myVideo" src="{{media_url}}" wx:if='{{videoSrc}}' controls  bindpause='bindpause' show-play-btn  show-center-play-btn bindended='bindended' data-type='1' bindplay="palyToVideo" bindpause = "pauseVideo">
+      <cover-view class="controls" bindtap="bindPlay" hidden='{{detailShow}}'>
+        <!--封面图片-->
+        <!-- <cover-image src="{{img_url}}" class='poster' hidden='{{showBtn}}' /> -->
+        <!--视频按钮-->
+        <!-- <cover-image src="/images/video/videoBtn.png" class='videoBtn' hidden='{{showVBtn}}' /> -->
+        
+        <cover-view class='audioMask' hidden='{{showABtn}}'>
+           <cover-image src="/images/video/audioBtn.png" class='videoBtn' style='width:325rpx;height:326rpx' />
+        </cover-view>
+       
+        <!--音频按钮-->
+
+        <cover-view class='maskDetail flexColumnH' hidden='{{otherShow}}'>
+          <cover-view class='fontBox hiddenLien flexRowH'>{{name}}</cover-view>
+          <cover-view class='informationBox flexRow'>
+            <cover-view class='flexRow' style='margin-right:200rpx;align-items:center'>
+              <cover-image src='/images/video/timer.png' mode='widthFix' class='cImgBox'></cover-image>
+              <cover-view>{{create_time}}</cover-view>
+            </cover-view>
+            <cover-view class='flexRow' style='align-items:center'>
+              <cover-image src='/images/video/videoNum.png' mode='widthFix' class='cImgBox'></cover-image>
+              <cover-view>{{look}}</cover-view>
+            </cover-view>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+    </video>
+    <!-- <video src="{{media_url}}" class='videoBox' style='height:{{winHeight}}'></video> -->
+  </view>
+
+  <!-- 音频 -->
+  <view class='audioMask' hidden='{{audioCard}}' bindtap="bindPlayPause">
+    <image src='/images/video/audioBtn.png' style='width:325rpx;height:326rpx'></image>
+  </view>
+</view>

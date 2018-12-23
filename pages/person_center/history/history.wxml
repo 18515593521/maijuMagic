@@ -1,0 +1,24 @@
+<view class="productList">
+    <block wx:for="{{productList}}" wx:key="product_id">
+        <view class="item" data-url="/pages/product/product_details/product_details?productId={{item.product_id}}" data-type="1" bindtap="pageSkip">
+            <view class="cover">
+                <image src="{{item.image_url}}"></image>
+            </view>
+            <view class="info">
+                <view class="title out_hidden_2">{{item.product_name}}</view>
+                <view class="consult">到店咨询</view>
+               
+            </view>
+        </view>
+    </block>
+</view>
+
+<view class="space"></view>
+
+<view class="thisBottom" bindtap="clearAllHistory">
+  <view>
+    <image class="clearAll" src="/images/clear.png"></image>
+  </view>
+  <view>清空</view> 
+</view>
+

@@ -1,0 +1,30 @@
+<view class='flexColumnH'> 
+  <view class='flexRow opactions '> 
+      <view>申请日期</view> 
+       <view>申请金额</view> 
+       <view>提现状态</view> 
+  </view> 
+  <block wx:for="{{groupData}}" wx:key="id"> 
+    <view class='flexRow detail'> 
+      <view>{{item.create_time}}</view> 
+      <view>{{item.money}}</view> 
+      <block wx:if="{{  item.cash_withdrawal_type ==1 && item.pay_status == 1}}" >
+        <view>提现成功</view> 
+      </block>
+      <block wx:elif ="{{ item.cash_withdrawal_type ==1 && item.pay_status == 2}}" >
+        <view bindtap='getMoneyTry' data-id='{{item.id}}'>提现失败,请重试!</view> 
+      </block>
+      <block wx:elif ="{{ item.cash_withdrawal_type ==2 && item.pay_status == 1}}" >
+        <view >线下已提现</view> 
+      </block>
+      <block wx:elif ="{{ item.cash_withdrawal_type ==2 && item.pay_status == 2}}" >
+        <view >线下待提现</view> 
+      </block>
+    </view> 
+   </block> 
+</view>
+
+<!-- 无数据 --> 
+<view hidden="{{isHaveData}}"> 
+  <image class="noData" src="/images/nodata/data.png"></image> 
+</view>

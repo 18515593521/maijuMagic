@@ -1,0 +1,93 @@
+.contentArea{
+  border-top: 2rpx solid #F3F3F3;
+}
+
+/*表单*/
+.pannel{
+  padding: 25rpx 20rpx 0;
+}
+.pannel .searchClass{
+  border: 2rpx solid #F0F0F0;
+  border-radius: 10rpx;
+  padding: 0 30rpx;
+  font-size: 26rpx;
+  color: #A7A7A7;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.pannel .searchTips{
+  font-size: 26rpx;
+  color: #A7A7A7;
+}
+
+/* 店面选择 */
+.pannel .shopContainer{
+   width: 710rpx; 
+}
+.pannel .shopContainer .dropdown{
+  width: 250rpx;
+}
+.pannel .shopContainer image{
+  width: 15rpx;
+  height: 30rpx;
+  display: inline-block;
+  transform: rotate(90deg);
+}
+/* 地址 */
+.address{
+  padding: 20rpx 50rpx;
+  font-size: 26rpx;
+  color: #A7A7A7;
+}
+
+.showFlex{
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.pannel .inputForCode{
+  width: 480rpx;
+}
+.pannel .getCode{
+  width: 200rpx;
+  font-size: 24rpx;
+  color: #6BB159; 
+  line-height: 70rpx;
+  border: 2rpx solid #6BB159;
+  border-radius: 10rpx;
+  text-align: center;
+}
+
+/* 活动封面图 */
+.cover{
+  width: 450rpx;
+  height: 280rpx;
+  display: block;
+  margin: 50rpx auto;
+}
+
+/*立即参与*/
+.join{
+  width: 510rpx;
+  margin: 0 100rpx;
+  background-color: #4ABDC2;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 36rpx;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  z-index: 10;
+  position: absolute;
+}
+/*报名图*/
+.signImage{
+  position: absolute;
+  bottom: 0;
+}
+.signImage image{
+  width: 750rpx;
+  height: 350rpx;
+  display: block;
+}

@@ -1,0 +1,262 @@
+page {
+  background-color: #F8F8F8;
+}
+
+/* 订单 */
+.order{
+  background-color: #FFFFFF;
+  margin-top: 15rpx;
+}
+.order .head{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  font-size: 26rpx;
+  color: #4E4E4E;
+}
+.order .head .image_code{
+  display: flex;
+  align-items: flex-end;
+}
+.order .head .image_code image{
+  width: 35rpx;
+  height: 35rpx;
+  margin-right: 15rpx;
+}
+.order .head .image_code .code{
+  
+}
+.order .head .state{
+  color: #FE7C7F;
+}
+.order .body{
+  padding: 20rpx 65rpx;
+  border-top: 2rpx solid #F8F8F8;
+}
+.order .body .item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 26rpx;
+  color: #6F6F6F;
+}
+.order .body .item + .item{
+  margin-top: 15rpx;
+}
+/* 地址 */
+.address{
+  margin-top: 15rpx;
+  background-color: #FFFFFF;
+  padding: 20rpx;
+  font-size: 26rpx;
+  color: #4E4E4E;
+}
+.address .people_phone{
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  padding-left: 46rpx;
+}
+.address .people_phone{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.address .people_phone .phone{
+  color: #6F6F6F;
+}
+.address .position{
+  display: flex;
+  align-items: center;
+  margin: 15rpx 0;
+  line-height: 40rpx; 
+}
+.address .position view:nth-child(1){
+  width: 50rpx; 
+}
+.address .position image{
+  width: 30rpx;
+  height: 36rpx;
+  display: block;
+  margin-right: 20rpx;
+}
+.address .time{
+  font-size: 22rpx;
+  color: #6F6F6F;
+  text-align: right;
+}
+/* 产品 */
+.product{
+  margin-top: 15rpx;
+  padding: 20rpx 30rpx;
+  background-color: #FFFFFF;
+  font-size: 26rpx;
+  color: #6F6F6F;
+}
+.product .head{
+  color: #4E4E4E;
+}
+.product .row{
+  display: flex;
+  align-items: center;
+}
+.product .row + .row{
+  margin-top: 20rpx;
+}
+.product .row view{
+  width: 25%;
+  text-align: center;
+}
+.product .row .red{
+  font-size: 24rpx;
+  color: #FE7C7F;
+}
+.product .property{
+  font-size: 20rpx;
+  color: #BFBFBF;
+  padding-left: 30rpx;
+}
+/* 活动 */
+.activity{
+  margin-top: 15rpx;
+  padding: 20rpx 40rpx;
+  background-color: #FFFFFF;
+  font-size: 24rpx;
+  color: #6F6F6F;
+  line-height: 50rpx;
+}
+.activity .column2{
+  display: flex;
+  align-items: center;
+}
+.activity .column2 view{
+  width: 50%;
+}
+.total{
+  margin-top: 2rpx;
+  padding: 20rpx 40rpx;
+  background-color: #FFFFFF;
+  font-size: 24rpx;
+  color: #6F6F6F;
+  text-align: right;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.total view+view{
+  padding-right: 20rpx;
+}
+/* 标题 */
+.title{
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  margin-top: 15rpx;
+  padding: 20rpx;
+  font-size: 26rpx;
+  color: #666666;
+}
+.title image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 20rpx;
+}
+/* 进度款明细 */
+.moneyProgress{
+  margin-top: 15rpx;
+  padding: 20rpx 25rpx;
+  background-color: #FFFFFF;
+  font-size: 22rpx;
+  color: #6F6F6F;
+}
+.moneyProgress .head{
+  font-size: 26rpx;
+  color: #4E4E4E;
+}
+.moneyProgress .row{
+  display: flex;
+  align-items: center;
+}
+.moneyProgress .row + .row{
+  margin-top: 20rpx;
+}
+.moneyProgress .row .column_1{
+  width: 350rpx;
+  text-align: center;
+}
+.moneyProgress .row .column_2{
+  width: 150rpx;
+  text-align: center;
+}
+.moneyProgress .row .column_3{
+  width: 200rpx;
+  text-align: center;
+}
+.moneyProgress .row .red{
+  font-size: 24rpx;
+  color: #FE7C7F;
+}
+.payTotal{
+  margin-top: 2rpx;
+  padding: 20rpx 40rpx;
+  background-color: #FFFFFF;
+  font-size: 24rpx;
+  color: #6F6F6F;
+  text-align: right;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.payTotal .red{
+  font-size: 24rpx;
+  color: #FE7C7F;
+}
+.payTotal view+view{
+  padding-right: 50rpx;
+}
+
+
+
+/* 备注 */
+.other{
+  margin-top: 2rpx;
+  padding: 20rpx 70rpx;
+  background-color: #FFFFFF;
+  font-size: 26rpx;
+  color: #6F6F6F;
+  min-height: 150rpx;
+}
+/* 说明 */
+.explain{
+  margin-top: 2rpx;
+  padding: 20rpx;
+  background-color: #FFFFFF;
+  font-size: 26rpx;
+  color: #6F6F6F;
+  min-height: 150rpx;
+}
+/* 导购 */
+.guider{
+  padding: 30rpx 20rpx;
+  background-color: #FFFFFF;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+}
+.guider .item{
+  width: 50%;
+}
+.guider .item .name{
+  color: #565656;
+}
+.guider .item .value{
+  color: #7D7D7D;
+}
+
+
+
+
+
+
+
+
+

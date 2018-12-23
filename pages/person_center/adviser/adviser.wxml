@@ -1,0 +1,27 @@
+<view class="invite">
+  <image src="{{codeImage}}" bindtap="clickImage"></image>
+</view>
+<view class="me">
+  <image src="{{headImage}}"></image>
+</view>
+<view class="info">
+  <view class="name">姓名</view>
+  <view class="value">{{adviserInfo.name}}</view>
+</view>
+<view class="info">
+  <view class="name">联系方式</view>
+  <view class="value" style="color:#4ABDC2;" bindtap="makePhone">{{adviserInfo.phone}}</view>
+</view>
+ <view class="info">
+  <view class="name">微信号</view>
+  <view class="value">
+    <block wx:if="{{adviserInfo.weixinhao}}">
+      <text class="copy" bindtap="copy">复制</text>
+      <text>{{adviserInfo.weixinhao}}</text>       
+    </block>
+    <block wx:else>
+      <text class="copy" style="color: #4ABDC2;">复制</text>
+      <text>无</text>      
+    </block>
+  </view>
+</view> 

@@ -1,0 +1,26 @@
+.fail{
+  width: 250rpx;
+  height: 270rpx;
+  margin: 100rpx 250rpx 0;
+}
+.text1{
+  text-align: center;
+  font-size: 36rpx;
+  color: #3F3F3F;
+  padding: 20rpx 0;
+}
+.text2{
+  text-align: center;
+  font-size: 26rpx;
+  color: #555555;
+}
+.authorize{
+  width: 350rpx;
+  height: 100rpx;
+  line-height:100rpx;
+  border: 2rpx solid #72BB63;
+  border-radius: 10rpx;
+  text-align: center;
+  margin: 150rpx 200rpx;
+  color: #72BB63;
+}

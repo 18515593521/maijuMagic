@@ -1,0 +1,162 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.1.1",
+	"appid": "wx7e89ae5c19f93e80",
+	"projectname": "%E9%AD%94%E6%96%B9%E4%BA%91%E6%99%BA%E6%85%A7%E9%97%A8%E5%BA%97",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 20,
+			"list": [
+				{
+					"id": -1,
+					"name": "用户验证",
+					"pathName": "pages/user_validate/user_validate",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "活动报名",
+					"pathName": "pages/activity/activity_sign/activity_sign",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "群发消息",
+					"pathName": "pages/index/index",
+					"query": "name=110",
+					"scene": "1008"
+				},
+				{
+					"id": 3,
+					"name": "收货地址",
+					"pathName": "pages/person_center/address/address_list/address_list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "新增地址",
+					"pathName": "pages/person_center/address/address_add/address_add",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "订单确认",
+					"pathName": "pages/order/order_confirm/order_confirm",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "订单列表",
+					"pathName": "pages/person_center/my_order/my_order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "爆款产品列表",
+					"pathName": "pages/product/hot_product_list/hot_product_list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "预约列表",
+					"pathName": "pages/person_center/booking/booking_list/booking_list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "购物车",
+					"pathName": "pages/shopping_cart/shopping_cart",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "评论",
+					"pathName": "pages/product/evaluation/evaluation",
+					"query": ""
+				},
+				{
+					"id": 11,
+					"name": "评论列表",
+					"pathName": "pages/product/evaluation_all/evaluation_all",
+					"query": "productId=12430"
+				},
+				{
+					"id": -1,
+					"name": "推广列表",
+					"pathName": "pages/person_center/extension/extension",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "产品列表",
+					"pathName": "pages/product/product_list/product_list",
+					"query": ""
+				},
+				{
+					"id": 14,
+					"name": "活动详情",
+					"pathName": "pages/activity/activity_details/activity_details",
+					"query": "activity_id=71&filialeid=299&customerid=4235&isShare=1&shareFrom=1&shopid=377"
+				},
+				{
+					"id": -1,
+					"name": "我的拼团",
+					"pathName": "pages/group/my_group/my_group",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "拼团规则",
+					"pathName": "pages/group/rule_list/rule_list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "参与拼团",
+					"pathName": "pages/group/part_in_group/part_in_group",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "卡片",
+					"pathName": "pages/member/memberCard/card",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "中心1",
+					"pathName": "pages/person_center/center/commission_center/commission_center",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "提现",
+					"pathName": "pages/person_center/reflect_value/reflect_value"
+				}
+			]
+		}
+	}
+}

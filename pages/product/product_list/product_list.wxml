@@ -1,0 +1,80 @@
+<import src="../../../template/modalBox/modalBox.wxml" />
+<!--搜索-->
+<view class="searchContainer">
+  <view class="class">
+    <image src="/images/class.png" data-url="/pages/product/product_class/product_class?type=old" data-type="2" bindtap="pageSkip"></image>
+  </view>
+  <view class="search">
+    <image src="/images/search.png" data-type="1" bindtap="searchProduct"></image>
+    <input type="text" class="searchClass" placeholder="输入产品标题搜索" placeholder-class="searchTips" value="{{searchText}}" data-type="2" bindconfirm="searchProduct" bindblur="setSearchText" />
+  </view>
+</view>
+
+<!--产品列表-->
+<view class="productContainer">
+  <block wx:for="{{productList}}" wx:key="product_id">
+    <view style='position:relative'>
+
+      <view class="item" data-url="/pages/product/product_details/product_details?productId={{item.id}}&hotProductVersion={{item.hot_version}}" data-type="1" bindtap="pageSkip">
+        <view class="image">
+          <image src="{{item.imgurl}}"></image>
+          <view class='presell idents' wx:if='{{item.presell==2&&!item.hot_price}}'>预售</view>
+          <view class='hotProducts2 idents' wx:if='{{item.hot_price}}'>爆款</view>
+        </view>
+        <!-- <view class="name out_hidden_2">{{item.product_title}}</view> -->
+          <input type='text' value='{{item.product_title}}' disabled='true'  maxlength='12'class="name out_hidden_2 productsName"></input>
+        <block wx:if="{{item.hot_price}}">
+          <block wx:if="{{item.residue_num>0 && item.buyNum<item.limitation_num}}">
+            <view class="money">
+              <text class='now' style='color:red'>￥{{item.hot_price}}</text>
+              <text class='old'>￥{{item.max_price}}</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="money"  style='color:red'>￥{{item.min_price}}</view>
+          </block>
+        </block>
+        <block wx:else>
+          <block wx:if="{{payState==1||payState==2}}">
+            <block wx:if="{{payStatusInfo.isOpen==1}}">
+              <block wx:if="{{payStatusInfo.pay_status==1}}">
+                <block wx:if="{{item.isOpen==1}}">
+                  <block wx:if="{{item.pay_status==1}}">
+                    <view class="price1 price" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                  </block>
+                  <block wx:else>
+                    <view class="price1 price" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                  </block>
+                </block>
+                <block wx:else>
+                  <view class="price1 price" style='color:{{appColor}}'>到店咨询</view>
+                </block>
+              </block>
+              <block wx:else>
+                <block wx:if='{{item.isOpen==1}}'>
+                  <view class="price1 price" style='color:{{appColor}}'>￥{{item.min_price}}</view>
+                </block>
+                <block wx:else>
+                  <view class="price1 price" style='color:{{appColor}}'>到店咨询</view>
+                </block>
+              </block>
+            </block>
+            <block wx:else>
+              <view class="price1 price" style='color:{{appColor}}'>到店咨询</view>
+            </block>
+          </block>
+
+        </block>
+      </view>
+
+    </view>
+  </block>
+</view>
+
+<!--等待的菊花-->
+<view hidden='{{wait}}'>
+  <template is="waitImg" />
+</view>
+
+
+<view class="space"></view>

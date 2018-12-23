@@ -1,0 +1,169 @@
+.vipBox{
+  width:750prx;
+  position:relative;
+}
+.vipbg{
+  width:710rpx;
+  height:402rpx;
+
+}
+.vipNameList{
+  text-align:center;
+}
+.vipTextBox{
+  position:absolute;
+  margin:auto;
+  top:241rpx;
+  left:0;
+  right:0;
+  text-align:center;
+  color:#fff;
+}
+.vipName{
+  font-size:24rpx;
+}
+.vipNumber{
+  font-size:24rpx;
+  margin-top:40rpx;
+}
+
+.vipBox .image{
+  position:absolute;
+  right: 40rpx;
+  bottom: 40rpx;
+}
+.vipBoxs{
+  width:750rpx;
+  margin-top:40rpx;
+}
+.vipWidths{
+  width:30rpx;
+  height:30rpx;
+  background:#fff;
+  position:absolute;
+  margin:auto;
+  left:0;
+  bottom:0;
+  right:0;
+  top:0;
+}
+.vipState{
+  width:100%;
+  height:100%;
+  display:block;
+}
+.line{
+  border:2rpx solid #eee;
+  height:1rpx;
+  background:#eee;
+}
+.line1{
+   justify-content:flex-end;
+  width:50%;
+}
+.line2{
+  justify-content:center;
+  width:100%;
+}
+.line3{
+  justify-content:flex-start;
+  width:50%;
+}
+.vipStateBox{
+  position:relative;
+  height:80rpx;
+  align-items:center;
+}
+.vipItemName{
+  font-size:30rpx;
+  color:#b1b1b1;
+}
+.colors{
+  color:#1f1f1f;
+}
+.ulBox li{
+  width:750rpx;
+  height:80rpx;
+  align-items:center;
+  border-top:2rpx solid #eee;
+   border-bottom:2rpx solid #eee;
+}
+.rule{
+  width:39rpx;
+  height:35rpx;
+}
+.ruleDetai{
+  margin-left:20rpx;
+  font-size:30rpx;
+  color:#1f1f1f;
+}
+.rights{
+  width:30%;
+  height:80rpx;
+   justify-content:flex-end;
+   display:flex;
+   align-items:center;
+
+}
+.rights image{
+  width:14rpx;
+  height:25rpx;
+}
+.rightText{
+  margin-right:20rpx;
+  font-size:30rpx;
+  color:#1f1f1f;
+}
+
+/*二维码*/
+.imagePannel{
+  position:fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 210;
+}
+.imagePannel .delete{
+  display: flex;
+  flex-direction: row-reverse; 
+}
+.imagePannel .delete image{
+  width: 30rpx;
+  height: 30rpx;
+  display: block;
+  margin: 20rpx;
+}
+.imagePannel .code{
+  background-color: #ffffff;
+  margin: calc((100vh - 980rpx)/2) 0;
+}
+.imagePannel .code image{
+  width: 750rpx;
+  height: 750rpx;
+  display: block;
+}
+.imagePannel .operate{
+  padding: 20rpx 50rpx 80rpx;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+.imagePannel .operate image{
+  width: 60rpx;
+  height: 60rpx;
+  display: block;
+}
+.imagePannel .operate .shareButton{
+  width: 90rpx;
+  height: 60rpx;
+  display: block;
+  background-color: transparent;
+  margin: 0;
+}
+.image image{
+  width: 100rpx;
+  height: 100rpx;
+  display: block;
+}

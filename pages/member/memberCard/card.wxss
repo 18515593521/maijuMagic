@@ -1,0 +1,44 @@
+.top {
+  float: left;
+  background: #52BDC0;
+  height:90rpx;
+  width:100%;
+}
+.rule{
+  width:50rpx;
+  height:50rpx;
+}
+.topElePadd{
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  margin-left: 20rpx;
+}
+.vipbg{
+  width:710rpx;
+  height:402rpx;
+  padding: 20rpx;
+  position:relative;
+}
+.vipTextBox{
+  position:absolute;
+  margin:auto;
+  top:201rpx;
+  left:0;
+  right:0;
+  text-align:center;
+  color:#fff;
+  width: 150rpx;
+}
+.vipName{
+  font-size:24rpx;
+}
+.vipNumber{
+  font-size:24rpx;
+  margin-top:20rpx;
+}
+.vipopen{
+  margin-top:20rpx;
+  font-size:24rpx;
+  border: 2rpx solid white;
+  border-radius: 10rpx;
+}

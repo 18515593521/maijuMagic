@@ -1,0 +1,73 @@
+page{
+  background-color: #F5F5F5;
+}
+
+.form{
+  background-color: #FFFFFF;
+  margin-top: 2rpx;
+  padding: 0 20rpx 0 20rpx;
+}
+.inputContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+  border-bottom: 2rpx solid #F5F5F5;
+  background-color: #FFFFFF;
+}
+.inputContainer .title{
+  font-size: 28rpx;
+  color: #E0E0E0;
+}
+.inputContainer .input{
+  width: 510rpx;
+}
+.inputContainer .input .inputClass{
+  font-size: 28rpx;
+  color: #565656;
+}
+.inputContainer .input .inputTips{
+  font-size: 28rpx;
+  color: #B1B1B1;
+}
+
+.inputContainer .setDefault{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.save{
+  margin: 60rpx 200rpx;
+  padding: 18rpx 50rpx;
+  text-align: center;
+  background-color: #4ABDC2;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  border-radius: 10rpx;
+}
+
+/*省市区选择器*/
+.pickerViewContainer{
+  position: fixed;
+  bottom: 0;
+  background-color: #F5F5F5;
+  opacity: 1;
+  border-top: 1rpx solid #B2B2B2;
+}
+.pickerViewOperate{
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 30rpx;
+}
+.pickerView{
+  width: 750rpx;
+  height: 400rpx;
+}
+.pickerColumn{
+  line-height: 50px;
+  text-align: center;
+  font-size: 28rpx;
+}

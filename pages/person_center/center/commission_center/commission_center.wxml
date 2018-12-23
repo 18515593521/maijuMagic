@@ -1,0 +1,113 @@
+<!-- <view class="people">
+  <view>
+    <image src="{{headImage}}"></image>
+  </view>
+  <view class='nameWeixin infoSysle'>{{nickName}}</view>
+</view> -->
+<view class=' flexColumnH infoSysle'>
+  <view class='flexRow headBoxs  paddingBox'>
+    <view class=' flexRow '>
+      <image src='{{headImage}}' class='headImg'></image>
+      <view class="flexColumnH headboxs2"  style='margin-left:20rpx'>
+      <view class='nameWeixin'>{{nickName}}</view>
+      <block wx:if="{{is_horizontal_alliances}}">
+       <view class='headTitle hiddenLien2'>异业导购</view>
+       </block>
+      </view>  
+    </view>
+    <view class="detailed" data-urls="/pages/person_center/detailed/detailed?types=2" data-types="1" bindtap='pageSkipTo'>交易明细</view>
+  </view>
+    <view class='goGet'>—— 可提现余额 ——</view>
+    <view class='showMoney flexRow'>
+      <view style='' class='yang'>¥</view>
+      <view class='redsShow'> {{canCarryMoney}}</view>
+       <!-- <view class='redsShow redsShow2' style='font-size:38rpx'> .00</view> -->
+    </view>
+    <block wx:if="{{canCarryMoney < 1 }}">
+    <view class='getToMoneys1' >少于 1 元 不可提现</view>
+    </block>
+    <block wx:elif="{{status==1 && payState==1 }}">
+    <view class='getToMoneys' data-urls="/pages/person_center/reflect_value/reflect_value?money={{canCarryMoney}}" data-types="1" bindtap='pageSkipTo'>立即提现</view>
+    </block>
+    <block wx:elif="{{status==2 && payState==1 }}">
+        <view class='getToMoneys' >{{num}}天后可提现</view>
+    </block>
+    <block wx:elif="{{status==2 && payState==2 }}">
+      <view class='getToMoneys1' >{{num}}天后 提交线下提现请求</view>
+    </block>
+  <block wx:elif="{{status==1 && payState==2 }}">
+      <view class='getToMoneys1'data-urls="/pages/person_center/reflect_value/reflect_value?money={{canCarryMoney}}" data-types="1" bindtap='pageSkipTo' >今日可提现 请提交线下提现请求</view>
+    </block>
+    <view class='getToMoneys goOutDetail' data-urls="/pages/person_center/details/details" data-types="1" bindtap='pageSkipTo' style='background:none'>提现明细</view>
+
+    <view class='estimate paddingBoxL'>待核算预估收入</view>
+    <!--待核算预估收入-->
+    <view class='meMoney paddingBoxL meMoney22' data-urls="/pages/person_center/detailed/detailed?types=1" data-types="1" bindtap='pageSkipTo'>
+      <view>
+
+        <view class='meTitle meTitle2 flexRow'>
+          <view  class='yang2'> ¥</view>
+          <view>{{waitAuditMoney}}</view>
+          <!-- <view class='meTitle3'>.00</view> -->
+      </view>
+        <image src="/images/arrows_right.png" class='arrows_right'></image>
+        <view class='detailToGet'>待核算订单明细</view>
+
+      </view>
+    </view>
+
+  <!--邀请好友得佣金-->
+  <view class='meMoney paddingBoxL ' data-urls="/pages/person_center/invitation_friend/invitation_friend" data-types="1" bindtap='pageSkipTo'>
+    <view >
+      <image src='http://www.kaolaj.com/file/upload/icon/me.png' class='meImage'></image>
+      <view class='meTitle'>邀请好友</view>
+      <image src="/images/arrows_right.png" class='arrows_right'></image>
+       <block wx:if="{{imageShow }}">
+      <image src='/images/money.png' class='moneyImg allMoneys2'></image>
+      </block>
+    </view>
+  </view>
+  <!--我的推广-->
+  <view class='meMoney paddingBoxL' data-urls="/pages/person_center/redextension/redextension?types=2" data-types="1" bindtap='pageSkipTo'>
+    <view>
+      <image src='/images/shares.png' class='meImage'></image>
+      <view class='meTitle'>我的推广</view>
+      <image src="/images/arrows_right.png" class='arrows_right'></image>
+       <block wx:if="{{imageShow }}">
+      <image src='/images/redPages.png' class='moneyImg2 allMoneys2'></image>
+      </block>
+    </view>
+  </view>
+</view>
+
+<view style="position: absolute;" class='flexColumnH'>
+  <!--第一块-->
+  <view class='listDatas flexRowH'>
+    <block wx:for='{{listData}}'>
+      <view class='items1 flexColumnH' data-check='{{item.check}}' data-type='1' bindtap='pageSkip' data-url='{{item.url}}' wx:if='{{item.status==1}}'>
+        <image src='{{item.icon}}' class='imagess {{item.class}}'></image>
+        <view class='name'>{{item.name}}</view>
+      </view>
+    </block>
+  </view>
+  <!--第二块-->
+  <!-- <view class='listDatas flexRowH' style='margin-top:20rpx'>
+    <block wx:for='{{listData2}}'>
+      <view class='items1 flexColumnH' data-check='1' data-type='1' bindtap='pageSkip' data-url='{{item.url}}'   wx:if='{{item.status==1}}'>
+        <image src='{{item.icon}}' class='imagess {{item.class}}'></image>
+        <view class='name'>{{item.name}}</view>
+      </view>
+    </block>
+  </view> -->
+
+  <view class='meMoney paddingBoxL meMoney33' style=' border-top:2rpx solid #eee;' data-urls="/pages/index/index" data-types="4" bindtap='pageSkipTo'>
+    <view>
+      <image src='/images/menu/index.png' class='backImage '></image>
+      <view class='meTitle'>返回首页</view>
+    </view>
+  </view>
+
+  <!--模态框-->
+  <import src="../../../template/modalBox/modalBox.wxml" />
+  <template is="bottomImg" />
+</view>

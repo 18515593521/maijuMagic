@@ -1,0 +1,172 @@
+page{
+  background-color: #F2F2F2;
+  padding-top: 2rpx;
+}
+
+.container + .container{
+  margin-top: 20rpx;
+}
+/* 信息 */
+.info{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+  padding: 30rpx 20rpx;
+  font-size: 28rpx;
+}
+.info .left .address{
+  padding-top: 20rpx;
+}
+.info .right{
+  padding-left: 100rpx;
+}
+/* 操作 */
+.operate{
+  margin-top: 2rpx;
+  background-color: #FFFFFF;
+  padding: 10rpx 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.operate .default{
+  width: 140rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24rpx;
+  color: #949494;
+}
+.operate .default .noChoose{
+  width: 28rpx;
+  height: 28rpx;
+  border: 1px solid grey;
+  border-radius: 20rpx;
+}
+.operate .button{
+  display: flex;
+  align-items: baseline;
+  font-size: 24rpx;
+  color: #B3B3B3;
+}
+.operate .button .item{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 10rpx 0 10rpx 20rpx;
+}
+.operate .button .item image{
+  width: 26rpx;
+  height: 26rpx;
+  display: block;
+  padding-right: 8rpx;
+}
+/* 新增地址 */
+.add{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color:#4ABDC2;
+  color: #FFFFFF;
+  font-size: 32rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
+/********************************** 地址添加 **********************************/
+.addressPannel{
+  position:fixed;
+  left: 0;
+  right: 0;
+  top:0;
+  bottom: 0;
+  z-index: 99;
+  background: rgba(0,0,0,0.7);
+}
+.addressPannel .box{
+  margin: 50rpx auto;
+  width: 650rpx;
+  padding: 0 0 10rpx;
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+}
+.addressPannel .box .close{
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  margin-left: 620rpx;
+  margin-top: -20rpx;
+}
+.addressPannel .box .title{
+  padding: 30rpx;
+  border-bottom: 2rpx solid #F5F5F5;
+  text-align: center;
+}
+.addressPannel .box .form{
+  padding: 0 20rpx 0 20rpx;
+}
+.inputContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #F5F5F5;
+}
+.inputContainer .name{
+  font-size: 28rpx;
+  color: #818181;
+  line-height: 50rpx;
+}
+.inputContainer .input{
+  width: 450rpx;
+}
+.inputContainer .input .inputClass{
+  font-size: 28rpx;
+  color: #565656;
+}
+.inputContainer .input .inputTips{
+  font-size: 28rpx;
+  color: #B1B1B1;
+}
+/* 提示信息 */
+.addressPannel .box .tips{
+  font-size: 26rpx;
+  color: red;
+  padding: 20rpx;
+}
+/* 保存 */
+.addressPannel .box .save{
+  margin: 40rpx 20rpx 20rpx;
+  padding: 18rpx 50rpx;
+  text-align: center;
+  background-color: #4ABDC2;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  border-radius: 10rpx;
+}
+
+/*省市区选择器*/
+.pickerViewContainer{
+  position: fixed;
+  bottom: 0;
+  background-color: #F5F5F5;
+  opacity: 1;
+  border-top: 1rpx solid #B2B2B2;
+}
+.pickerViewOperate{
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 30rpx;
+  color: #4ABDC2;
+}
+.pickerView{
+  width: 750rpx;
+  height: 400rpx;
+}
+.pickerColumn{
+  line-height: 50px;
+  text-align: center;
+  font-size: 28rpx;
+}

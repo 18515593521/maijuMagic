@@ -1,0 +1,111 @@
+.top {
+  float: left;
+  background: #52BDC0;
+  height:90rpx;
+  width:100%;
+}
+.rule{
+  width:50rpx;
+  height:50rpx;
+}
+.topElePadd{
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  margin-left: 20rpx;
+}
+.vipbg{
+  width:710rpx;
+  height:402rpx;
+  position:relative;
+}
+.vipTextBox{
+  position:absolute;
+  margin:auto;
+  top:201rpx;
+  left:0;
+  right:0;
+  text-align:center;
+  color:#fff;
+  width: 150rpx;
+}
+.vipName{
+  font-size:24rpx;
+}
+.vipNumber{
+  font-size:24rpx;
+  margin-top:20rpx;
+}
+.vipopen{
+  margin-top:20rpx;
+  font-size:24rpx;
+  border: 2rpx solid white;
+  border-radius: 10rpx;
+}
+.ruleDetai{
+  font-size:30rpx;
+  margin-left: 20rpx;
+  font-weight: 600
+}
+.texta{
+  font-size:24rpx;
+}
+/* 底部 */
+.thisBottom{
+  position: fixed;
+  width: 100%;
+  bottom: 30rpx;
+  line-height: 100rpx;
+}
+.thisBottom .pay{
+  width: 90%;
+  background-color:#52BDC0;
+  display:flex;
+  align-items: center;
+  justify-content:center;
+  border-radius: 50rpx;
+  text-align: center; 
+  color:white;
+  margin-left: 5%;
+}
+.ruleDetai1{
+  font-size:28rpx;
+  font-weight: 600
+}
+.buytime{
+  font-size: 24rpx;
+  color: #bbb9ba
+}
+.fontcolor{
+  color: #52BDC0
+}
+.ruleDetai2{
+  margin-left: 200rpx;
+}
+.rule{
+  width:39rpx;
+  height:35rpx;
+}
+.utilcolor{
+  font-size: 24rpx;
+  color: #bbb9ba
+}
+.diejia{
+  font-size: 24rpx ;
+  color: #52BDC0
+}
+.goumai{
+  font-size: 24rpx ;
+  color: #bbb9ba;
+  margin-left: 50rpx;
+}
+.youxiao{
+  position: absolute;
+}
+.sellNum{
+  position: absolute;
+  right: 40rpx;
+  font-size: 24rpx ;
+}
+.reNum{
+  color: #52BDC0
+}

@@ -1,0 +1,23 @@
+<!--全部商品-->
+<view class="arrowsMenu" data-type="1" bindtap="productList">
+  <view class="name">全部商品</view>
+  <view class="look">
+    <image src="/images/arrows_right.png"></image>
+  </view>
+</view>
+<!--分类-->
+<block wx:for="{{productClassList}}" wx:key="id" wx:for-index="classIndex">
+    <view class="title">{{item.name}}</view>
+    <view class="classContainer">
+        <block wx:for="{{item.brandSeries}}" wx:key="id" wx:for-index="seriesIndex" wx:for-item="series">
+            <view class="item {{series.choose}}" style='color:{{series.choose?active:""}};border-color:{{series.choose?active:""}}' data-classindex="{{classIndex}}" data-seriesindex="{{seriesIndex}}"  bindtap="chooseSeries">{{series.name}}</view>
+        </block>
+    </view>
+</block>
+
+
+<view class="space"></view>
+
+<!--按钮-->
+<view class="button" data-type="2"  style='background:{{active}}' bindtap="productList">确定</view>
+

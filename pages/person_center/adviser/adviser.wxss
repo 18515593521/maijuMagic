@@ -1,0 +1,43 @@
+page{
+    background-color: #EEEEEE;
+}
+.invite {
+    padding: 80rpx 125rpx 80rpx;
+}
+.invite image{
+    width: 500rpx;
+    height: 500rpx;
+    display: block;
+}
+.me{
+  position: absolute;
+  width: 750rpx;
+  text-align: center;
+  margin-top: -424rpx;
+}
+.me image{
+  width: 250rpx;
+  height: 250rpx;
+  border-radius: 50%;
+}
+
+.info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FDFDFD;
+  padding: 20rpx 30rpx;
+  font-size: 32rpx;
+  margin-bottom: 2rpx;
+}
+.info .name{
+  color: #9C9C9C; 
+}
+.info .value{
+  color: #555555; 
+}
+.info .value .copy{
+  font-size: 24rpx;
+  color: #4ABDC2; 
+  padding: 10rpx 40rpx 0;
+}

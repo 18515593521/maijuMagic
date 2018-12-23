@@ -1,0 +1,66 @@
+<view class='container'>
+  <view class='paddingBox'>
+    <view class='flexRow' style='width:90%;'>
+      <image src='/images/member/usedatil.png' class='rule'></image>
+      <view class='ruleDetai'>使用说明</view>
+    </view>
+    <textarea class='texta'>
+      {{direction}}
+    </textarea>
+</view>
+  <view class=''>
+    <view class='paddingBox'>
+    <view class='flexRow' style='width:90%;'>
+      <image src='/images/member/customedatil.png' class='rule'></image>
+      <view class='ruleDetai'>使用明细</view>
+    </view>
+     <view class='flexRow' style='width:90%;'>
+      <view class='use1'>会员卡名称: <text class='use2'>{{card_name}}</text></view>
+    </view>
+    </view>
+    <view class='useList'>
+      <view class='useLi'>
+        <text class="table htable1">使用日期</text>
+        <text class="table htable2">消费金额</text>
+        <text class="table htable3">更多信息</text>
+      </view>
+    <block wx:for='{{detailList}}' wx:key=''>  
+      <view class='useLi'>
+        <text class='htable1 timeStyle'>{{item.create_time}}</text>
+        <text class='htable2 timeStyle'>{{item.money}}{{util}}</text>
+        <view class='htable3 moneyStyle'data-set='{{item}}' bindtap="showCodeImage">查看</view>
+      </view>
+    </block>
+    </view>
+  </view>
+</view>
+
+<view class="propertyPannel1" hidden="{{codeImageHidden}}" >
+<view class="propertyPannel" hidden="{{codeImageHidden}}" >
+  <view class="top"><view class='toptext'>明细详情</view> <view class="delete">
+    <image src="/images/delete.png" bindtap="hideCodeImage"></image>
+  </view></view>
+  <view class='bottomp'>
+    <ui>
+      <li>
+        <view>使用日期:<text>{{info.create_time}}</text></view>
+      </li>
+      <li>
+        <view>消费金额/次数:<text>{{info.money}}{{util}}</text></view>
+      </li>
+      <li>
+        <view>支付方式:<text>{{info.type}}</text></view>
+      </li>
+      <li>
+        <view>使用门店:<text>{{info.name}}</text></view>
+      </li>
+      <li>
+        <view>备注:</view>
+        <view>{{info.remark}}</view>
+      </li>
+    </ui>
+  </view>
+</view>
+</view>
+
+

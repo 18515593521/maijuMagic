@@ -1,0 +1,195 @@
+page {
+  background-color: #EEEEEE;
+}
+/*菜单*/
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #FFFFFF;
+    line-height: 80rpx;
+    margin-bottom: 2rpx;
+    border-top: 2rpx solid #F3F3F3;
+}
+.menu .item{
+    font-size: 26rpx;
+    color: #4C4C4C;
+    text-align: center;
+    width: 33.33%;
+}
+.menu .active{
+    color: #4ABDC2;
+    border-bottom: 4rpx solid #4ABDC2;
+}
+/*卡券列表*/
+.cardList{
+  padding: 20rpx 40rpx;
+}
+.cardList .item{
+  height: 180rpx;
+  margin-bottom: 20rpx;
+}
+.cardList .item .image{
+  position: absolute;
+  width: 670rpx;
+  height: 180rpx;
+  display: block;
+}
+.cardList .item .info{
+  width: 670rpx;
+  position: absolute;
+  height: 180rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+/*左边*/
+.cardList .item .info .left{
+  width: 200rpx;
+  height: 180rpx;
+}
+.left_1{
+  border-left: 30rpx solid #FF6364;
+}
+.left_2{
+  border-left: 30rpx solid #999999;
+}
+.left_3{
+  border-left: 30rpx solid transparent;
+}
+.left_4{
+  border-left: 30rpx solid transparent;
+}
+.left_5{
+  width: 230rpx;
+  height: 180rpx;
+}
+.left_1 .moneyContainer{
+  width: 150rpx;
+  height: 150rpx;
+  margin: 15rpx 20rpx;
+  border-radius: 50%;
+  background-color: #FF6364;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 150rpx;
+}
+.left_2 .moneyContainer{
+  width: 150rpx;
+  height: 150rpx;
+  margin: 15rpx 20rpx;
+  border-radius: 50%;
+  background-color: #999999;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 150rpx;
+}
+.left_3 .moneyContainer{
+  width: 150rpx;
+  height: 150rpx;
+  margin: 15rpx 20rpx;
+  border-radius: 50%;
+  background-color: #17B26D;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 150rpx;
+}
+.left_4 .moneyContainer{
+  width: 150rpx;
+  height: 150rpx;
+  margin: 15rpx 20rpx;
+  border-radius: 50%;
+  background-color: #999999;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 150rpx;
+}
+.left_5 .discount{
+  color: #FFFFFF;
+  padding: 40rpx 20rpx;
+  text-align: center;
+}
+.left .moneyContainer .sign{
+  font-size: 22rpx;
+}
+.left .moneyContainer .money{
+  font-size: 38rpx;
+}
+.left_5 .discount .number{
+  font-size: 50rpx;
+  line-height: 100rpx;
+}
+
+
+
+/*右边*/
+.cardList .item .info .right{
+  width: 420rpx;
+  height: 160rpx;
+  padding: 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 24rpx;
+}
+.right .shopName{
+  color: #565656;
+}
+.right .time{
+  font-size: 20rpx;
+  color: #C0C0C0;
+}
+.right .condition>text:nth-child(1){
+  color: #7B7B7B;
+}
+.right .condition>text:nth-child(2){
+  font-size: 20rpx;
+  color: #B6B6B6;
+}
+.right .codeContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.right .codeContainer .codeTitle{
+  font-size: 22rpx;
+  color: #757575;
+}
+.right .codeContainer .code_1{
+  font-size: 24rpx;
+}
+.right .codeContainer .code_2{
+  font-size: 24rpx;
+  color: #A0A0A0;
+}
+/*即将到期*/
+.right .codeContainer .timeLimit_1{
+  font-size: 22rpx;
+  width: 110rpx;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #FF6364; 
+  padding: 2rpx 0;
+  line-height:28rpx;
+}
+/*有效*/
+.right .codeContainer .timeLimit_2{
+  font-size: 22rpx;
+  width: 110rpx;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #4ABDC2; 
+  padding: 2rpx 0;
+  line-height:28rpx;
+}
+/*已使用*/
+.right .codeContainer .timeLimit_3{
+  font-size: 22rpx;
+  width: 110rpx;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #999999; 
+  padding: 2rpx 0;
+  line-height:28rpx;
+}

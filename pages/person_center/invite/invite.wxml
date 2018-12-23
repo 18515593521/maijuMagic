@@ -1,0 +1,6 @@
+<view>
+  <image class="invite" src="{{codeImage}}" bindtap="clickImage"></image>
+</view>
+<view class="me">
+  <image src="{{headImage}}"></image>
+</view>

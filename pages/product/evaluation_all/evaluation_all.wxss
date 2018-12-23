@@ -1,0 +1,71 @@
+page {
+  border-top: 2rpx solid #EDEDED;
+}
+
+/*菜单*/
+.menu{
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10rpx 0;
+  border-bottom: 8rpx solid #F9F9F9;
+}
+.menu .item{
+  width: 25%;
+  font-size: 28rpx;
+  color: #6E6E6E;
+  text-align: center;
+}
+.menu .active{
+  color: #4ABCC1;
+  border-bottom: 4rpx solid #4ABCC1;
+}
+
+/*评论内容*/
+.commentCell{
+  padding: 20rpx;
+}
+.commentCell + .commentCell{
+  border-top: 2rpx solid #FBFBFB;
+}
+.commentCell .commentInfo{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.commentCell .commentInfo .people{
+  display: flex;
+  align-items: center;
+  
+}
+.commentCell .commentInfo .people .head{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  
+}
+.commentCell .commentInfo .people .name{
+  font-size: 30rpx;
+  color: #5A5A5A;
+  margin: 0 20rpx;
+}
+.commentCell .commentInfo .people .level{
+  font-size: 28rpx;
+  color: #4ABCC1;
+}
+
+
+.commentCell .commentInfo .time{
+  font-size: 24rpx;
+  color: #C7C7C7;
+}
+.commentCell .content{
+  font-size: 24rpx;
+  color: #7F7F7F;
+  margin: 20rpx 0 10rpx;
+}
+.commentCell .property{
+  font-size: 22rpx;
+  color: #C7C7C7;
+}
+

@@ -1,0 +1,4 @@
+
+<view class='ruleImage'>
+  <image src='/images/rule.jpg' mode='widthFix'></image>
+</view>

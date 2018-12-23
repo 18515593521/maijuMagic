@@ -1,0 +1,96 @@
+<block wx:for="{{addressList}}" wx:key="id">
+    <view class='container'>
+      <view class='info' data-param='{{item.id}}' bindtap='chooseOrderAddress'>
+        <view class='left'>
+          <view class='people_phone'>{{item.receiver_name}}，{{item.phone_num}}</view>
+          <view class='address'>{{item.province}} {{item.city}} {{item.district}} {{item.address_details}}</view>
+        </view>
+        <view class='right' hidden='{{!item.choose}}'>
+          <icon type="success_no_circle" size="20" color='#4ABDC2'/>
+        </view> 
+      </view>
+      <view class='operate'>
+        <block wx:if="{{item.state}}">
+            <view class='default'>
+                <icon type="success" size="16" color='#4ABDC2'/>
+                <text>默认地址</text>
+            </view>           
+        </block>
+        <block wx:else>
+            <view class='default' data-param='{{item.id}}' bindtap='setDefaultAddress'>
+                <view class="noChoose"></view>
+                <text>设为默认</text> 
+            </view>            
+        </block>
+        <view class='button'>
+          <view class='item' data-param='{{item.id}}' data-type='1' bindtap='operateAddress'>
+            <image src='/images/button/edit.png' style='height: 30rpx;'></image>
+            <view>编辑</view>
+          </view>
+          <view class='item' data-param='{{item.id}}' data-type='2' bindtap='operateAddress'>
+            <image src='/images/button/delete.png'></image>
+            <view>删除</view>
+          </view>
+        </view>
+      </view>
+    </view>
+</block>
+
+<view class="space"></view>
+
+<view class='add' bindtap="addNewAddress">+添加新地址</view>
+
+<!-- 添加地址 -->
+<view class='addressPannel' hidden='{{addressPannel_hidden}}'>
+  <view class='box'>
+      <image class="close" src="/images/quit.png" bindtap='closeAddressPannel'></image> 
+      <view class='title'>{{formTitle}}</view>
+      <view class='form'>
+          <view class='inputContainer'>
+            <view class='name'>收货人</view>
+            <view class='input'>
+              <input class='inputClass' placeholder='请输入收货人的姓名' placeholder-class="inputTips" value="{{name}}" data-param="name" bindinput="inputValue" bindfocus='pickerViewCancel'></input>
+            </view>
+          </view>
+          <view class='inputContainer'>
+            <view class='name'>手机号码</view>
+            <view class='input'>
+              <input type='number' maxlength='11' class='inputClass' placeholder='请输入收货人的手机号码' placeholder-class="inputTips" value="{{phone}}" data-param="phone" bindinput="inputValue" bindfocus='pickerViewCancel'></input>
+            </view>
+          </view>
+          <view class='inputContainer' bindtap="chooseAddress">
+            <view class='name'>省市区</view>
+            <view class='input'>
+              <view class="{{location=='请选择'?'inputTips':'inputClass'}}">{{location}}</view>
+            </view>
+          </view>
+          <view class='inputContainer'>
+            <view class='name'>详细地址</view>
+            <view class='input'>
+              <input class='inputClass' placeholder='请输入详细的收货地址' placeholder-class="inputTips" value="{{address}}" data-param="address" bindinput="inputValue" bindfocus='pickerViewCancel'></input>
+            </view>
+          </view>
+      </view>
+      <view class='tips' hidden='{{tips_hidden}}'>{{tipsInfo}}</view>
+      <view class='save' bindtap='saveAddress'>保  存</view> 
+  </view>
+  <view class="pickerViewContainer" hidden='{{addressPicker_hidden}}'>
+      <view class="pickerViewOperate">
+        <view bindtap="pickerViewCancel">取消</view>
+        <view bindtap="pickerViewSubmit">确定</view>
+      </view>
+      <view>
+        <picker-view class="pickerView" indicator-style="height: 50px;" value="{{addressArr}}" bindchange="addressChange">
+          <picker-view-column>
+            <view wx:for="{{provinceArr}}" class="pickerColumn" wx:key="code">{{item.name}}</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{cityArr}}" class="pickerColumn" wx:key="code">{{item.name}}</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{areaArr}}" class="pickerColumn" wx:key="code">{{item.name}}</view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+  </view>
+</view>

@@ -1,0 +1,74 @@
+.contentArea{
+  border-top: 2rpx solid #DFDFDF;
+}
+.inputPannel{
+  margin: 30rpx;
+  padding: 20rpx 40rpx;
+  border: 2rpx solid #E1E1E1; 
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.inputPannel .leftImage1{
+  width: 36rpx;
+  height: 46rpx;
+  display: block;
+}
+.inputPannel .inputClass{
+  width: 350rpx;
+  line-height: 100rpx;
+  border-radius: 10rpx;
+  padding: 0 20rpx;
+  font-size: 24rpx;
+  color: #9A9A9A;
+}
+.inputPannel .inputTips{
+  font-size: 24rpx;
+  color: #9A9A9A;
+}
+.inputPannel .rightTips{
+  width: 200rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #6BB159;
+}
+.inputPannel .rightTips .yes_no{
+  width: 35rpx;
+  height: 35rpx;
+  display: block;
+  margin: 0 30rpx;
+}
+.inputPannel .rightTips .tips_1{
+  font-size: 24rpx;
+}
+/*验证*/
+.check{
+  margin: 200rpx 100rpx;
+  line-height: 80rpx;
+  font-size: 36rpx;
+  text-align: center;
+  border-radius: 5rpx;
+  background-color: #4ABDC2;
+  color: #FFFFFF;
+}
+/*报名图*/
+.signImage{
+  position: absolute;
+  bottom: 0;
+}
+.signImage image{
+  width: 750rpx;
+  height: 350rpx;
+  display: block;
+}
+/*获取验证码*/
+.getcaode{
+  width:200rpx;
+  height:60rpx;
+  line-height:60rpx;
+  font-size:26rpx;
+  color:#4ABDC2;
+  text-align:right;
+}

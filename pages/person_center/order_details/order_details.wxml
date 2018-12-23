@@ -1,0 +1,162 @@
+<!-- 订单信息 -->
+<view class="order">
+  <view class="head">
+    <view class="image_code">
+      <image src="/images/order.png"></image>
+      <view class="code">订单编号：{{orderDetails.orderCode?orderDetails.orderCode:''}}</view>
+    </view>
+    <view class="state">{{orderStateObj[orderDetails.orderState]}}</view>
+  </view>
+  <view class="body" wx:if="{{orderDetails.orderType==1}}">
+    <view class="item">
+      <view>活动名称：</view>
+      <view>{{orderDetails.activityName}}</view>
+    </view>
+    <view class="item">
+      <view>活动编号：</view>
+      <view>{{orderDetails.activityCode}}</view>
+    </view>
+  </view>
+</view>
+<!-- 地址 -->
+<view class="address">
+  <view class="people_phone">
+    <view class="people">收件人：{{orderDetails.consignee}}</view>
+    <view class="phone">{{orderDetails.consigneePhone}}</view>
+  </view>
+  <view class="position">
+    <view>
+      <image src="/images/position_2.png"></image>
+    </view>
+    <view>收货地址：{{orderDetails.province}} {{orderDetails.city}} {{orderDetails.district}} {{orderDetails.consigneeAddress}}</view>
+  </view>
+  <view class="time">下单日期：{{orderDetails.createTime}}</view>
+</view>
+<!-- 产品信息 -->
+<view class="product">
+  <view class="row head">
+    <view>产品型号</view>
+    <view>产品单价</view>
+    <view>数量</view>
+    <view>产品总额</view>
+  </view>
+  <block wx:for="{{orderDetails.productInfoList}}" wx:key="detailId">
+      <view class="row">
+        <view>{{item.productModel}}</view>
+        <view>{{item.price}}</view>
+        <view>{{item.num}}</view>
+        <view class="red">￥{{item.totalPrice}}</view>
+      </view>
+      <view class='row property flexRow' hidden='{{orderDetails.orderType!=3}}'>
+        <text>颜色:{{item.colour?item.colour:'暂无'}}；型号:{{item.productModel?item.productModel:'暂无'}}；规格:{{item.size?item.size:'暂无'}};</text>
+        <view wx:if='{{item.presell==2}}'>{{item.presellTimes}}整点发货</view>
+      </view>
+  </block>
+</view>
+<!-- 活动 -->
+ <view class="activity"  wx:if="{{orderDetails.orderType==1}}">
+  <view class="column2">
+    <view>预付定金：￥{{orderDetails.depositPrice}}</view>
+    <view>实收金额：￥{{orderDetails.realPayPrice}}</view>
+  </view>
+  <view hidden="{{orderDetails.orderType==2||orderDetails.orderType==6}}">
+    <view>是否使用了活动卡：{{orderDetails.isUseActivityCard?orderDetails.isUseActivityCard:'无'}}</view>
+  </view>
+  <view>
+    <view>付款方式：{{orderDetails.payStatus}}</view>
+  </view>
+  <view hidden="{{orderDetails.orderType==2||orderDetails.orderType==6}}">
+    <view>可抽奖：{{prizeNumber}}次</view>
+  </view>
+  <view hidden="{{orderDetails.orderType==2||orderDetails.orderType==6}}">
+    <view>可砸蛋：{{eggNumber}}次</view>
+  </view>
+  <view hidden="{{orderDetails.orderType==2||orderDetails.orderType==6}}">
+    <view>奖品内容：{{orderDetails.prizes?orderDetails.prizes:'无'}}</view>
+  </view>
+  <view hidden="{{orderDetails.orderType==2||orderDetails.orderType==6}}">
+    <view>满赠礼品：{{orderDetails.prize?orderDetails.prize:'无'}}</view>
+  </view>
+</view>
+<!-- 优惠 -->
+<view class='activity'>
+    <view hidden="{{!orderDetails.yhqUse}}">
+      <view>{{orderDetails.yhqUse}}</view>
+    </view>
+    <view hidden="{{!orderDetails.zkqUse}}">
+      <view>{{orderDetails.zkqUse}}</view>
+    </view>
+    <view hidden="{{!orderDetails.hbUse}}">
+      <view>{{orderDetails.hbUse}}</view>
+    </view>
+</view>
+<!-- 总计 -->
+<view class="total">
+  <view>订单总额：￥{{orderDetails.orderPrice}}</view>
+  <view>已优惠：￥{{orderDetails.youHui}}</view>
+</view>
+<!-- 进度款明细 -->
+<view hidden='{{!(payNumber==2 && orderDetails.payInfo.length>0)}}'>
+    <view class="title">
+      <image src="/images/icon/4.png"></image>
+      <text>进度款明细：</text>
+    </view>
+    <view class="moneyProgress">
+      <view class="row head">
+        <view class='column_1'>款项信息</view>
+        <view class='column_2'>支付状态</view>
+        <view class='column_3'>支付日期</view>
+      </view>
+      <block wx:for="{{orderDetails.payInfo}}" wx:key="*this"> 
+          <view class="row">
+            <view class='column_1' style='text-align: center;'>{{item.create_time}} <text class='red'>￥{{item.money}}</text></view>
+            <view class='column_2'>{{payStatus[item.status]}}</view>
+            <view class="column_3">{{item.pay_time ? item.pay_time : '暂无'}}</view>
+          </view>
+      </block> 
+    </view>
+    <view class="payTotal">
+      <view>已支付总计：<text class='red'>￥{{orderDetails.payCount}}</text></view>
+      <view>未支付总计：<text class='red'>￥{{orderDetails.unpaid}}</text></view>
+    </view>
+</view>
+<!-- 备注 -->
+<view class="title">
+  <image src="/images/icon/1.png"></image>
+  <text>备注：</text>
+</view>
+<view class="other">{{orderDetails.remarks?orderDetails.remarks:''}}</view>
+<!-- 说明 -->
+<view class="title">
+  <image src="/images/icon/2.png" style="width:35rpx;"></image>
+  <text>说明：</text>
+</view>
+<view class="explain">
+    <block wx:for="{{orderDetails.explainArr}}" wx:key="*this">
+        <view>{{item}}</view>
+    </block>
+</view>
+<!-- 导购 -->
+<view class="guider" style="margin-top: 15rpx;">
+  <view class="item">
+    <text class="name">专属店员姓名：</text>
+    <text class="value">{{orderDetails.sellerName}}</text>
+  </view>
+  <view class="item">
+    <text class="name">专属店员电话：</text>
+    <text class="value">{{orderDetails.sellerPhone}}</text>
+  </view>
+</view>
+<!-- 打单员 -->
+<view class="guider" wx:if="{{orderDetails.typist_id}}">
+  <view class="item">
+    <text class="name">打单店员姓名：</text>
+    <text class="value">{{orderDetails.typistName}}</text>
+  </view>
+  <view class="item">
+    <text class="name">打单店员电话：</text>
+    <text class="value">{{orderDetails.typistPhone}}</text>
+  </view>
+</view>
+
+<view class="space"></view>

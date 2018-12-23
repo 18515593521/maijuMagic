@@ -1,0 +1,480 @@
+<import src="../../../plugs/wxParse/wxParse.wxml" />
+
+<!--二维码-->
+<view class="imagePannel" hidden="{{codeImageHidden}}">
+  <view class="delete">
+    <image src="/images/delete.png" bindtap="hideCodeImage"></image>
+  </view>
+  <view class="code">
+    <image src="{{codeImage}}" mode="widthFix" />
+  </view>
+  <view class="operate">
+    <image class="download" src="/images/download.png" bindtap="imageDownload" />
+    
+  </view>
+</view>
+<!--优惠券-->
+<view class="propertyPannel" hidden="{{couponPannelHidden}}">
+  <view class="top"></view>
+  <view class="bottom" style="background-color: #F0F0F0;">
+    <view class="couponTitle">购物券</view>
+    <view style="height:calc(100% - 150rpx);overflow-y:auto;">
+      <block wx:for="{{couponList}}" wx:key="id">
+        <view class="couponItem">
+          <block wx:if="{{item.type==1}}">
+            <view class="money">{{item.value}}元</view>
+          </block>
+          <block wx:if="{{item.type==2}}">
+            <view class="money">{{item.value}}元</view>
+          </block>
+          <block wx:if="{{item.type==3}}">
+            <view class="money">{{item.value*10}}折</view>
+          </block>
+          <view class="condition">
+            <view>
+              <block wx:if="{{item.step_value}}">
+                <view class="describe">订单满{{item.step_value}}元使用(不包含邮费)</view>
+              </block>
+              <block wx:else>
+                <view class="describe">无限制(不包含邮费)</view>
+              </block>
+              <view class="time">使用期限 {{item.start_time}}至{{item.end_time}}</view>
+            </view>
+            <block wx:if="{{item.have_state==1}}">
+              <view class="get" data-param="{{item.id}}" bindtap="getCoupon">领取</view>
+            </block>
+            <block wx:else>
+              <view class="haveGet">已领取</view>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <!--按钮-->
+  <view class="couponButton" bindtap="closeCouponPannel">完成</view>
+</view>
+<!--属性面板-->
+<view class="propertyPannel" hidden="{{propertyPannelHidden}}">
+
+  <view class="top"></view>
+  <view class="bottom">
+    <view class="flex_row info">
+      <view class="flex_1">
+        <view class="pictureContainer">
+          <image class="picture" src="{{saleInfo.color_url}}" mode="scaleToFill"></image>
+        </view>
+      </view>
+      <view class="flex_2">
+        <view class="productPrice">
+          <block wx:if="{{isHot==1}}">
+            <block wx:if="{{productInfo.info.residue_num>0 && productInfo.buyNum<productInfo.info.limitation_num}}">
+              <text class='now' style='color:{{appColor}}'>￥{{productInfo.info.hot_price}}</text>
+              <text class='old'>￥{{productInfo.info.max_price}}</text>
+            </block>
+            <block wx:else>
+              <text style='color:{{appColor}}'>￥{{saleInfo.price}}</text>
+            </block>
+          </block>
+          <block wx:else>
+            <block wx:if="{{isShowPrice==1}}">
+              <text style='color:{{appColor}}'>￥{{saleInfo.price}}</text>
+            </block>
+            <block wx:else>
+              <text style='color:{{appColor}}'>到店咨询</text>
+            </block>
+          </block>
+        </view>
+        <view style="color:#666666;">库存{{(isHot==1 && productInfo.info.residue_num && productInfo.buyNum
+          <productInfo.info.limitation_num) ? productInfo.info.residue_num : saleInfo.stock}}件</view>
+            <view style="color:#666666;">请选择颜色</view>
+        </view>
+        <view class="flex_3" bindtap="closeProperty">
+          <image class="quitImage" src="/images/quit.png"></image>
+        </view>
+      </view>
+
+      <view style="height:calc(100% - 340rpx);overflow-y:auto;">
+
+        <view class="pannel color">
+          <view class="">颜色</view>
+          <view>
+            <block wx:for="{{colorArr}}" wx:key="*this">
+              <view class="colorItem {{colorActiveArr[index]}}" data-param="{{item}}" bindtap="chooseColor">{{item}}</view>
+            </block>
+          </view>
+        </view>
+
+        <view class="pannel color">
+          <view class="">规格</view>
+          <view>
+            <block wx:for="{{modelArr}}" wx:key="id">
+              <view class="colorItem {{modelActiveArr[index]}}" data-param="{{item.id}}" bindtap="chooseModel">{{item.standard}}</view>
+            </block>
+          </view>
+        </view>
+
+        <view class="pannel flex_row count">
+          <view class="countText">数量</view>
+          <view class="flex_row countOperate">
+            <view data-param="-1" bindtap="changeProductCount">-</view>
+            <view>{{buyCount}}</view>
+            <view data-param="1" bindtap="changeProductCount">+</view>
+          </view>
+        </view>
+
+      </view>
+
+    </view>
+  </view>
+
+  <!--图片轮播图 -->
+  <swiper indicator-dots="true" autoplay="" circular="true" class="swiper">
+    <block wx:for="{{productInfo.img}}" wx:key="*this">
+      <swiper-item>
+        <image src="{{item.imgurl}}" class="swiper_item_image" wx:if='{{item.img_type==1}}' />
+        <image src="{{item.imgurl}}" class="swiper_item_image" wx:if='{{item.img_type==2}}' data-indexs='{{index}}' bindtap='playTo' />
+        <image src='/images/play.png' class='playImage' wx:if='{{item.img_type==2}}' data-indexs='{{index}}' bindtap='playTo'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <!--产品信息-->
+  <view class="productInfo">
+    <view class="info">
+      <view class="name">{{productInfo.info.product_title}}</view>
+      <block wx:if="{{isHot==1}}">
+        <view class="price">
+          <block wx:if="{{productInfo.info.residue_num>0 && productInfo.buyNum<productInfo.info.limitation_num}}">
+            <text class="number now" style='color:{{appColor}}'>￥{{productInfo.groupBuyingInfo.group_price}}</text>
+            <text class="old">￥{{productInfo.info.max_price}}</text>
+          </block>
+          <block wx:else>
+            <block wx:if="{{productInfo.info.max_price==productInfo.info.min_price}}">
+              <text class="number now" style='color:{{appColor}}'>￥{{productInfo.groupBuyingInfo.group_price}}</text>
+              <text class="old">￥{{productInfo.info.max_price}}</text>
+            </block>
+            <block wx:else>
+              <text class="number" style='color:{{appColor}}'>￥{{productInfo.groupBuyingInfo.group_price}}-{{productInfo.info.max_price}}</text>
+            </block>
+          </block>
+        </view>
+      </block>
+      <block wx:else>
+        <block wx:if="{{isShowPrice==1}}">
+          <view class="price">
+            <block wx:if="{{productInfo.info.max_price==productInfo.info.min_price}}">
+              <text class="number" style='color:{{appColor}}'>￥{{productInfo.groupBuyingInfo.group_price}}</text>
+            </block>
+            <block wx:else>
+              <text class="number" style='color:{{appColor}}'>￥{{productInfo.groupBuyingInfo.group_price}}-{{productInfo.info.max_price}}</text>
+            </block>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="price">到店咨询</view>
+        </block>
+      </block>
+      <view class='grounpPeople flexRow' style='margin-top:10rpx'>
+        <view class='mustSelect2'>{{groupBuyingInfo.success_num}}人拼团</view>
+        <view class='mustSelect2' style='margin-left:20rpx'>已拼{{groupBuyingInfo.buyNum}}件</view>
+      </view>
+      <view class='grounpPeople flexRow' style='margin-top:10rpx'>
+        <view class='mustSelect3'>距开团结束还剩:</view>
+        <view class='mustSelect4 flexRow' style='margin-left:20rpx'>
+          <view class='bgred'>{{days}}</view>
+          <view>天</view>
+          <view class='bgred'>{{hours}}</view>
+          <view>:</view>
+          <view class='bgred'>{{minutes}}</view>
+          <view>:</view>
+          <view class='bgred'>{{secomds}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="image" bindtap="showCodeImage">
+      <image src="{{codeImage}}" />
+    </view>
+  </view>
+
+  <!--选择属性-->
+  <view class="chooseMenu" bindtap="choseProperty">
+    <view class="name">
+      <text style="font-size:30rpx;">选择属性</text>
+      <text class="mustSelect">(必选)</text>
+    </view>
+    <view class="look">
+      <image src="/images/arrows_right.png"></image>
+    </view>
+  </view>
+  <!--拼团规则-->
+  <view class="chooseMenu" bindtap="pageSkip" data-type='1' data-url='/pages/group/rule_list/rule_list'>
+    <view class="name justBetween flexRow names">
+      <text style="font-size:22rpx;color:#A0A0A0">开团/参团>凑齐拼单人数发货/凑不齐退款</text>
+      <text class="mustSelect2" style='color:#fe6665'>拼团规则</text>
+    </view>
+    <view class="look">
+      <image src="/images/arrows_right.png"></image>
+    </view>
+  </view>
+  <!--更多拼团信息 wx:if='{{otherGroupData.length>0}}'-->
+  <view class="chooseMenu" bindtap="moreGroupInfo" data-types='1'>
+    <view class="name justBetween flexRow names">
+      <text style="font-size:22rpx;color:#A0A0A0">想购买?可直接参与下方发的的拼团</text>
+      <text class="mustSelect2">查看更多</text>
+    </view>
+    <view class="look">
+      <image src="/images/arrows_right.png"></image>
+    </view>
+  </view>
+  <block wx:for='{{otherGroupData}}' wx:if='{{otherGroupData.length>0}}'>
+    <view class='moreGroup flexColumnH ' bindtap='selectToGroup' data-id='{{item.id}}' data-types='{{item.type}}'>
+      <view class='morderFroupItem flexRow paddingBox'>
+        <image class='groupImage' src='{{item.head_url}}' style='margin-left:10rpx'></image>
+        <view class='flexColumnH' style='width:380rpx;margin-left:20rpx'>
+          <view class='names'>{{item.name}}</view>
+          <view class='dropPeople'>距离结束{{item.remaining}}</view>
+        </view>
+        <view class='names names2'>还差{{item.num}}人成团</view>
+        <view class='goToBuys' data-orderId='{{item.id}}' >立即参团</view>
+      </view>
+    </view>
+
+  </block>
+
+  <!--评价-->
+  <block wx:if="{{productInfo.evaluateNum>0}}">
+    <view class="commentTitle">
+      <text class="name">评价</text>
+      <text class="total">({{productInfo.evaluateNum}})</text>
+    </view>
+    <block wx:for="{{productInfo.evaluate}}" wx:key="*this">
+      <view class="commentCell">
+        <view class="commentInfo">
+          <view class="people">{{item.customerName}}</view>
+          <view class="time">{{item.create_time}}</view>
+        </view>
+        <view class="content">{{item.details}}</view>
+        <view class="property">颜色:{{item.color}}；规格:{{item.size}}；型号:{{item.model}}；数量:{{item.num}}；</view>
+      </view>
+    </block>
+    <view class="lookAllComment" data-url="/pages/product/evaluation_all/evaluation_all?productId={{productId}}" data-type="1" bindtap="pageSkip">查看全部评论</view>
+  </block>
+  <block wx:else>
+    <view class="noComment">暂无评论</view>
+  </block>
+  <!--拖动-->
+  <view class="dragDown">
+    <view class="line">
+      <image src="/images/line.png" mode="aspectFit" class="lineLeft"></image>
+    </view>
+    <view class="text">继续拖动,查看图文详情</view>
+    <view class="line">
+      <image src="/images/line.png" mode="aspectFit" class="lineRight"></image>
+    </view>
+  </view>
+  <!--详情-->
+  <view class="details">
+    <view class="pannel menu">
+      <view class="menuCell {{activeArr[0]}}" style='color: {{activeArr[0]?active:""}};border-color:{{activeArr[0]?active:""}}' data-value="0" bindtap="chooseMenu">图文详情</view>
+      <view class="menuCell {{activeArr[1]}}" style='color: {{activeArr[1]?active:""}};border-color:{{activeArr[1]?active:""}}' data-value="1" bindtap="chooseMenu">产品参数</view>
+    </view>
+    <!--图文详情-->
+    <view class="pannel article" hidden="{{menuContentHiddenArr[0]}}">
+      <view class="wxParse">
+        <template is="wxParse" data="{{wxParseData:contentDetails.nodes}}" />
+      </view>
+    </view>
+    <!--产品参数-->
+    <view class="pannel" hidden="{{menuContentHiddenArr[1]}}">
+      <block wx:for="{{productInfo.attr}}" wx:key="*this">
+        <view class="table">
+          <view>{{item.name}}</view>
+          <view>{{item.value}}</view>
+        </view>
+      </block>
+      <view class="table">
+        <view>计价单位</view>
+        <view>{{productInfo.info.product_unit}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="space"></view>
+
+
+  <block>
+    <!--线上拼团-->
+    <view class='bottomArea' wx:if='{{isType==1}}'>
+      <view class='picture' bindtap='phoneServer'>
+        <image src='/images/phone_4.png'></image>
+        <view class='text_2'>电话</view>
+      </view>
+      <view class='picture' style='width:180rpx;border-left:2rpx solid #eee'>
+        <button style='width:180rpx' open-type='contact' session-from="weapp" class='picture' wx:if="{{server==1}}">
+          <view class='service'>
+            <image src='/images/weixin2.png'></image>
+          </view>
+
+          <view class='text_2'>客服</view>
+        </button>
+        <button style='width:180rpx' class='picture' wx:if="{{server==2}}" style='background:#eee'>
+           <view class='service'>
+            <image src='/images/weixin2.png'></image>
+          </view>
+          <view class='text_2'>客服</view>
+        </button>
+      </view>
+      <view class='aloneBox flexColumnH' data-param='2' data-online='1' bindtap='buyNow' data-group='1'>
+        <view class='flexRow button_22'>
+          <view class='yang'>￥</view>
+          <view class='moneys'>{{saleInfo.price?saleInfo.price:productInfo.info.max_price}}</view>
+        </view>
+        <view class='alone button_22'>单人独立购</view>
+      </view>
+      <view class='aloneBox flexColumnH' data-group='2' data-online='1' data-param='3' bindtap='buyNow' style='background:#fe6665'>
+        <view class='flexRow button_22'>
+          <view class='yang' style='color:#fff'>￥</view>
+          <view class='moneys' style='color:#fff'>{{groupBuyingInfo.group_price}}</view>
+        </view>
+        <view class='alone button_22' style='color:#fff'>{{groupBuyingInfo.success_num}}人线上拼</view>
+      </view>
+    </view>
+    <!--线下拼团-->
+    <view class='bottomArea' wx:if='{{isType==2}}'>
+      <view class='picture' bindtap='phoneServer' style='width:180rpx'>
+        <image src='/images/phone_4.png'></image>
+        <view class='text_2'>电话</view>
+      </view>
+      <view class='picture' style='width:180rpx;border-left:2rpx solid #eee'>
+        <button style='width:180rpx' open-type='contact' session-from="weapp" class='picture' wx:if='{{server==1}}'>
+            <view class='service'>
+            <image src='/images/weixin2.png'></image>
+          </view>
+          <view class='text_2'>客服</view>
+        </button>
+        <button style='width:180rpx;background:#eee' class='picture' wx:if='{{server==2}}'>
+            <view class='service'>
+            <image src='/images/weixin2.png'></image>
+          </view>
+          <view class='text_2'>客服</view>
+        </button>
+      </view>
+      <view class='aloneBox flexColumnH' data-group='2' data-online='2' data-param='3' bindtap='buyNow' style='background:#fe6665;width:390rpx'>
+        <view class='flexRow button_22'>
+          <view class='yang' style='color:#fff'>￥</view>
+          <view class='moneys' style='color:#fff'>{{groupBuyingInfo.group_price}}</view>
+        </view>
+        <view class='alone button_22' style='color:#fff'>{{groupBuyingInfo.success_num}}人线下拼</view>
+      </view>
+    </view>
+    <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='position:fixed; width:750rpx;height:150rpx;margin:auto;bottom:0;z-index:10000' open-type="getPhoneNumber" data-type='' data-param='{{}}' bindgetphonenumber="authorizePhone"></button>
+   
+  </block>
+  
+  <!--拼团弹框-->
+  <view class='positionBox' hidden='{{groupBook}}'>
+    <image src='/images/close.png' class='close' bindtap="moreGroupInfo" data-types='0'></image>
+    <view class='groupTop positionAbsolute paddingBox flexColumnH'>
+      <view class='groupTitle'>正在拼单</view>
+      <scroll-view scroll-x='true' style='height:690rpx' bindscroll='getscrollData'>
+        <block wx:for='{{otherGroupData}}'>
+          <view class='groupItem flexRow ' bindtap='selectToGroup' data-id='{{item.id}}'>
+            <image class='groupImage' src='{{item.head_url}}'></image>
+            <view class='flexColumnH ' style='width:350rpx'>
+              <view class='flexRow'>
+                <view class='names paddingBoxL'>{{item.name}}</view>
+                <view class='dropPeople'>还差{{item.num}}人</view>
+              </view>
+              <view class='dropPeople paddingBoxL' style='margin-top:10rpx'>剩余{{item.remaining}}</view>
+            </view>
+            <view class='goToBuy' data-orderId='{{item.id}}' data-types='{{item.type}}'>去拼单</view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+  <!--线下拼团提示框-->
+  <view class='positionBox' hidden='{{isTops}}'>
+    <view class='isBottons flexColumnNo positionAbsolute'>
+      <view class='onlineTitle'>是否确认线下拼团此款产品?</view>
+      <view class='flexRow'>
+        <view class='calcel' bindtap='submitOrder' data-types='1'>取消</view>
+        <view class='sure' style='background:#4ABDC2;color:#fff' bindtap='submitOrder' data-types='2'>确认</view>
+      </view>
+    </view>
+  </view>
+
+
+  <!--分享好友召集参与 -->
+<view class='bgBox' catchtouchmove='true' hidden='{{shareBg1}}'>
+  <view class='images2' bindtap='closeShare' data-types='1'>
+    <image src='/images/close.png'></image>
+  </view>
+  <view class='popUpBox flexColumnH'>
+    <view class='title'>分享好友召集参与</view>
+    <view class='flexRow  prompt'>
+      <view>还差</view>
+      <view style='color:red'>{{remainingNum}}</view>
+      <view>人即可组团成功,</view>
+      <view>{{payData.remainingTime}}</view>
+      <view>后结束</view>
+    </view>
+    <view class='headImage'>
+      <scroll-view scroll-y style='height:200rpx;margin-top:40rpx'>
+        <view class='flexRowH scrollImage'>
+          <block wx:for='{{payData.joinCustomer}}'>
+            <image src='{{item.head_url}}' data-customer_id='{{item.customer_id}}'></image>
+          </block>
+          <block wx:for='{{remainingNum}}'>
+            <image src='/images/group.png'></image>
+          </block>
+        </view>
+
+      </scroll-view>
+    </view>
+    <button class='share' open-type='share'>分享好友参与</button>
+  </view>
+</view>
+
+<!--成功-->
+<view class='bgBox' catchtouchmove='true' hidden='{{shareBg3}}'>
+  <view class='images2' bindtap='closeShare' data-types='1'>
+    <image src='/images/close.png'></image>
+  </view>
+  <view class='popUpBox flexColumnH'>
+    <view class='title'>恭喜组团成功</view>
+    <view class='flexRow  prompt'>
+      <view>历时{{payData.time}}</view>
+    </view>
+    <view class='flexRowH headImage'>
+      <scroll-view scroll-y style='height:200rpx;margin-top:40rpx'>
+         <view class='flexRowH scrollImage'>
+        <block wx:for='{{payData.joinCustomer}}'>
+          <image src='{{item.head_url}}' data-customer_id='{{item.customer_id}}'></image>
+        </block>
+        <block wx:for='{{payData.remainingNum}}'>
+          <image src='/images/group.png'></image>
+        </block>
+        </view>
+      </scroll-view>
+    </view>
+    <button class='share' bindtap='closeShare' data-types='2'>查看更多拼团</button>
+  </view>
+</view>
+  <!--模态框-->
+  <import src="../../../template/modalBox/modalBox.wxml" />
+  <template is="modalBox" data="{{...modalBox_message}}" />
+
+      <!--视频弹框--->
+  <view >
+    <view class='poptopBox flexColumnH' hidden='{{videoPlay}}'>
+      <view class='closes' >
+        <image src='/images/quit.png' bindtap='closePlay'></image>
+      </view>
+      <view>
+        <block wx:for="{{productInfo.img}}" wx:key="*this">
+          <video id="myVideo{{videoIndex}}" src='{{item.imgurl}}' class="swiper_item_image2" wx:if='{{item.img_type==2&&index==videoIndex}}' controls></video>
+        </block>
+      </view>
+    </view>
+  </view>

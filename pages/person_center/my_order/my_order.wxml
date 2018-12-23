@@ -1,0 +1,100 @@
+<!--菜单-->
+<view class="menu">
+  <view class="item {{menuClassArr[0]}}" style='border-color:{{menuClassArr[0]?active:""}};color:{{menuClassArr[0]?active:""}}' data-param="0" bindtap="chooseOrderState">全部</view>
+  <view class="item {{menuClassArr[1]}}" style='border-color:{{menuClassArr[1]?active:""}};color:{{menuClassArr[1]?active:""}}' data-param="1" bindtap="chooseOrderState">待支付</view>
+  <view class="item {{menuClassArr[2]}}" style='border-color:{{menuClassArr[2]?active:""}};color:{{menuClassArr[2]?active:""}}' data-param="2" bindtap="chooseOrderState">待发货</view> 
+  <view class="item {{menuClassArr[3]}}" style='border-color:{{menuClassArr[3]?active:""}};color:{{menuClassArr[3]?active:""}}' data-param="3" bindtap="chooseOrderState">已完成</view>
+  <view class="item {{menuClassArr[4]}}"  style='border-color:{{menuClassArr[4]?active:""}};color:{{menuClassArr[4]?active:""}}' data-param="4" bindtap="chooseOrderState">关闭</view>
+</view>
+<!--搜索-->
+<view class='search'>
+  <view class='input'>
+    <input class='' placeholder='按订单编号或名称搜索' placeholder-class='searchTips' data-type='1' bindconfirm='searchOrder' bindinput='setSearchText'></input>
+    <image src='/images/search.png' data-type='2' bindtap='searchOrder'></image>
+  </view>
+  <picker mode='selector' range='{{orderType}}' range-key='name' bindchange='selectOrderType'>
+    <view class='param'>
+        <view>{{orderType[showOrderType].name}}</view>
+        <image src='/images/triangle_1.png'></image>
+    </view>
+  </picker>
+</view>
+<!-- 订单 -->
+ <block wx:for="{{orderList}}" wx:key="orderId">
+    <view class="order">
+      <view class="head">
+        <view class="image_code">
+          <image src="/images/order.png"></image>
+          <view class="code">订单编号：{{item.orderCode?item.orderCode:''}}</view>
+        </view>
+        <block wx:if="{{item.evaluate==2}}">
+          <view class='evaluate' data-url="/pages/product/evaluation/evaluation?orderId={{item.orderId}}&state={{item.evaluate}}&orderType={{item.orderType}}" data-type="1" bindtap="pageSkip">去评价</view>
+        </block>
+        <block wx:elif="{{item.evaluate==3}}">
+          <view class='evaluate' data-url="/pages/product/evaluation/evaluation?orderId={{item.orderId}}&state={{item.evaluate}}&orderType={{item.orderType}}" data-type="1" bindtap="pageSkip">查看评价</view>
+        </block> 
+      </view>
+      <view class="body">
+        <view class="row">
+          <view>订单金额</view>
+          <view>产品型号</view>
+          <view>专属顾问</view>
+          <view>订单状态</view>
+        </view>
+        <view class="row info">
+          <view>￥{{item.orderPrice?item.orderPrice:0}}</view>
+          <view>{{item.productModel}}</view>
+          <view>{{item.sellerName}}</view>
+          <view>{{orderStateObj[item.orderState]}}</view>
+        </view>
+      </view>
+      <view class="bottom">
+        <view class="time">订单时间：{{item.createTime}}</view>
+        <view class='operate'>
+          <view class="pay" hidden='{{item.isShowPay!=1}}'>
+            <form report-submit='true' bindsubmit='payMoney' data-param='{{item.orderId}}' data-paycount='{{item.pay_num}}'>
+              <button form-type='submit'>去支付</button>
+            </form>
+          </view>
+          <view class="look" data-url="/pages/person_center/order_details/order_details?orderId={{item.orderId}}&payNumber={{item.pay_num}}" data-type="1" bindtap="pageSkip">查看详情</view>
+          <view class="look" hidden='{{item.isShowCancel!=1}}' data-param='{{item.orderId}}' bindtap='deleteOrder'>取消订单</view>
+        </view>
+      </view>
+    </view>
+</block> 
+
+<!-- 无数据 -->
+<view hidden="{{isHaveData}}">
+  <image class="noData" src="/images/nodata/data.png"></image>
+</view>
+
+<!-- 支付明细 -->
+<view class='maskPannel' hidden='{{payInfoHidden}}'>
+  <view class='payInfo'> 
+    <view class='title'>支付明细</view>
+    <view class='line'></view>
+
+    <block wx:if="{{payDataList_2.length>0}}">
+        <view class='details'> 
+        <block wx:for="{{payDataList_2}}" wx:key="id">
+            <view>{{item.pay_time}} 支付 ￥{{item.money}}</view>
+        </block>
+        </view>
+        <view class='total'>已支付小计：￥{{hasPayMoney}}</view>
+    </block>
+    <block wx:if="{{payDataList_1.length>0}}">
+        <view class='details'> 
+        <block wx:for="{{payDataList_1}}" wx:key="id">
+            <view>{{item.create_time}} 提交 ￥{{item.money}}</view>
+        </block>
+        </view>
+        <view class='total'>未支付小计：￥{{unPayMoney}}</view>
+    </block>
+    <view class='payMoney'>应付金额：￥<text class='money'>{{unPayMoney}}</text></view>
+
+    <view class='operate'> 
+      <view class='cancel' bindtap='cancelPay'>取消支付</view>
+      <view class='pay' bindtap='ensurePay'>确认支付</view>
+    </view>
+  </view>
+</view>

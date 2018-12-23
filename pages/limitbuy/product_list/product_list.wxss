@@ -1,0 +1,212 @@
+.container{
+  /* border-top: 20rpx solid #EEEEEE; */
+  font-family: "微软雅黑";
+}
+
+.container .showLimitTime{
+  
+  align-items:center;
+}
+
+.container .showLimitTime3{
+  justify-content: space-between ;
+  display: flex;
+}
+.container .showLimitTime2{
+  justify-content: space-around ;
+  display: flex;
+  margin-left: 50
+}
+.container .showLimitTime1{
+  justify-content: center ;
+  display: flex;
+
+}
+
+.container .showLimitTime .limit_time{
+  width: 25%;
+  color:#868686;
+  font-size: 30rpx;
+  margin-top:0rpx;
+  padding-bottom:20rpx;
+  box-sizing:border-box; 
+}
+.container .showLimitTime .limit_time1{
+   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-weight:700;
+  
+}
+ .limit_time2{
+    display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-weight:550;
+  font-size: 24rpx;
+  
+}
+
+.container .item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+  border-bottom: 2rpx solid #EEEEEE;
+  position:relative;
+}
+.textShow{
+  border-top: 10rpx solid #EEEEEE;
+  border-bottom: 5rpx solid #EEEEEE;
+  justify-content: space-between;
+  display: flex;
+  font-weight: 550rpx;
+  font-size: 24rpx;
+  color: #1f1f1f;
+  height:80rpx;
+  line-height:80rpx;
+}
+.title{
+ font-size: 32rpx;
+ font-weight: 550;
+ color: #1f1f1f; 
+
+}
+
+.textShow .name{
+  justify-content: space-between;
+  display: flex;
+}
+.textShow .end{
+  font-size: 26rpx;
+  font-weight: 900;
+  color: #FFFFFF;
+  align-items:center;
+  justify-content:center;
+}
+.textShow .name .time{
+  justify-content: space-between;
+  display: flex;
+  height:40rpx;
+  line-height:40rpx;
+}
+.textShow .name .time .text{
+ width: 40rpx;
+ background-color: black;
+ border-radius: 10rpx;
+ margin-left: 10rpx;
+ margin-right: 10rpx;
+ color: white;
+  display: flex;
+  justify-content: space-around;
+}
+
+.container .name{
+  font-size: 26rpx;
+  color: #515151;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+
+.container .item .left image{
+  width: 220rpx;
+  height: 220rpx;
+  display: block;
+}
+.container .item .right{
+  width: 470rpx;
+  height: 220rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.container .item .right .name{
+  font-size: 26rpx;
+  color: #515151;
+}
+.container .item .right .count{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20rpx;
+  float: right;
+}
+.container .item .right .count .percent{
+  width: 150rpx;
+  display: flex;
+  align-items: center;
+  padding-left: 20rpx;
+}
+/* 百分比 */
+.percent .all{
+  width: 150rpx;
+  height: 20rpx;
+  border: 1rpx solid red;
+  border-radius: 10rpx;
+  
+}
+.percent .all .remain{
+  width: 0;
+  border-color: red; 
+  height: 20rpx;
+  background-color: red;
+  border-radius: 10rpx;
+}
+.percent .remain_title{
+  font-size: 22rpx;
+  color: red;
+}
+.container .item .right .count .sale{
+  font-size: 22rpx;
+  color: #A0A0A0;
+}
+.container .item .right .price{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+.container .item .right .price .priceshow{
+  flex-flow:column wrap;
+}
+
+.container .item .right .price .priceshow .sell1{
+  float:right;
+  padding-left: 10rpx;
+}
+.container .item .right .price .priceshow .now{
+  font-size: 32rpx;
+  color: #ff0000; 
+}
+.container .item .right .price .priceshow .text{
+  font-size: 22rpx;
+  color: #A0A0A0;
+  padding-left: 0rpx;
+}
+.container .item .right .price .priceshow .priceOld{
+  justify-content: flex-start ;
+  display: flex;
+  align-items:center;
+  padding-top: 20rpx;
+}
+.container .item .right .price .priceshow .priceOld .text{
+  width: 50rpx;
+}
+.container .item .right .price .priceshow .old{
+  font-size: 22rpx;
+  color: #A0A0A0;
+  text-decoration: line-through;
+  padding-left: 0rpx;
+}
+.container .item .right .price .look{
+  width: 160rpx;
+  height: 50rpx;
+  background-color: #EB2024;
+  font-size: 22rpx;
+  color: #FFFFFF;
+  text-align: center;
+  border-radius: 15rpx;
+  line-height: 50rpx;
+  letter-spacing: 10rpx;
+  float:right;
+}

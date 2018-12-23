@@ -1,0 +1,47 @@
+<view class='container'>
+  <view class='top flexRow'>
+    <image src='/images/member/code.png' class='rule topElePadd'></image>
+    <view class=' topElePadd'>开通会员享受超多折扣</view>
+  </view>
+  <view class=''>
+    <block wx:for='{{cardListInfo}}' wx:key=''>
+    <view>
+        <image src='{{item.image}}' class='vipbg' bindtap='skinUp' data-url='/pages/member/memberCardDetails/card?id={{item.id}}&card_name= {{item.card_name}}&balance={{item.balance}}&money={{item.money}}&image={{item.image}}&buy_price={{item.buy_price}}&direction={{item.direction_for_use}}&useType={{item.use_type}}&vipType={{vipType}}&sellNum={{item.sellNum}}&sellType={{item.sellType}}&buyType={{item.buyType}}' data-types='1' >
+        <view class='vipTextBox flexColumnH' >
+          <view class='vipName'>{{item.card_name}}</view>
+          <block wx:if='{{vipType==2}}'>
+              <view class='vipNumber'>{{item.balance}}折</view>
+              <block wx:if='{{item.use_type ==2 && item.money >0}}'>
+                  <view class='vipNumber'>{{item.money}}元</view>
+              </block>
+          </block>
+          <block wx:elif='{{vipType==3}}'>
+                  <block wx:if='{{item.use_type ==1 && item.money >0}}'>
+                      <view class='vipNumber'>{{item.money}}次</view>
+                  </block>
+                  <block wx:elif='{{item.use_type ==2 && item.money >0}}'>
+                      <view class='vipNumber'>{{item.money}}元</view>
+                  </block>
+              
+          </block>
+          <block wx:if='{{item.buyType ==1}}'>
+            <view class='vipopen'>已购买</view>
+          </block>
+          <block wx:elif='{{item.sellType ==1}}'>
+            <view class='vipopen'>立即开通</view>
+          </block>
+          <block wx:else>
+            <view class='vipopen'>已抢光</view>
+          </block>
+           
+        </view>
+        </image>
+    </view>
+     
+    </block>
+  </view>
+</view>
+
+
+
+

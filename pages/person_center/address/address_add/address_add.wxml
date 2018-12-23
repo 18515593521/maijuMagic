@@ -1,0 +1,57 @@
+<view class='form'>
+    <view class='inputContainer'>
+      <view class='title'>收货人</view>
+      <view class='input'>
+        <input class='inputClass' placeholder='请输入收货人的姓名' placeholder-class="inputTips"></input>
+      </view>
+    </view>
+    <view class='inputContainer'>
+      <view class='title'>手机号码</view>
+      <view class='input'>
+        <input type='number' maxlength='11' class='inputClass' placeholder='请输入收货人的手机号码' placeholder-class="inputTips"></input>
+      </view>
+    </view>
+    <view class='inputContainer' bindtap="chooseAddress">
+      <view class='title'>省市区</view>
+      <view class='input'>
+        <view class='title'>{{location}}</view>
+      </view>
+    </view>
+    <view class='inputContainer'>
+      <view class='title'>详细地址</view>
+      <view class='input'>
+        <input class='inputClass' placeholder='请输入详细的收货地址' placeholder-class="inputTips"></input>
+      </view>
+    </view>
+</view>
+<view class='inputContainer' style='margin-top:20rpx;padding: 20rpx 40rpx;'>
+  <view class='title'>默认地址</view>
+  <view class='input setDefault'>
+    <view class='inputTips'>每次下单默认使用该地址</view>
+    <switch type='switch' color='#4ABDC2'></switch>
+  </view>
+</view>
+
+<view class='save'>保存地址</view>
+
+<block wx:if="{{addressPickerShow}}">
+    <view class="pickerViewContainer">
+        <view class="pickerViewOperate">
+          <view bindtap="pickerViewCancel">取消</view>
+          <view bindtap="pickerViewSubmit">确定</view>
+        </view>
+        <view>
+          <picker-view class="pickerView" indicator-style="height: 50px;" value="{{addressArr}}" bindchange="addressChange">
+            <picker-view-column>
+              <view wx:for="{{provinceArr}}" class="pickerColumn" wx:key="code">{{item.name}}</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{cityArr}}" class="pickerColumn" wx:key="code">{{item.name}}</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{areaArr}}" class="pickerColumn" wx:key="code">{{item.name}}</view>
+            </picker-view-column>
+          </picker-view>
+        </view>
+    </view>
+</block>

@@ -1,0 +1,35 @@
+<view class="menu">
+  <view class="item {{level==0 ? 'active' : ''}}" data-param="0" bindtap="chooseMenu">
+    <view>全部</view>
+    <view>{{countInfo.hao + countInfo.zhong + countInfo.cha}}</view>
+  </view>
+  <view class="item {{level==3 ? 'active' : ''}}" data-param="3" bindtap="chooseMenu">
+    <view>好评</view>
+    <view>{{countInfo.hao}}</view>
+  </view>
+  <view class="item {{level==2 ? 'active' : ''}}" data-param="2" bindtap="chooseMenu">
+    <view>中评</view>
+    <view>{{countInfo.zhong}}</view>
+  </view>
+  <view class="item {{level==1 ? 'active' : ''}}" data-param="1" bindtap="chooseMenu">
+    <view>差评</view>
+    <view>{{countInfo.cha}}</view>
+  </view>
+</view>
+
+<block wx:for="{{evaluationList}}" wx:key="*this">
+    <view class="commentCell">
+      <view class="commentInfo">
+        <view class='people'>
+          <image class='head' src='{{item.head_url}}'></image>
+          <view class='name'>{{item.customerName}}</view>
+          <view class='level'>（{{levelObj[item.level]}}）</view>
+        </view>
+        <view class="time">{{item.create_time}}</view>
+      </view>
+      <view class="content">{{item.details}}</view>
+      <view class="property">颜色:{{item.color}}；规格:{{item.size}}；型号:{{item.model}}；数量:{{item.num}}；</view>
+    </view>
+</block>
+
+

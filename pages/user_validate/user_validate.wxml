@@ -1,0 +1,31 @@
+<view class="contentArea">
+
+  <view class="inputPannel">
+    <image class="leftImage1" src="/images/phone.png"></image>
+    <input type="text" class="inputClass" placeholder="请输入手机号" placeholder-class="inputTips" maxlength="11" data-param="phone" bindinput="inputValue" bindblur="isPhoneNumber" value="{{phone}}" disabled="{{isPhoneDisabled}}"/>
+    <view class="rightTips">
+      <block wx:if="{{isPhone_ok==1}}">
+        <image class="yes_no" src="/images/yes.png"></image> 
+        <text class="tips_1">可使用</text> 
+      </block>
+      <block wx:if="{{isPhone_ok==2}}">
+        <image class="yes_no" src="/images/no.png"></image> 
+        <text class="tips_1">不可使用</text> 
+      </block>
+    </view>
+  </view>
+    <view class="inputPannel">
+      <image class="leftImage1" src="/images/pass.png"></image>
+      <input type="text" class="inputClass" placeholder="请输入验证码" placeholder-class="inputTips" maxlength="6" data-param="verificationCode" bindinput="inputValue"  value="{{verificationCode}}" disabled="{{isPhoneDisabled}}" />
+      <view class='getcaode' bindtap='getCode'>{{phoneValue}}</view>
+    </view> 
+  <view class="check" bindtap="check">立即登录</view>
+</view>
+
+<view class="signImage">
+  <image src="/images/signImage.png"></image>
+</view>
+
+<!--模态框-->
+<import src="../../template/modalBox/modalBox.wxml"/>
+<template is="modalBox" data="{{...modalBox_message}}"/>

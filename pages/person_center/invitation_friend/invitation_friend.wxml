@@ -1,0 +1,7 @@
+<view>
+  <image class="invite" src="{{codeImage}}" bindtap="clickImage"></image>
+</view>
+<view class="me">
+  <image src="{{headImage}}"></image>
+</view>
+<button open-type='share' class='shareTo'>邀请好友</button>

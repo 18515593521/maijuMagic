@@ -1,0 +1,23 @@
+<!-- 搜索 -->
+<view class='search'>
+  <input placeholder='输入姓名搜索' placeholder-class='searchTips' data-type='1' bindconfirm='searchPeople' bindinput='setSearchText'></input>
+  <image src='/images/search.png' data-type='2' bindtap='searchPeople'></image>
+</view>
+<!-- 列表 -->
+<view class='row head'>
+  <view class='column1'>姓名</view>
+  <view class='column2'>联系方式</view>
+  <view class='column3'>注册日期</view>
+</view>
+<block wx:for="{{peopleList}}" wx:key="id">
+    <view class='row'>
+      <view class='column1'>{{item.name}}</view>
+      <view class='column2'>{{item.phone}}</view>
+      <view class='column3'>{{item.create_time}}</view>
+    </view>
+</block> 
+
+<!-- 无数据 -->
+<view hidden="{{isHaveData}}">
+  <image class="noData" src="/images/nodata/data.png"></image>
+</view>

@@ -1,0 +1,54 @@
+.menus{
+  background:#fff;
+}
+.menus_item{
+  width:50%;
+  text-align:center;
+  line-height:60rpx;
+  font-size:26rpx;
+}
+.menus1 .actives{
+  background:#fff;
+  color:#4abcc2;
+
+}
+.active{
+  color:#4abcc2;
+  border-bottom:2rpx solid #4abcc2;
+}
+.timerAll,.timer view{
+    font-size:26rpx;
+  color:#999;
+  line-height:50rpx;
+}
+.timer{
+  width:100%;
+  justify-content:space-between;
+}
+.redPageState view{
+  /* width:150rpx; */
+  height:50rpx;
+  text-align:center;
+  line-height:50rpx;
+  font-size:24rpx;
+}
+.infosBox{
+  width:100%;
+}
+.infos{
+  width:70%;
+  font-size:30rpx;
+}
+/* .infos view{
+  line-height:60rpx;
+} */
+.moneys{
+  width:30%;
+  text-align:right;
+  color:red;
+  font-size:30rpx;
+}
+.timer .names{
+  color:#333;
+  margin-left:20rpx;
+}

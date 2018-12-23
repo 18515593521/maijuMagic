@@ -1,0 +1,164 @@
+.top {
+  float: left;
+  background: #52BDC0;
+  height:90rpx;
+  width:100%;
+}
+.rule{
+  width:50rpx;
+  height:50rpx;
+}
+.topElePadd{
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  margin-left: 20rpx;
+}
+.vipbg{
+  width:710rpx;
+  height:402rpx;
+  padding: 20rpx;
+  position:relative;
+}
+.vipTextBox{
+  position:absolute;
+  margin:auto;
+  top:201rpx;
+  left:0;
+  right:0;
+  text-align:center;
+  color:#fff;
+  width: 150rpx;
+}
+.vipName{
+  font-size:24rpx;
+}
+.vipNumber{
+  font-size:24rpx;
+  margin-top:20rpx;
+}
+.vipopen{
+  margin-top:20rpx;
+  font-size:24rpx;
+  border: 2rpx solid white;
+  border-radius: 10rpx;
+}
+.texta{
+  font-size:24rpx;
+}
+.useList{
+  display: flex;
+  flex-direction:column;
+}
+.useLi{
+   display: flex;
+   justify-content: space-between;
+   margin-top: 20rpx;
+   margin-left: 20rpx;
+   margin-right: 20rpx;
+   font-size: 36rpx;
+}
+.timeStyle{
+  font-size: 28rpx;
+  color: #c0c0c0
+}
+.moneyStyle{
+  font-size: 26rpx;
+  color: #52BDC0
+}
+.htable1{
+  font-size: 30rpx;
+  width: 50%;
+  text-align: center
+
+}
+.htable2{
+  font-size: 30rpx;
+  width: 25%;
+   text-align: center
+}
+.htable3{
+  font-size: 30rpx;
+  width: 25%;
+   text-align: center
+}
+.totile{
+  font-size: 30rpx;
+  color: #52BDC0;
+}
+/*属性面板*/
+.propertyPannel1{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  overflow: hidden;
+  z-index: 100;
+  background-color: #c0c0c0;
+}
+.propertyPannel .delete{
+  position:absolute;
+  right: 15rpx; 
+}
+.propertyPannel .delete image{
+  width: 30rpx;
+  height: 30rpx;
+  display: block;
+  margin: 20rpx;
+}
+/*属性面板*/
+.propertyPannel{
+  position:fixed;
+  width:80%;
+  height:60%;
+  top:10%;
+  left: 10%;
+  overflow: hidden;
+  z-index: 210;
+background-color: white
+
+}
+.propertyPannel .top{
+  height: 70rpx;
+  background: #52BDC0;
+  color: white
+}
+.toptext{
+  position:absolute;
+  top: 15rpx;
+  left: 250rpx;
+  font-size: 30rpx;
+}
+.bottomp {
+  margin-top: 100rpx;
+}
+
+ui li{
+  font-size: 30rpx;
+}
+ui li view{
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+}
+ui li view text{
+  margin-left: 15rpx;
+ 
+}
+
+.ruleDetai{
+  font-size: 35rpx;
+  margin-left: 15rpx;
+  font-weight: 500
+}
+.use1{
+   font-size: 30rpx;
+  margin-left: 15rpx;
+}
+.use2{
+   font-size: 30rpx;
+  margin-left: 15rpx;
+  color: #52BDC0
+}
+.rule{
+  width:39rpx;
+  height:35rpx;
+}

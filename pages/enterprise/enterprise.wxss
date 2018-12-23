@@ -1,0 +1,11 @@
+page {
+  background-color: #FFFFFF;
+  border-top: 2rpx solid #F3F3F3;
+}
+
+.wxParse image{
+  width: 100% !important;
+}
+.article{
+  margin-top: 15rpx;
+}

@@ -1,0 +1,37 @@
+<!--菜单-->
+<view class="menu">
+  <block wx:for="{{stateList}}" wx:key="value">
+      <view class="item {{item.choose}}" data-param="{{item.value}}" style='color:{{item.choose?active:""}};border-color:{{item.choose?active:""}}' bindtap="chooseBookingState">{{item.name}}</view>
+  </block>
+</view>
+<!-- 预约信息 -->
+<block wx:for="{{bookingList}}" wx:key="id">
+    <view class='booking'>
+      <view class='shop'>
+        <view class='logo_name'>
+          <image mode='widthFix' src='/images/order.png'></image>
+          <view class='shopName'>{{item.shop_name}}</view>
+        </view>
+        <view class='state'>{{stateMap[item.state]}}</view>
+      </view>
+      <view class='time'>
+      
+        <view>提交时间：{{item.create_time}}</view>
+      </view>
+      <view class='product'>
+        <view>
+          <image src='{{item.imgurl}}'></image>
+        </view>
+        <view class='info'>
+          <view class='name out_hidden_2'>{{item.product_title}}</view>
+          <view class='property'>颜色：{{item.color}}；型号：{{item.model}}；规格：{{item.standard}}；</view>
+          <view class='count'>数量：{{item.reserve_num}}</view>
+          <view class='price'>
+            <text class='now'>￥{{item.hot_price}}</text>
+            <text class='old'>￥{{item.max_price}}</text>
+          </view> 
+        </view>
+      </view>
+    </view>
+</block>
+

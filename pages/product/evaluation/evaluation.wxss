@@ -1,0 +1,115 @@
+page {
+  background-color: #EEEEEE;
+}
+
+.order{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rpx 0 10rpx;
+  background-color: #FFFFFF;
+  padding: 20rpx;
+  font-size: 26rpx;
+}
+/* 产品信息 */
+.product + .product{
+  margin-top: 2rpx;
+}
+.product{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+  background-color: #FFFFFF; 
+}
+.product .picture{
+  width: 160rpx;
+  height: 160rpx;
+  padding-right: 20rpx;
+}
+.product .info{
+  width: 530rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 160rpx;
+}
+.product .name{
+  font-size: 24rpx;
+}
+.product .property{
+  font-size: 22rpx;
+  color: #B8B8B8;
+  padding-top: 6rpx;
+}
+.product .price{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
+}
+/*评价区域*/
+.content{
+    background-color: #FFFFFF;
+    margin-top: 10rpx;
+}
+.content .input{
+    width: 710rpx;
+    height: 300rpx;
+    padding: 20rpx;
+    font-size: 24rpx;
+}
+.content .searchTips{
+    font-size: 22rpx;
+    color: #949494;
+}
+/*评分*/
+.scoreContainer{
+  margin-top: 10rpx;
+  padding: 20rpx;
+  background-color: #FFFFFF;
+}
+.scoreContainer .score{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx 0;
+}
+.scoreContainer .score .name{
+  font-size: 28rpx;
+  color: #666666;
+}
+.scoreContainer .score .area{
+  display: flex;
+  align-items: center;
+}
+.scoreContainer .score .area .item{
+  display: flex;
+  align-items: center;
+}
+.scoreContainer .score .area .item image{
+  width: 40rpx;
+  height: 40rpx;
+  display: block;
+  margin-left: 30rpx;
+} 
+.scoreContainer .score .area .item .text_yes{
+  font-size: 24rpx;
+  color: #FD9090;
+  margin: 0 20rpx;
+} 
+.scoreContainer .score .area .item .text_no{
+  font-size: 24rpx;
+  color: #666666;
+  margin: 0 20rpx;
+} 
+/*提交*/
+.submit{
+  margin: 100rpx 250rpx;
+  background-color: #49BCC1;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 30rpx;
+  padding: 20rpx;
+  border-radius: 10rpx;
+}

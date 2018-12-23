@@ -1,0 +1,26 @@
+page{
+    border-top: 2rpx solid #EEEEEE;
+}
+.invite {
+    width: 600rpx;
+    height: 600rpx;
+    display: block;
+    margin: 150rpx 75rpx 0;
+}
+.me{
+  text-align: center;
+  margin-top: -435rpx;
+}
+.me image{
+  width: 270rpx;
+  height: 270rpx;
+  border-radius: 50%;
+}
+.shareTo{
+  width:200rpx;
+  height:60rpx;
+  color:#fff;
+  background:#4ca9aa;
+  font-size:24rpx;
+  margin:300rpx auto 0;
+}

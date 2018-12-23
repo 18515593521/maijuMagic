@@ -1,0 +1,84 @@
+.container{
+  border-top: 20rpx solid #EEEEEE;
+}
+.container .item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+  border-bottom: 2rpx solid #EEEEEE;
+  position:relative;
+}
+.container .item .left image{
+  width: 220rpx;
+  height: 220rpx;
+  display: block;
+}
+.container .item .right{
+  width: 470rpx;
+  height: 220rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.container .item .right .name{
+  font-size: 26rpx;
+  color: #515151;
+}
+.container .item .right .count{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 30rpx;
+}
+.container .item .right .count .percent{
+  width: 350rpx;
+  display: flex;
+  align-items: center;
+}
+/* 百分比 */
+.percent .all{
+  width: 300rpx;
+  height: 20rpx;
+  border: 1rpx solid #F5F5F5;
+  border-radius: 10rpx;
+}
+.percent .all .remain{
+  width: 0;
+  height: 20rpx;
+  background-color: #5CC7CD;
+  border-radius: 10rpx;
+}
+.percent .remain_title{
+  font-size: 22rpx;
+  color: #5CC7CD;
+}
+.container .item .right .count .sale{
+  font-size: 22rpx;
+  color: #A0A0A0;
+}
+.container .item .right .price{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.container .item .right .price .now{
+  font-size: 32rpx;
+  color: #FE6165; 
+}
+.container .item .right .price .old{
+  font-size: 22rpx;
+  color: #A0A0A0;
+  text-decoration: line-through;
+  padding-left: 10rpx;
+}
+.container .item .right .price .look{
+  width: 160rpx;
+  height: 50rpx;
+  background-color: #EB2024;
+  font-size: 22rpx;
+  color: #FFFFFF;
+  text-align: center;
+  border-radius: 4rpx;
+  line-height: 50rpx;
+}

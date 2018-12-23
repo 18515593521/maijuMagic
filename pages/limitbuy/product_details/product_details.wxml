@@ -1,0 +1,360 @@
+<import src="../../../plugs/wxParse/wxParse.wxml" />
+
+<!--二维码-->
+<view class="imagePannel" hidden="{{codeImageHidden}}">
+  <view class="delete">
+    <image src="/images/delete.png" bindtap="hideCodeImage"></image>
+  </view>
+  <view class="code">
+    <image src="{{codeImage}}" mode="widthFix" />
+  </view>
+  <view class="operate">
+    <image class="download" src="/images/download.png" bindtap="imageDownload" />
+  </view>
+</view>
+
+<!--属性面板-->
+<view class="propertyPannel" hidden="{{propertyPannelHidden}}">
+
+  <view class="top"></view>
+  <view class="bottom">
+    <view class="flex_row info">
+      <view class="flex_1">
+        <view class="pictureContainer">
+          <image class="picture" src="{{saleInfo.color_url}}" mode="scaleToFill"></image>
+        </view>
+      </view>
+      <view class="flex_2">
+        <view class="productPrice">
+
+          <block wx:if="{{payState==1||payState==2}}">
+            <block wx:if="{{payStatusInfo.isOpen==1}}">
+              <block wx:if="{{payStatusInfo.pay_status==1}}">
+                <block wx:if="{{productInfo.info.isOpen==1}}">
+                  <block wx:if="{{productInfo.info.pay_status==1}}">
+                    <view class="price1 price" style='color:{{appColor}}'>￥{{chooseModel.product_price}}</view>
+                  </block>
+                  <block wx:else>
+                    <view class="price1 price" style='color:{{appColor}}'>￥{{chooseModel.product_price}}</view>
+                  </block>
+                </block>
+                <block wx:else>
+                  <view class="price1 price">到店咨询</view>
+                </block>
+              </block>
+              <block wx:else>
+                <block wx:if='{{productInfo.info.isOpen==1}}'>
+                  <view class="price1 price" style='color:{{appColor}}'>￥{{chooseModel.product_price}}</view>
+                </block>
+                <block wx:else>
+                  <view class="price1 price">到店咨询</view>
+                </block>
+              </block>
+            </block>
+            <block wx:else>
+              <view class="price1 price">到店咨询</view>
+            </block>
+          </block>
+
+        </view>
+        <view style="color:#666666;">库存{{chooseModel.lib_num}}件</view>
+        <view style="color:#666666;">请选择颜色</view>
+      </view>
+      <view class="flex_3" bindtap="closeProperty">
+        <image class="quitImage" src="/images/quit.png"></image>
+      </view>
+    </view>
+
+    <view style="height:calc(100% - 340rpx);overflow-y:auto;">
+
+      <view class="pannel color">
+        <view class="">颜色</view>
+        <view>
+          <block wx:for="{{colorArr}}" wx:key="*this">
+            <view class="colorItem {{colorActiveArr[index]}}" data-param="{{item}}" bindtap="chooseColor">{{item}}</view>
+          </block>
+        </view>
+      </view>
+
+      <view class="pannel color">
+        <view class="">规格</view>
+        <view>
+          <block wx:for="{{modelArr}}" wx:key="id">
+            <view class="colorItem {{modelActiveArr[index]}}" data-param="{{item.id}}" bindtap="chooseModel">{{item.standard}}</view>
+          </block>
+        </view>
+      </view>
+
+      <view class="pannel flex_row count">
+        <view class="countText">数量</view>
+        <view class="flex_row countOperate">
+          <view data-param="-1" bindtap="changeProductCount">-</view>
+          <view>{{buyCount}}</view>
+          <view data-param="1" bindtap="changeProductCount">+</view>
+        </view>
+      </view>
+
+    </view>
+
+  </view>
+</view>
+<!-- 预约信息 -->
+<view class='bookingPannel' hidden='{{bookingPannelHidden}}'>
+  <view class='box'>
+    <view style='height:60rpx'>
+      <view class='title'>提示</view>
+      <view class='line'></view>
+    </view>
+    <view class='titles'>是否确认提交需求？</view>
+    <view class='operate'>
+      <view class='cancel' bindtap='cancelBooking'>取消</view>
+      <view class='submit' bindtap='submitBooking'>确定</view>
+    </view>
+  </view>
+</view>
+
+  <!--图片轮播图 -->
+  <swiper indicator-dots="true" autoplay="" circular="true" class="swiper">
+    <block wx:for="{{productInfo.img}}" wx:key="*this">
+      <swiper-item>
+        <image src="{{item.imgurl}}" class="swiper_item_image" wx:if='{{item.img_type==1}}' />
+        <image src="{{item.imgurl}}" class="swiper_item_image" wx:if='{{item.img_type==2}}' data-indexs='{{index}}' bindtap='playTo' />
+        <image src='/images/play.png' class='playImage' wx:if='{{item.img_type==2}}' data-indexs='{{index}}' bindtap='playTo'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+<!--产品信息-->
+<view class="productInfo">
+  <view class="info">
+    <view class="name">{{productInfo.info.product_title}}</view>
+    <view class='priceShow'>
+      <block wx:if="{{payState==1||payState==2}}">
+        <block wx:if="{{payStatusInfo.isOpen==1}}">
+          <block wx:if="{{payStatusInfo.pay_status==1}}">
+            <block wx:if="{{productInfo.info.isOpen==1}}">
+              <block wx:if="{{productInfo.info.pay_status==1}}">
+                <view class="price1 price" style='color:{{appColor}}'>￥{{productInfo.info.price}}</view>
+                <view class="old">￥{{productInfo.info.max_price}}</view>
+              </block>
+              <block wx:else>
+                <view class="number" style='color:{{appColor}}'>￥{{productInfo.info.price}}</view>
+                <view class="old">￥{{productInfo.info.max_price}}</view>
+              </block>
+            </block>
+            <block wx:else>
+              <view class="old">到店咨询</view>
+            </block>
+          </block>
+          <block wx:else>
+            <block wx:if='{{productInfo.info.isOpen==1}}'>
+              <view class="number" style='color:{{appColor}}'>￥{{productInfo.info.price}}</view>
+              <view class="old">￥{{productInfo.info.max_price}}</view>
+            </block>
+            <block wx:else>
+              <view class="price1 price" style='color:{{appColor}}'>到店咨询</view>
+              <view class="old ">￥{{productInfo.info.max_price}}</view>
+            </block>
+          </block>
+        </block>
+        <block wx:else>
+          <view class="price1 price">到店咨询</view>
+        </block>
+      </block>
+    </view>
+    <view class='textShow'>
+      <view class='name end'>
+        <view>
+          <block wx:if="{{productInfo.info.limit_time_type ==1}}">距抢购开始</block>
+          <block wx:if="{{productInfo.info.limit_time_type ==2}}">距抢购结束</block>
+        </view>
+        <view class='time'>
+          <view class='text'>{{time.h}}</view>时
+          <view class='text'>{{time.m}}</view>分
+          <view class='text'>{{time.s}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="image" bindtap="showCodeImage">
+    <image src="{{codeImage}}" />
+  </view>
+</view>
+
+<!--选择属性-->
+<view class="chooseMenu" bindtap="choseProperty">
+  <view class="name">
+    <text style="font-size:30rpx;">选择属性</text>
+    <text class="mustSelect">(必选)</text>
+  </view>
+  <view class="look">
+    <image src="/images/arrows_right.png"></image>
+  </view>
+</view>
+<!--评价-->
+<block wx:if='{{isCanBuy}}'>
+  <block wx:if="{{productInfo.evaluateNum>0}}">
+    <view class="commentTitle">
+      <text class="name">评价</text>
+      <text class="total">({{productInfo.evaluateNum}})</text>
+    </view>
+    <block wx:for="{{productInfo.evaluate}}" wx:key="*this">
+      <view class="commentCell">
+        <view class="commentInfo">
+          <view class="people">{{item.customerName}}</view>
+          <view class="time">{{item.create_time}}</view>
+        </view>
+        <view class="content">{{item.details}}</view>
+        <view class="property">颜色:{{item.color}}；规格:{{item.size}}；型号:{{item.model}}；数量:{{item.num}}；</view>
+      </view>
+    </block>
+    <view class="lookAllComment" data-url="/pages/product/evaluation_all/evaluation_all?productId={{productId}}" data-type="1" bindtap="pageSkip">查看全部评论</view>
+  </block>
+  <block wx:else>
+    <view class="noComment">暂无评论</view>
+  </block>
+</block>
+<!--拖动-->
+<view class="dragDown">
+  <view class="line">
+    <image src="/images/line.png" mode="aspectFit" class="lineLeft"></image>
+  </view>
+  <view class="text">继续拖动,查看图文详情</view>
+  <view class="line">
+    <image src="/images/line.png" mode="aspectFit" class="lineRight"></image>
+  </view>
+</view>
+<!--详情-->
+<view class="details">
+  <view class="pannel menu">
+    <view class="menuCell {{activeArr[0]}}" style='color:{{activeArr[0]?active:""}};border-color:{{activeArr[0]?active:""}}' data-value="0" bindtap="chooseMenu">图文详情</view>
+    <view class="menuCell {{activeArr[1]}}"  style='color:{{activeArr[1]?active:""}};border-color:{{activeArr[1]?active:""}}' data-value="1" bindtap="chooseMenu">产品参数</view>
+  </view>
+  <!--图文详情-->
+  <view class="pannel article" hidden="{{menuContentHiddenArr[0]}}">
+    <view class="wxParse">
+      <template is="wxParse" data="{{wxParseData:contentDetails.nodes}}" />
+    </view>
+  </view>
+  <!--产品参数-->
+  <view class="pannel" hidden="{{menuContentHiddenArr[1]}}">
+    <block wx:for="{{productInfo.attr}}" wx:key="*this">
+      <view class="table">
+        <view>{{item.name}}</view>
+        <view>{{item.value}}</view>
+      </view>
+    </block>
+    <view class="table">
+      <view>计价单位</view>
+      <view>{{productInfo.info.product_unit}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="space"></view>
+
+<!-- 底部 -->
+<view class='bottomArea'>
+  <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:100rpx;margin:auto;top:0' open-type="getPhoneNumber" data-type='' data-param='{{}}' bindgetphonenumber="authorizePhone"></button>
+  <block wx:if='{{sellerPhone}}'>
+    <view class='picture' data-types='2' bindtap='phoneServer'>
+      <image src='/images/phone_4.png'></image>
+      <view class='text_1'>电话</view>
+    </view>
+    <view class='phone'>
+      <button open-type='contact' class='picture' session-from="weapp" style='width:100%;height:100rpx;padding:0;' wx:if="{{server==1}}">
+        <view class='flexColumnH'>
+          <view class='imagesconte'>
+            <image src='/images/contact.png' class='contants2' style='margin-bottom:13rpx;margin-top:5rpx;z-index:10000'></image>
+          </view>
+
+          <view class='button_11' data-param='1'>客服</view>
+        </view>
+      </button>
+      <button class='picture' style='width:100%;height:100rpx;padding:0;background:#eee' wx:if="{{server==2}}">
+        <view class='flexColumnH'>
+          <view class='imagesconte'>
+            <image src='/images/contact.png' class='contants2' style='margin-bottom:13rpx;margin-top:5rpx;z-index:10000'></image>
+          </view>
+
+          <view class='button_11' data-param='1'>客服</view>
+        </view>
+      </button>
+    </view>
+  </block>
+  <block wx:else>
+    <view class='picture' bindtap='phoneServer' data-types='1'>
+      <image src='/images/phone_4.png'></image>
+      <view class='text_1'>电话</view>
+    </view>
+    <view class='phone'>
+      <button open-type='contact' session-from="weapp" style='width:100%;height:100rpx;padding:0;' wx:if="{{server==1}}">
+        <view class='picture sertvers'>
+          <view class='imagesconte'>
+            <image src='/images/contact.png' style='z-index:10000' class='contants2'></image>
+          </view>
+
+          <view class='button_11' data-param='1'>客服</view>
+        </view>
+      </button>
+      <button style='width:100%;height:100rpx;padding:0;background:#eee' wx:if="{{server==2}}">
+        <view class='picture sertvers'>
+          <view class='imagesconte'>
+            <image src='/images/contact.png' style='z-index:10000' class='contants2'></image>
+          </view>
+          <view class='button_11' data-param='1'>客服</view>
+        </view>
+      </button>
+    </view>
+  </block>
+  <block wx:if='{{productInfo.info.limit_time_type ==2}}'>
+    <block wx:if='{{chooseModel.buyNum==0}}'>
+      <block wx:if='{{isShowPrice==1 && isCanBuy}}'>
+        <view class='button_1' data-param='1' bindtap='buyNow'>立即抢购</view>
+      </block>
+      <block wx:else>
+        <view class='button_1' data-param='1' bindtap='bookingNow'>立即预订</view>
+      </block>
+    </block>
+    <block wx:elif='{{chooseModel.buyNum>0}}'>
+      <view class='button_1'>已抢购</view>
+    </block>
+    <block wx:else>
+      <block wx:if='{{isShowPrice==1 && isCanBuy}}'>
+        <view class='button_1' data-param='1' bindtap='buyNow'>立即抢购</view>
+      </block>
+      <block wx:else>
+        <view class='button_1' data-param='1' bindtap='buyNow'>立即预订</view>
+      </block>
+    </block>
+  </block>
+  <block wx:else>
+    <view class='button_1'>尚未开始</view>
+  </block>
+
+</view>
+
+
+
+
+<!--模态框-->
+<import src="../../../template/modalBox/modalBox.wxml" />
+<template is="modalBox" data="{{...modalBox_message}}" />
+<!--等待的菊花-->
+<view hidden='{{wait}}'>
+  <template is="waitImg" />
+</view>
+
+
+ <!--视频弹框--->
+  <view >
+    <view class='poptopBox flexColumnH' hidden='{{videoPlay}}'>
+      <view class='closes' >
+        <image src='/images/quit.png' bindtap='closePlay'></image>
+      </view>
+      <view>
+        <block wx:for="{{productInfo.img}}" wx:key="*this">
+          <video id="myVideo{{videoIndex}}" src='{{item.imgurl}}' class="swiper_item_image2" wx:if='{{item.img_type==2&&index==videoIndex}}' controls></video>
+        </block>
+      </view>
+    </view>
+  </view>

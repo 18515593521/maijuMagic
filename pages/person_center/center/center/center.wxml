@@ -1,0 +1,32 @@
+<view class="people">
+  <view>
+    <image src="{{headImage}}"></image>
+  </view>
+  <view class='nameWeixin'>{{nickName}}</view>
+</view>
+
+<view style="position: absolute;" class='flexColumnH' >
+<!--第一块-->
+  <view class='listDatas flexRowH'>
+    <block wx:for='{{listData}}'>
+      <view class='items1 flexColumnH' data-check='{{item.check}}' data-type='1' bindtap='pageSkip' data-url='{{item.url}}'  wx:if='{{item.status==1}}'>
+        <image src='{{item.icon}}' class='imagess {{item.class}}'></image>
+        <view class='name'>{{item.name}}</view>
+      </view>
+    </block>
+  </view>
+<!--第二块-->
+  <view class='listDatas flexRowH' style='margin-top:20rpx'>
+    <block wx:for='{{listData2}}'>
+      <view class='items1 flexColumnH' data-check='1' data-type='1' bindtap='pageSkip' data-url='{{item.url}}'   wx:if='{{item.status==1}}'>
+        <image src='{{item.icon}}' class='imagess {{item.class}}'></image>
+        <view class='name'>{{item.name}}</view>
+      </view>
+    </block>
+  </view>
+<!--第三块-->
+ 
+    <!--模态框-->
+<import src="../../../template/modalBox/modalBox.wxml"/>
+<template is="bottomImg"/>
+</view>

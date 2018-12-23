@@ -1,0 +1,138 @@
+ @import "/template/modalBox/modalBox.wxss"; 
+.cover image{
+  width: 750rpx;
+  display: block;
+}
+.title{
+  padding: 10rpx 20rpx;
+  font-size: 30rpx;
+  color: #333333;
+}
+.lookNumber{
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx 10rpx;
+  font-size: 24rpx;
+  color: #666666;
+}
+.lookNumber image{
+  width: 30rpx;
+  height: 18rpx;
+  display: block;
+  margin-right: 10rpx;
+}
+/*报名人员*/
+.signPeople{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15rpx 20rpx;
+  line-height: 45rpx;
+}
+.signPeople .people{
+  display: flex;
+  align-items: center;
+}
+.signPeople .people .count{
+  font-size: 26rpx;
+  color: #4ABDC2;
+  text-align: center;
+  padding-right: 20rpx;
+}
+.signPeople .people .list{
+
+}
+.signPeople .people .list image{
+  width: 70rpx;
+  height: 70rpx;
+  display: inline-block;
+  border-radius: 50%;
+  margin: 0 10rpx;
+}
+.signPeople .look{
+  padding: 20rpx 0 20rpx 30rpx;
+}
+.signPeople .look image{
+  width: 15rpx;
+  height: 30rpx;
+  display: block;
+}
+/* 信息 */
+.info{
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  font-size: 26rpx;
+  color: #666666;
+  border-top: 2rpx solid #F6F6F6;
+}
+.info image{
+  width: 25rpx;
+  height: 25rpx;
+  display: block;
+  margin-right: 20rpx;
+}
+/* 模块 */
+.module{
+  padding: 20rpx;
+}
+.module .moduleTitle{
+  font-size: 26rpx;
+  /* color: #4ABDC2; */
+  padding-left: 10rpx;
+  /* border-left: 6rpx solid #4ABDC2; */
+  margin-bottom: 20rpx;
+}
+/* 往期活动 */
+.history{
+  width: 710rpx;
+  height: 150rpx;
+  display: flex;
+  white-space: nowrap;
+}
+.history .item{
+  width: 217rpx;
+  display: inline-block;
+}
+.history .item + .item{
+  margin-left: 30rpx;
+}
+.history .item image{
+  width: 217rpx;
+  height: 150rpx;
+  display: block;
+}
+.history .item .name{
+  margin-top: -34rpx;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 5rpx;
+  font-size: 22rpx;
+  color: #FFFFFF; 
+}
+
+/*底部*/
+.thisBottom{
+  width: 750rpx;
+  height: 80rpx;
+  position: fixed;
+  bottom: 0;
+  /* background-color:#4ABDC2; */
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36rpx;
+  color: #FFFFFF;
+}
+.sign{
+  width: 40rpx;
+  height: 40rpx;
+  display: block;
+  margin-right: 20rpx;
+}
+.phoneButton{
+  width: 750rpx;
+  height: 80rpx;
+  position: fixed;
+  bottom: 0;
+  opacity: 0;
+}

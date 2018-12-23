@@ -1,0 +1,92 @@
+page {
+  background-color: #F5F5F5;
+}
+ @import "/template/modalBox/modalBox.wxss"; 
+.people{
+  display:flex;
+  align-items:center;
+  padding:20rpx;
+  font-size:28rpx;
+  color:#3C3C3C;
+  margin:15rpx 0;
+  height:200rpx;
+  background:#4abcc2;
+}
+.people image{
+  width: 113rpx;
+  height: 113rpx;
+  display: block;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+/*菜单*/
+.menuItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50rpx;
+    line-height: 50rpx;
+    padding: 20rpx;
+    background-color: #FFFFFF;
+    margin-bottom: 2rpx;
+}
+.menuItem .image{
+    width: 50rpx;
+}
+.menuItem .image image{
+    width: 28rpx;
+    display: block;
+}
+.menuItem .title{
+    width: 610rpx;
+    font-size: 24rpx;
+    color: #686868;
+}
+.menuItem .look{
+    width: 50rpx;
+}
+.menuItem .look image{
+    width: 15rpx;
+    height: 25rpx;
+    margin-left: 10rpx;
+}
+/* 是否支付 */
+.isNeedPay{
+  position: absolute;
+  width: 14rpx;
+  height: 14rpx;
+  background-color:#FF6664;
+  border-radius:50%;
+  margin-top: -10rpx;
+  margin-left: 150rpx;
+}
+
+/*海带制作*/
+.listDatas{
+  padding:0 3rpx;
+  box-sizing:border-box;
+  background:#fff;
+}
+.items1{
+  width:187rpx;
+  height:150rpx;
+  align-items:center;
+  justify-content:center;
+}
+.name{
+  font-size:24rpx;
+  margin-top:20rpx;
+}
+ .imagess{
+  width:40rpx;
+  height:42rpx;
+}
+.listDatas .foot{
+  width:48rpx;
+  height:48rpx;
+}
+.nameWeixin{
+  font-size:30rpx;
+  color:#fff;
+}

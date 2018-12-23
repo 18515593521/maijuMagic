@@ -1,0 +1,115 @@
+ <view class="cover" data-url="/pages/activity/activity_details/activity_details"  data-type="4" bindtap="pageSkip">
+  <image src="{{activityInfo.imgurl?activityInfo.imgurl:'about:blank'}}" mode='widthFix'></image>
+</view>
+<view class="process">活动流程</view>
+<view class="state">
+  <view>
+    <view class="title">
+      <text>活动状态</text>
+      <text class="sign">{{signState[activityInfo.sign_state]}}</text>
+    </view>
+    <view>
+    <block wx:if="{{activityInfo.card==0}}">
+        <image class="card" src="/images/nodata/card.png"></image>
+    </block>
+    <block wx:else>
+        <image class="card" src="{{activityInfo.blockurl}}"></image>
+    </block>
+    </view>
+  </view>
+  <view>
+    <view class="title" style="padding-left:5rpx;">
+      <text>活动二维码</text>
+    </view>
+    <view>
+      <image class="code" src="{{codeImage}}"></image>
+    </view> 
+  </view>
+</view>
+<view class="state" style="padding:0 20rpx 10rpx;">
+    <view class="title" style="padding-left:5rpx;">
+      <text>签到礼</text>
+      <text class="sign">{{activityInfo.sign_gift?activityInfo.sign_gift:'无'}}</text>
+    </view>
+</view>
+<view class="money">
+  <view>定金：{{activityInfo.deposit_price?activityInfo.deposit_price:0}}元</view>
+  <view>已付金额：{{activityInfo.real_pay_price?activityInfo.real_pay_price:0}}元</view>
+</view> 
+<!-- 礼品 -->
+<view class="tilte">活动券</view>
+<block wx:if="{{activityInfo.item.length>0}}">
+    <block wx:for="{{activityInfo.item}}" wx:key="id">
+        <view class="giftContainer">
+            <block wx:if="{{item.status==0}}">
+                <image class="bg" src="/images/coupon/red.png"></image>
+            </block>
+            <block wx:else>
+                <image class="bg" src="/images/coupon/gray.png"></image>
+            </block>     
+          <view class="info">
+            <view class="left">
+              <image src="{{logoImage}}"></image>
+            </view>
+            <view class="right">
+              <view class="limit">
+                  <block wx:if="{{item.item_id==4}}">
+                      <text>每达到<text class="count">{{item.use_money}}</text>元，可砸蛋一次</text>
+                  </block>
+                  <block wx:if="{{item.item_id==5}}">
+                      <text>每达到<text class="count">{{item.use_money}}</text>元，可抽奖一次</text>
+                  </block>
+              </view>
+              <view class="code_state">
+                <view class="_code">兑换码：{{item.code}}</view>
+                <view class="_state">有效</view>
+              </view>
+            </view>
+          </view>
+          <block wx:if="{{item.status==1}}">
+              <image class="used" src="/images/coupon/used.png"></image>
+          </block>
+          <view class="gift">礼品：{{item.gift?item.gift:'暂无'}}</view>
+        </view> 
+    </block>
+</block>
+<block wx:else>
+    <view class="giftContainer noGift">暂无</view>
+</block>
+
+<!-- 评价记录 -->
+<view class="tilte" style="margin-bottom: 2rpx;">评价记录</view>
+
+<block wx:if="{{activityInfo.comment.length>0}}">
+    <block wx:for="{{activityInfo.comment}}" wx:key="id">
+        <view class="evaluation">
+          <view class="time">{{item.create_time}}</view>
+          <view class="content">{{item.content}}</view>
+        </view>
+    </block>
+</block> 
+<block wx:else>
+    <view class="evaluation noGift">暂无</view>
+</block> 
+<view class="operateGroup">
+  <view class="operate" data-url="/pages/person_center/my_order/my_order?orderType=1" data-type="1" bindtap="pageSkip">活动订单</view>
+  <view class="operate" bindtap="comment">评 价</view>
+</view>
+<!-- 评价 -->
+<view class="modalBox" hidden="{{confirm_hidden}}">
+  <view class="confirm">
+    <textarea fixed placeholder="请描述你的评价" placeholder-class="searchTips" value="{{commentContent}}" bindinput="setContent"/>
+    <view class="operate">
+      <view class="no" bindtap="cancelComment">取消</view>
+      <view class="yes" bindtap="submitComment">确认</view>
+    </view>
+  </view>
+</view>
+<!--模态框-->
+<import src="../../../template/modalBox/modalBox.wxml"/>
+<template is="modalBox" data="{{...modalBox_message}}"/>
+
+<!-- 没有参与当前活动 -->
+<view class="Cover" hidden="{{isJoinActivity}}">
+  <image class="noJoinActivity" src="/images/nodata/activity_join.jpg"></image>
+</view>

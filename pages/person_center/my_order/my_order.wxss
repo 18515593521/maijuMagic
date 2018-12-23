@@ -1,0 +1,224 @@
+page {
+  background-color: #EEEEEE;
+}
+
+/*菜单*/
+.menu {
+    display: flex;
+    justify-content: space-around;
+    line-height: 70rpx;
+    background-color: #FFFFFF;
+    margin-top: 2rpx;
+}
+.menu .item{
+    font-size: 28rpx;
+    color: #4C4C4C;
+    text-align: center;
+    width: 20%;
+}
+.menu .active{
+    /* color: #4ABDC2; */
+    border-bottom: 4rpx solid ;
+}
+/*搜索*/
+.search{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+  background-color: #FFFFFF;
+  margin-top: 2rpx;
+}
+.search .input{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  width: 450rpx;
+  height: 60rpx;
+  border: 2rpx solid #EDEDED;
+  border-radius: 10rpx;
+}
+.search .input input{
+  width: 400rpx;
+  font-size: 24rpx;
+  color: grey;
+}
+.search .input image{
+  width: 30rpx;
+  height: 30rpx;
+  display: block;
+  padding: 10rpx;
+}
+.search .param{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10rpx;
+  width: 160rpx;
+  height: 60rpx;
+  border: 2rpx solid #EDEDED;
+  border-radius: 10rpx;
+  font-size: 26rpx;
+  color: #6E6E6E;
+}
+.search .param image{
+  width: 30rpx;
+  height: 30rpx;
+  display: inline-block;
+}
+/* 订单 */
+.order{
+  background-color: #FFFFFF;
+}
+.order + .order{
+  margin-top: 20rpx;
+}
+.order .head{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  font-size: 26rpx;
+  color: #4E4E4E;
+}
+.order .head .image_code{
+  display: flex;
+  align-items: flex-end;
+}
+.order .head .image_code image{
+  width: 35rpx;
+  height: 35rpx;
+  margin-right: 15rpx;
+}
+.order .head .image_code .code{
+  
+}
+.order .head .evaluate{
+  color: #FF4D4D;
+  text-decoration: underline;
+}
+.order .body{
+  padding: 30rpx 30rpx;
+  background-color: #F5F5F5;
+}
+.order .body .row{
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #4E4E4E;
+}
+.order .body .row view{
+  width: 25%;
+  text-align: center;
+}
+.order .body .info{
+  color: #8E8E8E;
+  padding-top: 15rpx;
+}
+.order .bottom{
+  padding: 15rpx 20rpx 15rpx 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.order .bottom .time{
+  font-size: 20rpx;
+  color: #8E8E8E;
+}
+.order .bottom .operate{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  font-size: 24rpx;
+}
+.order .bottom .operate .look{
+  color: #8E8E8E;
+  width: 120rpx;
+  text-align: center;
+  line-height: 50rpx;
+  border: 2rpx solid #CBCBCB;
+  border-radius: 10rpx;
+  margin-left: 10rpx;
+}
+.order .bottom .operate .pay{
+
+}
+.order .bottom .operate .pay button{
+  width: 150rpx;
+  background-color: #FF6766;
+  line-height: 50rpx;
+  font-size: 22rpx;
+  color: #FFFFFF;
+  text-align: center;
+  margin-left: 10rpx;
+}
+/* 遮罩层 */
+.maskPannel{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  background-color: rgba(0, 0, 0, 0.4)
+}
+/* 支付明细 */
+.maskPannel .payInfo{
+  width: 650rpx;
+  padding: 20rpx 0;
+  min-height: 500rpx;
+  background-color: #FFFFFF;
+  margin: 200rpx 50rpx auto;
+  border-radius: 10rpx;
+}
+.maskPannel .payInfo .title{
+  text-align: center;
+  font-size: 28rpx;
+  color: #515151;
+}
+.maskPannel .payInfo .line{
+  margin: 8rpx 270rpx 30rpx;
+  height: 4rpx;
+  background-color: #38C9E8;
+}
+.maskPannel .payInfo .details{
+  background-color: #F8F8F8;
+  padding: 15rpx 50rpx;
+  font-size: 26rpx;
+  color: #7E7E7E;
+  line-height: 40rpx;
+}
+.maskPannel .payInfo .total{
+  padding: 10rpx 50rpx;
+  text-align: right;
+  font-size: 26rpx;
+  color: #7E7E7E;
+  line-height: 40rpx;
+}
+.maskPannel .payInfo .payMoney{
+  margin: 50rpx auto;
+  text-align: center;
+  font-size: 26rpx;
+  color: #7E7E7E;
+}
+.maskPannel .payInfo .payMoney .money{
+  font-size: 36rpx;
+  color: #FE4B4C;
+}
+.maskPannel .payInfo .operate{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30rpx;
+  color: #FFFFFF;
+}
+.maskPannel .payInfo .operate .cancel{
+  background-color: #D2D2D2;
+  padding: 10rpx 20rpx;
+  border-radius: 6rpx;
+  margin-right: 20rpx;
+}
+.maskPannel .payInfo .operate .pay{
+  background-color: #FF5757;
+  padding: 10rpx 20rpx;
+  border-radius: 6rpx;
+}

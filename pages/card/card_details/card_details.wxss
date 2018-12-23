@@ -1,0 +1,122 @@
+page {
+  background-color: #EEEEEE;
+}
+/*顶部信息*/
+.cardImage{
+  width: 750rpx;
+  height: 590rpx;
+  position: absolute;
+}
+.topInfo {
+    height: 510rpx;
+    color: #FFFFFF;
+    padding: 35rpx 50rpx;
+}
+.topInfo .moneyInfo{
+    display: flex;
+    justify-content: center; 
+    opacity:0.99;
+    text-align:center;
+}
+.topInfo .moneyInfo .sign{
+    font-size: 60rpx;
+    margin: 55rpx 0;
+}
+.topInfo .moneyInfo .money{
+    font-size: 250rpx;
+}
+.topInfo .type{
+    background-color: #000000;
+    opacity: 0.5;
+    font-size: 28pt;
+    text-align: center;
+    width: 390rpx;
+    margin: 10rpx auto;
+}
+/*卡券信息*/
+.title{
+    padding: 20rpx;
+    font-size: 11pt;
+    color: #7B7B7B;
+    background-color: #FFFFFF;
+}
+.moneyAndCount{
+    display: flex;
+    flex-direction: row-reverse; 
+    padding: 0 20rpx 10rpx;
+    background-color: #FFFFFF;
+    margin-bottom: 10rpx;
+}
+.moneyAndCount .money{
+    width: 350rpx;
+}
+.moneyAndCount .money .money1{
+    color: #FF6463;
+    line-height: 60rpx;
+}
+.moneyAndCount .money .money2{
+    color: #A6A6A6;
+    font-size: 10pt;
+}
+.moneyAndCount .count{
+    width: 360rpx;
+    font-size: 8pt;
+    text-align: right;
+    line-height: 30rpx;
+}
+.moneyAndCount .count .count1{
+    color: #A6A6A6;
+}
+.moneyAndCount .count .count2{
+    color: #4ABDC2;
+}
+/*适用*/
+.use{
+    display: flex;
+    flex-direction: row; 
+    background-color: #FFFFFF;
+    padding: 20rpx 20rpx;
+    margin-bottom: 10rpx;
+}
+.use .shop{
+    width: 670rpx;
+    font-size: 10pt; 
+    line-height: 50rpx;   
+}
+.use .look{
+    width: 50rpx;
+}
+.use .look image{
+    width: 15rpx;
+    height: 25rpx;
+    margin-left: 20rpx;
+}
+/*详情*/
+.detailsTitle{
+    background-color: #FFFFFF;
+    text-align: center;
+    line-height: 80rpx;
+    font-size: 26rpx;
+    color: #848484;
+    margin-bottom: 5rpx;
+}
+.details{
+    min-height: 225rpx;
+    background-color: #FFFFFF;
+    padding: 40rpx 20rpx;
+    font-size: 30rpx;
+    color: #393939;
+}
+
+/*立即购买*/
+.bottomButton{
+    position: fixed;
+    bottom: 0;
+    background-color: #4ABDC2;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 80rpx;
+    width: 750rpx;
+    height: 80rpx;
+    font-size: 32rpx;
+}

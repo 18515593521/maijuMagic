@@ -1,0 +1,951 @@
+/*轮播图*/
+.swiper {
+    height:750rpx;
+}
+ @import "/template/modalBox/modalBox.wxss"; 
+.swiper_item_image{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+/*产品信息*/
+.productInfo{
+  padding: 20rpx 20rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.productInfo .info{
+  width: 600rpx;
+}
+.productInfo .info .name{
+  font-size: 32rpx;
+  color: #333333;
+}
+.productInfo .info .price{
+  color: #4ABDC2;
+  padding-top: 20rpx;
+  font-size: 30rpx;
+}
+.productInfo .info .price .number{
+  font-size: 46rpx;
+}
+.productInfo .info .price .now{
+  color: #FE6165;
+}
+.productInfo .info .price .old{
+  font-size: 38rpx;
+  color: #A0A0A0;
+  text-decoration: line-through;
+  padding-left: 10rpx;
+}
+.productInfo .image{
+
+}
+.productInfo .image image{
+  width: 100rpx;
+  height: 100rpx;
+  display: block;
+}
+/*价格、销量*/
+.priceAndSaleNumber{
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10pt;
+  color: #9C9C9C;
+}
+.priceAndSaleNumber .price .old{
+  text-decoration: line-through;
+  font-size: 12pt;
+}
+/*属性*/
+.productProperty{
+  border: 2rpx solid #EEEEEE;
+  margin: 20rpx 0 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.productProperty .item{
+  width: 50%;
+  font-size: 26rpx;
+  color: #464646;
+  line-height: 40rpx;
+}
+/*箭头菜单*/
+.chooseMenu{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  border-top: 14rpx solid #EEEEEE;
+  line-height: 40rpx;
+  border-bottom:2rpx solid #EEEEEE;
+}
+.chooseMenu .name{
+  font-size: 24rpx;
+  color: #4C4C4C;
+}
+.chooseMenu .names{
+  width:686rpx;
+}
+.chooseMenu .name image{
+  width: 32rpx;
+  height: 32rpx;
+  margin-bottom: -8rpx;
+  margin-right: 15rpx;
+}
+
+.chooseMenu .look image{
+  width: 18rpx;
+  height: 28rpx;
+  display: block;
+}
+.mustSelect2{
+  color: #A0A0A0;
+  font-size: 22rpx;
+}
+.mustSelect4,.mustSelect3{
+  color: #fe6665;
+  font-size: 22rpx; 
+   line-height:40rpx; 
+}
+
+.mustSelect4 view{
+  margin-right:5rpx;
+}
+.bgred{
+  width:40rpx;
+  text-align:center;
+  background:#fe6665;
+  color:#fff;
+  height:40rpx;
+}
+.groupTop{
+  width:600rpx;
+  height:800rpx;
+  background:#fff;
+  border-radius:20rpx;
+}
+.groupTitle{
+  text-align:center;
+  font-size:34rpx;
+  margin-bottom:20rpx;
+}
+.close{
+  position:absolute;
+  right:46rpx;
+  top:172rpx;
+  margin:auto;
+  width:50rpx;
+  height:50rpx;
+}
+.groupItem{
+  width:100%;
+  height:100rpx;
+  border-bottom:10rpx solid #F9F9F9;
+  align-items:center;
+  justify-content:centern;
+}
+.groupImage{
+  width:60rpx;
+  height:60rpx;
+  border-radius:50rpx;
+}
+.names{
+  font-size:26rpx;
+}
+.names2{
+  width:170rpx;
+  text-align:right;
+  margin-right:10px;
+}
+.dropPeople{
+  font-size:22rpx;
+  color: #A0A0A0;
+}
+.goToBuy{
+  width:150rpx;
+  height:60rpx;
+  line-height:60rpx;
+  text-align:center;
+  color:#fff;
+  background:#ff3a3a;
+  border-radius:20rpx;
+  font-size:26rpx;
+}
+.morderFroupItem{
+  width:100%;
+  height:80rpx;
+   border-bottom:2rpx solid #EEEEEE; 
+  border-radius:20rpx;
+  align-items: center;
+}
+/*担任拼团*/
+.moneys{
+  color:#fe6665;
+  font-size:38rpx;
+}
+.yang{
+  color:#fe6665;
+  font-size:30rpx;
+}
+.aloneBox{
+  width:250rpx;
+  height:100rpx;
+  background:#ffe4e3;
+  align-items:center;
+  justify-content: center;
+}
+.alone{
+  font-size:22rpx;
+  color:#fe6665;
+}
+.button_22{
+  justify-content: center;
+}
+/*评价*/
+.commentTitle{
+  padding: 20rpx;
+  border-bottom: 2rpx solid #EEEEEE;
+  color: #4C4C4C;
+}
+.commentTitle .name{
+  font-size: 30rpx;
+}
+.commentTitle .total{
+  font-size: 26rpx;
+}
+.goToBuys{
+  width:150rpx;
+  height:60rpx;
+  line-height:60rpx;
+  text-align:center;
+  color:#fff;
+  background:#fe6665;
+  border-radius:20rpx;
+  font-size:26rpx;
+}
+/*评论内容*/
+.commentCell{
+  padding: 20rpx;
+}
+.commentCell .commentInfo{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.commentCell .commentInfo .people{
+  font-size: 30rpx;
+  color: #5A5A5A;
+}
+.commentCell .commentInfo .time{
+  font-size: 24rpx;
+  color: #C7C7C7;
+}
+.commentCell .content{
+  font-size: 24rpx;
+  color: #949494;
+  margin: 20rpx 0 10rpx;
+}
+.commentCell .property{
+  font-size: 22rpx;
+  color: #C7C7C7;
+}
+.lookAllComment{
+  padding: 40rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #858585;
+  text-decoration: underline;
+}
+.noComment{
+  padding: 20rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #858585;
+}
+/*拖动*/
+.dragDown{
+  display: flex;
+  flex-direction: row;
+  background-color: #EEEEEE;
+}
+.dragDown .line .lineLeft{
+  width: 100rpx;
+  height: 60rpx;
+  display: block;
+  margin: 20rpx 20rpx 20rpx 80rpx;
+}
+.dragDown .line .lineRight{
+  width: 100rpx;
+  height: 60rpx;
+  display: block;
+  margin: 20rpx 80rpx 20rpx 20rpx;
+}
+.dragDown .text{
+  width: 350rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 24rpx;
+  text-align: center;
+  color: #989898;
+}
+/* 详情 */
+.details{
+  margin-bottom: 40rpx;
+}
+.details .menu{
+  display:flex;
+  flex-direction:row;
+  margin-bottom: 2rpx;
+  padding-bottom: 0;
+  font-size:30rpx;
+}
+.details .menu .menuCell{
+  width: 375rpx;
+  padding: 10rpx 0;
+  text-align: center;
+}
+.details .menu .active{
+  border-bottom: 4rpx solid #4ABDC2;
+  color: #4ABDC2;
+}
+
+.wxParse image{
+  width: 100% !important;
+}
+
+.article .picture{
+  width: 100%;
+  height: 300rpx; 
+}
+.article .content{
+  text-indent: 2em; 
+}
+
+.case .picture{
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+
+.table{
+  display:flex;
+  flex-direction:row;
+  padding-bottom: 20rpx;
+  line-height: 50rpx;
+  font-size: 30rpx;
+}
+.table view:nth-child(1){
+  width: 200rpx;
+  color: #888888;
+  padding-left: 5rpx;
+}
+.table view:nth-child(2){
+  width: 500rpx;
+  word-break: break-all;
+}
+
+.thisBottomArea{
+  width: 750rpx;
+  min-height: 70rpx;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  z-index: 200;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  border-top:2rpx solid #EEEEEE;
+
+}
+.thisBottomArea .pictureButton{
+  width: 100rpx; 
+  text-align: center;
+}
+.thisBottomArea .pictureButton .picture{
+  width: 30rpx;
+  height: 30rpx; 
+}
+.thisBottomArea .title{
+  font-size: 24rpx;
+  color: #8C8C8C;
+}
+/* 服务电话 */
+.thisBottomArea .servicePhone{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  color: #4ABDC2;
+  padding: 10rpx 0;
+}
+.thisBottomArea .phone{
+  font-size: 32rpx;
+  color: #4ABDC2;
+  padding: 0 20rpx;
+}
+/* 立即抢购 */
+.thisBottomArea .buy{
+  background-color: #FE0036;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  padding: 30rpx 100rpx;
+}
+
+.thisBottomArea .button{
+  width: 200rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  display: inline-block;
+  background-color:white;
+  border: 2rpx solid #C9A358;
+  border-radius: 10rpx;
+  color: #C9A358;
+  margin-left: 30rpx;
+  font-size: 10pt;
+}
+.thisBottomArea .button_hover{
+  background-color:#C9A358;
+  color: #ffffff;
+}
+
+/* 底部 */
+.bottomArea{
+  position: fixed;
+  width: 100%;
+  height: 100rpx;
+  bottom: 0;
+  z-index: 200;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border-top:2rpx solid #EEEEEE;
+  background-color: #FFFFFF;
+}
+.bottomArea .picture{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 125rpx;
+  height: 100rpx;
+  
+}
+.bottomArea .picture image{
+  width: 40rpx;
+  height: 40rpx; 
+  display: block;
+}
+.bottomArea .picture .service{
+  width: 44rpx;
+  height: 37rpx; 
+  display: block;
+  z-index:10000;
+}
+.bottomArea .picture .service image{
+   width: 44rpx;
+  height: 37rpx; 
+  display: block;
+  z-index:10000;
+}
+.bottomArea .picture .text_1{
+  font-size: 24rpx;
+  color: #4ABDC2;
+}
+.bottomArea .picture .text_2{
+  font-size: 24rpx;
+  color: #686663;
+  line-height:40rpx;
+  z-index:10000;
+}
+.cartProductCount{
+  position: fixed;
+  width: 30rpx;
+  height: 30rpx;
+  bottom: 66rpx;
+  left: 284rpx;
+  z-index: 210;
+  text-align: center;
+  line-height: 30rpx;
+  font-size: 18rpx;
+  background-color:#FF6664;
+  color:#FFFFFF;
+  border-radius: 50%;
+  /* margin-top: -34rpx;
+  margin-left: -155rpx; */
+}
+
+
+
+.bottomArea .phone{
+  width: 275rpx;
+  font-size: 32rpx;
+  color: #4ABDC2;
+}
+.bottomArea .button_1{
+  width: 350rpx;
+  line-height: 100rpx;
+  text-align: center;
+  background-color: #FF0036;
+  color: #FFFFFF;
+  font-size: 30rpx;
+}
+.bottomArea .button_2{
+  width: 250rpx;
+  line-height: 100rpx;
+  text-align: center;
+  background-color: #EF8D60;
+  color: #FFFFFF;
+  font-size: 30rpx;
+}
+.bottomArea .button_3{
+  width: 250rpx;
+  line-height: 100rpx;
+  text-align: center;
+  background-color: #FF6664;
+  color: #FFFFFF;
+  font-size: 30rpx;
+}
+
+
+
+/*二维码*/
+.imagePannel{
+  position:fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 210;
+}
+.imagePannel .delete{
+  display: flex;
+  flex-direction: row-reverse; 
+}
+.imagePannel .delete image{
+  width: 30rpx;
+  height: 30rpx;
+  display: block;
+  margin: 20rpx;
+}
+.imagePannel .code{
+  background-color: #ffffff;
+  margin: calc((100vh - 980rpx)/2) 0;
+}
+.imagePannel .code image{
+  width: 750rpx;
+  height: 750rpx;
+  display: block;
+}
+.imagePannel .operate{
+  padding: 20rpx 50rpx 80rpx;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+.imagePannel .operate image{
+  width: 60rpx;
+  height: 60rpx;
+  display: block;
+}
+.imagePannel .operate .shareButton{
+  width: 90rpx;
+  height: 60rpx;
+  display: block;
+  background-color: transparent;
+  margin: 0;
+}
+
+
+
+/*属性面板*/
+.propertyPannel{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  overflow: hidden;
+  z-index: 100;
+}
+.propertyPannel .top{
+  height: 30%;
+  opacity: 0.5;
+  background: black;
+}
+.propertyPannel .bottom{
+  height: 70%;
+  background-color: #ffffff;
+}
+/*优惠券领取*/
+.bottom .couponTitle{
+  text-align: center;
+  font-size: 32rpx;
+  color: #616161;
+  line-height: 70rpx;
+  background-color: #FFFFFF;
+}
+.bottom .couponItem{
+  background-color: #FFFFFF;
+}
+.bottom .couponItem .money{
+  font-size: 32rpx;
+  color: #FE6261;
+  padding: 20rpx;
+}
+.bottom .couponItem .condition{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30rpx;
+  padding: 0 20rpx 10rpx;
+  line-height: 40rpx;
+}
+.bottom .couponItem .condition .time{
+  font-size: 24rpx;
+}
+.bottom .couponItem .condition .describe{
+  color: #424242;
+}
+.bottom .couponItem .detconditionails .time{
+  color: #BCBCBC;
+}
+.bottom .couponItem .condition .get{
+  width: 150rpx;
+  text-align: center;
+  color: #FB787D;
+  border: 2rpx solid #FB787D;
+  border-radius: 10rpx;
+  padding: 10rpx 0;
+}
+.bottom .couponItem .condition .haveGet{
+  width: 150rpx;
+  text-align: center;
+  background-color: #AAAAAA;
+  color: #FFFFFF;
+  border: 2rpx solid #AAAAAA;
+  border-radius: 10rpx;
+  padding: 10rpx 0;
+}
+/*按钮*/
+.propertyPannel .couponButton{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color:#4ABDC2;
+  color: #FFFFFF;
+  font-size: 34rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
+
+/*产品属性*/
+.bottom .info{
+  height: 240rpx;
+  border-bottom: 1rpx solid #F5F5F5;
+}
+.bottom .productPrice{
+  color: #4ABDC2;
+  font-size: 42rpx;
+}
+.bottom .productPrice .now{
+  color: #FE6165;
+}
+.bottom .productPrice .old{
+  font-size: 28rpx;
+  color: #A0A0A0;
+  text-decoration: line-through;
+  padding-left: 10rpx;
+}
+.bottom .pictureContainer{
+  position: absolute;
+  background-color: #ffffff;
+  margin: -50rpx 30rpx;
+}
+.bottom .picture{
+  width: 250rpx;
+  height: 250rpx;
+  margin: 10rpx;
+}
+.bottom .flex_1{
+  width: 330rpx;
+}
+.bottom .flex_2{
+  width: 350rpx;
+  margin-top: 20rpx; 
+}
+.bottom .flex_3{
+  margin-top: 20rpx; 
+  width: 50rpx;
+}
+.bottom .quitImage{
+  width: 50rpx;
+  height: 50rpx;
+}
+.bottom .color{
+  border-bottom: 1rpx solid #F5F5F5;
+}
+.bottom .colorItem{
+  display: inline-block;
+  border: 1rpx solid grey;
+  border-radius: 6rpx;
+  padding: 20rpx;
+  margin: 10rpx 15rpx 10rpx 0;
+  font-size: 10pt;
+  color: grey;
+}
+.bottom .active{
+  border: 1rpx solid #4ABDC2;
+  color: #4ABDC2;
+}
+.bottom .count{
+  border-bottom: 1rpx solid #F5F5F5;
+}
+.bottom .countText{
+  width: 450rpx;
+  line-height: 60rpx;
+}
+.bottom .countOperate{
+  width: 300rpx;
+}
+.countOperate view{
+  border: 1rpx solid lightgrey;
+  width: 60rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+}
+.countOperate view:nth-child(2){
+  width: 100rpx;
+  border-left: 0;
+  border-right: 0;
+}
+
+.button_group{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color:#C9A358;
+  opacity: 1;
+}
+.button_group .button{
+  width: 366rpx;
+  height: 40px;
+  margin: 5rpx;
+  line-height: 40px;
+  text-align: center;
+  display: inline-block;
+  background-color:white;
+  color: #C9A358;
+}
+.button_group .button_hover{
+  background-color:#C9A358;
+  color: #ffffff;
+}
+/* 预约信息 */
+.bookingPannel{
+  position:fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 210;
+}
+.bookingPannel .box{
+  margin: 200rpx 100rpx;
+  background-color: #FFFFFF;
+  border-radius: 10rpx;
+}
+.bookingPannel .title{
+  font-size: 26rpx;
+  text-align: center;
+  padding-top: 20rpx;
+}
+.bookingPannel .line{
+  margin: 8rpx 210rpx 30rpx;
+  height: 4rpx;
+  background-color: #43BFBC;
+}
+.bookingPannel .input{
+  display: flex;
+  align-items: center;
+  padding: 10rpx 40rpx 20rpx;
+}
+.bookingPannel .input .time{
+  width: 180rpx;
+  padding: 10rpx;
+  font-size: 22rpx;
+  color: #AAAAAA;
+  border: 2rpx solid #E7E7E7;
+  border-radius: 10rpx;
+  margin-right: 10rpx;
+}
+.bookingPannel .input .name{
+  font-size: 22rpx;
+  color: #AAAAAA;
+  padding: 0 10rpx;
+}
+.bookingPannel .operate{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 2rpx solid  #E7E7E7;
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 80rpx;
+  margin-top: 20rpx;
+}
+.bookingPannel .operate .cancel{
+  width: 50%; 
+}
+.bookingPannel .operate .submit{
+  width: 50%;
+  color: #FFFFFF;
+  background-color: #43BFBD;
+  border-bottom-right-radius: 10rpx;
+}
+/*线下拼团 */
+.isBottons{
+  width:600rpx;
+  height:184rpx;
+  border:2rpx solid #4ABDC2;
+  background:#fff;
+  overflow:hidden;
+  box-sizing:border-box;
+}
+.onlineTitle{
+  width:100%;
+  height:120rpx;
+  line-height:120rpx;
+  text-align:center;
+  font-size:28rpx;
+  border-bottom:2rpx solid #4ABDC2;
+  box-sizing:border-box;
+}
+.calcel,.sure{
+  width:50%;
+  height:60rpx;
+  line-height:60rpx;
+  text-align:center;
+  font-size:24rpx;
+  box-sizing:border-box;
+}
+button::after{
+border:none;
+}
+.bgBox{
+  background:rgba(0,0,0,0.4);
+  position:fixed;
+  margin:auto;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:10000;
+}
+.popUpBox{
+  width:550rpx;
+  height:500rpx;
+  border-radius:20rpx;
+  background:#fff;
+  margin:auto;
+  position:absolute;
+  top:101rpx;
+  bottom:0;
+  left:0;
+  right:0;
+}
+.title{
+  width:100%;
+  text-align:center;
+  font-size:34rpx;
+  line-height:80rpx;
+}
+.prompt{
+  font-size:24rpx;
+  color:#A0A0A0;
+  width:100%;
+  align-items: center;
+  justify-content: center;
+}
+.images2{
+  width:60rpx;
+  height:60rpx;
+  position:absolute;
+  margin:auto;
+  right:62rpx;
+  top:368rpx;
+
+}
+.images2 image{
+  width:50rpx;
+  height:50rpx;
+}
+.headImage{
+  width:100%;
+  /* height:120rpx; */
+}
+.scrollImage{
+  align-items: center;
+  justify-content: center;
+}
+.headImage image{
+  width:80rpx;
+  height:80rpx;
+  border-radius:50rpx;
+  margin-right:20rpx;
+
+}
+.share{
+  width:510rpx;
+  height:60rpx;
+  text-align:center;
+  line-height:60rpx;
+  background:#ff3a3a;
+  color:#fff;
+  margin:40rpx auto;
+  font-size:26rpx;
+  border-radius:20rpx;
+}
+
+.poptopBox{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  margin:auto;
+}
+.closes {
+  width:750rpx;
+  height:80rpx;
+}
+.swiper_item_image2{
+  width:750rpx;
+  height:650rpx;
+}
+.closes image{
+  float:right;
+  width:50rpx;
+  height:50rpx;
+  display:block;
+  margin-top:20rpx;
+}
+.playImage{
+  width:80rpx;
+  height:80rpx;
+  margin: auto ;
+  top:375rpx;
+  left:0;
+  right:0;
+  position:absolute;
+}

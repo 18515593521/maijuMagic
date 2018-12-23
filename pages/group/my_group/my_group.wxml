@@ -1,0 +1,62 @@
+<view class='menus1 flexRowH' style='border-color:{{active}};color:{{active}}' >
+  <view class='menus_item menuns {{menus2[0]}}'  data bindtap='isDiffert' style='color:{{menus2[0]?"#fff":""}};background:{{menus2[0]?active:""}}' data-types='1'>线上拼团</view>
+  <view class='menus_item  menuns {{menus2[1]}}'  style='color:{{menus2[1]?"#fff":""}};background:{{menus2[1]?active:""}}' bindtap='isDiffert' data-types='2'>线下拼团</view>
+</view>
+<block wx:for='{{menuHidden2}}' wx:for-index='checke'>
+  <view hidden='{{menuHidden2[checke]}}'>
+    <view class=' flexRowH' style='margin-top:20rpx'>
+      <view class='menus_item {{menus[0]}}' style='color:{{menus[0]?active:""}};border-color:{{menus[0]?active:""}}' bindtap='selectState' data-types='0'>我发起的</view>
+      <view class='menus_item  {{menus[1]}}'  style='color:{{menus[1]?active:""}};border-color:{{menus[1]?active:""}}' bindtap='selectState' data-types='1'>我参与的</view>
+    </view>
+
+    <block wx:for='{{menuHidden}}' wx:for-index='indexs'>
+      <view hidden='{{menuHidden[indexs]}}' data-indexs='{{indexs}}'>
+        <block wx:for='{{groupData}}' wx:key='{{id}}' wx:for-item='groupItem'>
+          <view class='lists  paddingBox' bindtap='skinUpTo' data-status='{{groupItem.status}}' data-customer_info_id='{{groupItem.id}}' data-id='{{groupItem.customer_group_buying_id}}' data-productId='{{groupItem.product_id}}' data-payState='{{groupItem.pay_status}}'
+            data-groupBuyingId='{{groupItem.group_buying_id}}'>
+            <view class='flexColumnH'>
+              <view class='flexRow storesBox'>
+                <image src='{{shopInfo}}' class='headImage'></image>
+                <view class='stores'>{{groupItem.shopName}}</view>
+                <!--status  1成功  2拼团中  3拼团失败  4人数够了但是有人未付款-->
+                <view class='state' style='color:red' wx:if='{{groupItem.status==1}}'>拼团成功</view>
+                <view class='state' wx:if='{{groupItem.status==3}}'>拼团失败,已关闭</view>
+                <block wx:if='{{groupItem.pay_status==1}}'>
+                  <view class='stateOther flexColumnH' wx:if='{{groupItem.status==2}}'>
+                    <view class='state' style='color:red' wx:if="{{difftenType==1}}">拼团中，还差{{groupItem.num}}人</view>
+                    <view class='overs'  wx:if="{{difftenType==1}}">剩余{{groupItem.latest_pay_time}}</view>
+
+                     <view class='state' style='color:red'  wx:if="{{difftenType==2}}">拼团中，还差{{groupItem.success_num-groupItem.joinNum}}人</view>
+                    <view class='overs'  wx:if="{{difftenType==2}}">剩余{{groupItem.remaining}}</view>
+                  </view>
+                  <view class='state' wx:if='{{groupItem.status==4}}'>即将成功,{{groupItem.notPayNum}}未付款</view>
+                </block>
+                <block wx:else>
+                  <view class='flexColumnH stateOther'>
+                    <view class='state' style='color:red'>待支付,点击支付</view>
+                    <view class='overs'>剩余{{groupItem.latest_pay_time}}</view>
+                  </view>
+
+                </block>
+              </view>
+              <view class='productsDetail flexRow paddingBoxH'>
+                <image src='{{groupItem.imgurl}}' class='productImg'></image>
+                <view class='flexColumnH productDetail'>
+                  <view class='productTitle hiddenLien'>{{groupItem.product_title}}</view>
+                  <view class='piece'>共{{groupItem.buy_num}}件</view>
+                  <view class='flexRow' style='margin-top:60rpx'>
+                    <view class='pay'>实付:</view>
+                    <view class='moneys'>￥{{groupItem.group_price}}</view>
+                    <view class='freight'>(含运费￥0.00)</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </block>
+
+  </view>
+
+</block>

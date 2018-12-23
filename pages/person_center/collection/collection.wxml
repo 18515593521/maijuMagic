@@ -1,0 +1,29 @@
+<!--搜索-->
+<view class="search">
+  <image src="/images/search.png" data-type="1" bindtap="searchProduct"></image>
+  <input type="text" class="searchClass" placeholder="请输入要搜索的产品名称" placeholder-class="searchTips" data-type="2" bindconfirm="searchProduct" bindblur="setSearchText"/>
+</view>
+<!--产品列表-->
+<view class="productContainer">
+  <block wx:for="{{productList}}" wx:key="product_id">
+      <view class="item" data-url="/pages/product/product_details/product_details?productId={{item.product_id}}" data-type="1" bindtap="pageSkip">
+        <view class="image">
+            <image class="productImage" src="{{item.image_url}}"></image>
+            <image class="deleteImage" src="/images/delete_3.png" data-param="{{item.product_id}}" catchtap="cancelThisProduct"></image>
+        </view>
+        <view class="name out_hidden_2">{{item.product_name}}</view>
+        <view class="consult">到店咨询</view>
+       
+      </view>
+  </block>
+</view> 
+
+<block wx:if="{{productList.length>0 && !isSearchNextPage}}">
+    <view class="loadAll">已经全部加载完毕</view>
+</block>
+
+<view class="space"></view>
+<view class="thisBottom" bindtap="clearAllProduct">全部清空</view>
+
+
+

@@ -1,0 +1,255 @@
+/*富文本解析器*/
+ @import "/plugs/wxParse/wxParse.wxss"; 
+ /*模态框*/
+ @import "/template/modalBox/modalBox.wxss"; 
+
+/**全局样式**/
+page {
+  min-height: 100vh;
+  background-color: #FFFFFF;
+  width:750rpx;
+  /* overflow:hidden; */
+}
+
+
+.pannel{
+  padding: 20rpx;
+  box-sizing:border-box;
+}
+
+.clear{
+  clear: both;
+}
+
+.flex_row{
+  display:flex;
+  flex-direction:row;
+}
+
+/*箭头菜单*/
+.arrowsMenu{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFFFFF;
+  padding: 20rpx;
+  box-sizing:border-box;
+  border-bottom: 2rpx solid #F3F3F3;
+  line-height: 40rpx;
+}
+.arrowsMenu .name{
+  font-size: 24rpx;
+  color: #555555;
+}
+.arrowsMenu .look{
+  
+}
+.arrowsMenu .look image{
+  width: 18rpx;
+  height: 28rpx;
+  display: inline-block;
+}
+/*间隔*/
+.space{
+  height: 80rpx;
+}
+/*顶部间隔*/
+.top_line_1{
+  border-top: 2rpx solid #EEEEEE;
+}
+.top_line_2{
+  border-top: 15rpx solid #EEEEEE;
+}
+/*文本超出隐藏*/
+.out_hidden_1{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.out_hidden_2{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+/*背景色*/
+.bg_red{
+  background-color: #FF5858;
+}
+.bg_green{
+  background-color: #00BC81;
+}
+.bg_blue{
+  background-color: #0195FF;
+}
+.bg_blue_2{
+  background-color: #17B26D;
+}
+.bg_purple{
+  background-color: #B84FA8;
+}
+.bg_gray{
+  background-color: #939393;
+}
+/*字体颜色*/
+.color_red{
+  color: #FF5858;
+}
+.color_green{
+  color: #00BC81;
+}
+.color_green_2{
+  color: #4ABDC2;
+}
+.color_blue{
+  color: #0195FF;
+}
+.color_gray_1{
+  color: #A6A6A6;
+}
+.color_gray_2{
+  color: #3D3D3D;
+}
+
+/*购物车*/
+.shoppingCart{
+  position: fixed;
+  width: 80rpx;
+  height: 80rpx;
+  bottom: 200rpx;
+  right: 20rpx;
+  z-index: 200;
+}
+.shoppingCart2{
+   position: fixed;
+  width:85rpx;
+    bottom: 200rpx;
+  right: 20rpx;
+  z-index: 200;
+  height:85rpx;
+  background:none;
+}
+
+/* 浮层 */
+.Cover{
+  position:fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  z-index: 100;
+}
+/* 当前无活动 */
+.Cover .noActivity{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.Cover .switchPositin{
+  position: absolute;
+  right: 0;
+  font-size: 26rpx;
+  color: #333333;
+  text-decoration: underline;
+  padding: 10rpx 20rpx;
+  box-sizing:border-box;
+}
+/* 没有参与当前活动 */
+.Cover .noJoinActivity{
+  width: 500rpx;
+  height: 466rpx;
+  display: block;
+  margin:100rpx auto;
+}
+/* 无数据 */
+.noData{
+  width: 460rpx;
+  height: 500rpx;
+  display: block;
+  margin:100rpx auto;
+}
+/*公共部分*/
+.paddingBox{
+  padding:20rpx;
+  box-sizing:border-box;
+}
+.paddingBox1{
+  padding:10rpx 20rpx;
+  box-sizing:border-box;
+}
+.paddingBoxL{
+  padding:0 20rpx;
+  box-sizing:border-box;
+}
+.paddingBoxH{
+  padding:20rpx 0;
+  box-sizing:border-box;
+}
+.flexRow{
+  display:flex;
+  flex-flow:row nowrap;
+}
+.flexRowH{
+  display:flex;
+  flex-flow:row wrap;
+}
+.flexColumnH{
+  display:flex;
+  flex-flow:column nowrap;
+}
+.flexColumnNo{
+  display:flex;
+  flex-flow:column wrap;
+}
+.positionBox{
+  position:fixed;
+  margin:auto;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  background:rgba(0, 0, 0, 0.5);
+  z-index:10000;
+}
+.positionAbsolute{
+  position:absolute;
+  margin:auto;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+}
+/*超出去后隐藏*/
+.hiddenLien{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}
+/*超出一行变省略*/
+.hiddenLien2{
+  display:block;
+  word-break:keep-all;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.justAround{
+  justify-content:space-around;
+}
+.justBetween{
+  justify-content:space-between;
+}
+.phoneButton{
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+    opacity: 0;   
+  box-sizing:border-box;
+  background:red;
+}

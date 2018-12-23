@@ -1,0 +1,58 @@
+<import src="../../../plugs/wxParse/wxParse.wxml" />
+<import src="../../../template/modalBox/modalBox.wxml" />
+
+<!-- 活动详情 -->
+<view class="module">
+  <view class="wxParse">
+    <template is="wxParse" data="{{wxParseData:details.nodes}}" />
+  </view>
+</view>
+
+<view>
+
+  <view class="space"></view>
+  <view class="thisBottom" style='background:{{appColor}}' hidden='{{activityDetails.type==2||fromType==2}}'>
+    <view>
+      <image class="sign" src="/images/pen.png"></image>
+    </view>
+
+    <view>{{signButtonText}}</view>
+
+  </view>
+ 
+  <button class="phoneButton" bindtap="checkUserSignState" hidden='{{activityDetails.type==2||fromType==2}}'></button>
+</view>
+<!--预约时间-->
+
+<!-- 预约信息 -->
+<view class='bookingPannel' hidden='{{bookingPannelHidden}}'>
+  <view class='box'>
+    <view style='height:60rpx'>
+      <view class='title'>提示</view>
+      <view class='line'></view>
+    </view>
+    <view style='margin-top:40rpx'>
+      <view class='input'>
+        <picker mode='date' start='{{nowDate}}' data-param="booking_startTime_1" bindchange='setTime'>
+          <view class='time'>{{booking_startTime_1}}</view>
+        </picker>
+        <picker mode='time' data-param="booking_startTime_2" bindchange='setTime'>
+          <view class='time'>{{booking_startTime_2}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class='operate'>
+      <view class='cancel' bindtap='cancelBooking'>取消</view>
+      <view class='submit' bindtap='submitBooking'>确定</view>
+    </view>
+  </view>
+</view>
+
+
+<!--等待的菊花-->
+<view hidden='{{wait}}'>
+  <template is="waitImg" />
+  <!--模态框-->
+  <template is="modalBox" data="{{...modalBox_message}}" />
+</view>

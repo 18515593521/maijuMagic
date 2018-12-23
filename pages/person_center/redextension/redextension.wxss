@@ -1,0 +1,113 @@
+page {
+  background-color: #FFFFFF;
+  border-top: 2rpx solid #EFEFEF;
+}
+
+/* 搜索 */
+.search{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20rpx 40rpx;
+  border: 2rpx solid #F6F6F6;
+  border-radius: 10rpx;
+}
+.search input{
+  width: 620rpx;
+  height: 60rpx;
+  font-size: 24rpx;
+  color: grey;
+}
+.search image{
+  width: 30rpx;
+  height: 30rpx;
+  display: block;
+  padding: 10rpx;
+}
+/* 列表 */
+.row{
+  display: flex;
+  font-size: 24rpx;
+  color: #767676;
+}
+.row + .row{
+  border-bottom: 2rpx solid #F6F6F6;
+}
+.row .column1{
+  width: 180rpx;
+  line-height: 70rpx;
+  text-align: center;
+}
+.row .column2{
+  width: 200rpx;
+  line-height: 70rpx;
+  text-align: center;
+}
+.row .column3{
+  width: 370rpx;
+  line-height: 70rpx;
+  text-align: center;
+}
+.head{
+  background-color: #EEEEEE;
+  font-size: 28rpx;
+  color: #535353;
+}
+
+.allMoneys2{
+    float: right;
+  margin-right: 20rpx;
+  margin-top: 20rpx;
+}
+.moneyImg2{
+  width:25rpx;
+  height:29rpx;
+  margin-right:26rpx;
+}
+/*二维码*/
+.imagePannel{
+  position:fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 210;
+}
+
+.redPagBox{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  margin:auto;
+  width:700rpx;
+  height:602rpx;
+}
+.redPagBox image{
+  display:block;
+}
+.money{
+  width:100%;
+  text-align:center;
+  height:80rpx;
+  line-height:80rpx;
+   position:absolute;
+   margin:auto;
+  font-size: 60rpx;
+  color: yellow;
+   top : 250rpx;
+   left:0;
+}
+
+.redClass{
+  color: red
+}
+.redimage{
+  position: absolute;
+  left: 350rpx;
+  width: 400rpx;
+  height: 382rpx;
+  margin-left: -200rpx; 
+}

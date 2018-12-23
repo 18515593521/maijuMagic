@@ -1,0 +1,8 @@
+
+<import src="../../plugs/wxParse/wxParse.wxml" />
+<view class="pannel article" >
+      <view class="wxParse">
+        <template is="wxParse" data="{{wxParseData:contentDetails.nodes}}" />
+      </view>
+</view>
+

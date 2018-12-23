@@ -1,0 +1,255 @@
+page{
+  background-color: #F2F2F2;
+  padding-top: 2rpx;
+}
+image{
+  display: block;
+}
+/* 收货信息 */
+.people_address{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+  background-color: #FFFFFF;
+}
+.people_address .position{
+  width: 34rpx;
+  height: 40rpx;
+  padding: 0 30rpx 0 6rpx;
+}
+.people_address .middle{
+  width: 600rpx;
+}
+.people_address .middle .name{
+  font-size: 30rpx;
+  color: #1B1B1B;
+  font-weight: bold;
+  padding-right: 20rpx;
+}
+.people_address .middle .phone{
+  font-size: 28rpx;
+  color: #161616;
+}
+.people_address .middle .address{
+  font-size: 26rpx;
+  color: #1B1B1B;
+}
+.people_address .middle .noAddress{
+  font-size: 26rpx;
+  color: #1B1B1B;
+  text-align: right;
+}
+.people_address .look{
+  width: 16rpx;
+  height: 30rpx;
+  padding: 20rpx 0 20rpx 20rpx;
+}
+/* 分割条 */
+.bar{
+  width: 100%;
+  height: 6rpx;
+}
+/* 店铺信息 */
+.shop{
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx;
+  background-color: #FFFFFF;
+  padding: 20rpx;
+  font-size: 28rpx;
+}
+.shop .logo{
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 20rpx;
+}
+/* 产品信息 */
+.product{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx 20rpx;
+  border-bottom: 10rpx solid #FFFFFF;
+}
+.product .picture{
+  width: 200rpx;
+  height: 200rpx;
+  padding-right: 20rpx;
+}
+.product .info{
+  width: 490rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200rpx;
+}
+.product .name{
+  font-size: 28rpx;
+}
+.product .property{
+  font-size: 24rpx;
+  color: #B1B1B1;
+  padding-top: 6rpx;
+}
+.product .price{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
+}
+/* 卡券 */
+.cardMoney{
+  font-size: 30rpx;
+  color: #E87878;
+  padding: 0 20rpx;
+
+}
+/* 底部 */
+.thisBottom{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color:#FFFFFF;
+  line-height: 100rpx;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.thisBottom .total{
+  width: 450rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #505050;
+}
+.thisBottom .total .money{
+  font-size: 30rpx;
+  color: #FE0036;
+}
+.thisBottom .pay{
+  width: 300rpx;
+}
+.thisBottom .pay button{
+  background-color: #FE0036;
+  line-height: 100rpx;
+  border-radius:0;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  text-align: center;
+}
+/* 遮罩层 */
+.maskPannel{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  background-color: rgba(0, 0, 0, 0.4)
+}
+/* 优惠券 */
+.maskPannel .couponInfo{
+  height: 500rpx;
+  background: #FFFFFF;
+  margin-top: calc(100vh - 500rpx);
+}
+.maskPannel .couponInfo .title{
+  padding: 20rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #515151;
+}
+.maskPannel .couponInfo .quitImage{
+  width: 50rpx;
+  height: 50rpx;
+  display: block;
+  position: absolute;
+  right: 18rpx;
+  margin-top: -66rpx;
+}
+.maskPannel .couponInfo .coupon{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30rpx;
+  color: #FB3737;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #F4F4F4;
+}
+.maskPannel .couponInfo .coupon .noChoose{
+  width: 30rpx;
+  height: 30rpx;
+  border: 1px solid #FB3737;
+  border-radius: 50%;
+}
+.bgBox{
+  background:rgba(0,0,0,0.4);
+  position:fixed;
+  margin:auto;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
+.popUpBox{
+  width:550rpx;
+  height:500rpx;
+  border-radius:20rpx;
+  background:#fff;
+  margin:auto;
+  position:absolute;
+  top:101rpx;
+  bottom:0;
+  left:0;
+  right:0;
+}
+.title{
+  width:100%;
+  text-align:center;
+  font-size:34rpx;
+  line-height:80rpx;
+}
+.prompt{
+  font-size:24rpx;
+  color:#A0A0A0;
+  width:100%;
+  align-items: center;
+  justify-content: center;
+}
+.images2{
+  width:60rpx;
+  height:60rpx;
+  position:absolute;
+  margin:auto;
+  right:62rpx;
+  top:368rpx;
+
+}
+.images2 image{
+  width:50rpx;
+  height:50rpx;
+}
+.headImage{
+  width:100%;
+  /* height:120rpx; */
+}
+.scrollImage{
+  align-items: center;
+  justify-content: center;
+}
+.headImage image{
+  width:80rpx;
+  height:80rpx;
+  border-radius:50rpx;
+  margin-right:20rpx;
+
+}
+.share{
+  width:510rpx;
+  height:60rpx;
+  text-align:center;
+  line-height:60rpx;
+  background:#ff3a3a;
+  color:#fff;
+  margin:40rpx auto;
+  font-size:26rpx;
+  border-radius:20rpx;
+}

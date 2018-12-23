@@ -1,0 +1,11 @@
+.peopleList {
+  padding: 20rpx;
+}
+.peopleList image{
+  width: 102rpx;
+  height: 102rpx;
+  display: inline-block;
+  border-radius: 50%;
+  margin: 20rpx;
+}
+

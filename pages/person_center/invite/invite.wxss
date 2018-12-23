@@ -1,0 +1,36 @@
+page{
+    border-top: 2rpx solid #EEEEEE;
+}
+.invite {
+    width: 600rpx;
+    height: 600rpx;
+    display: block;
+    margin: 150rpx 75rpx 0;
+}
+.me{
+  text-align: center;
+  margin-top: -435rpx;
+}
+.me image{
+  width: 270rpx;
+  height: 270rpx;
+  border-radius: 50%;
+}
+.invitation{
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  
+  margin-top: 250rpx;
+}
+.btn{
+  margin: 0 auto;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 30rpx;
+  letter-spacing: 3px;
+  color: white;
+  background-color: #4abcc2;
+  border-radius: 15rpx;
+  text-align: center;
+}

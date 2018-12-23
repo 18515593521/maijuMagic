@@ -1,0 +1,94 @@
+<import src="../../../plugs/wxParse/wxParse.wxml" />
+<import src="../../../template/modalBox/modalBox.wxml" />
+<view class="cover">
+  <block wx:if='{{activityType==1}}'>
+     <image src="{{activityDetails.imgurl}}" mode='widthFix' ></image>
+
+   
+  </block>
+  <block wx:else>
+    <image src="{{activityDetails.image}}" mode='widthFix' ></image>
+  </block>
+  
+
+</view>
+<view class="title">{{activityDetails.title}}</view>
+<view class="lookNumber" hidden='{{isImage}}'>
+  <view>
+    <image src="/images/see.png"></image>
+  </view>
+  <view>{{activityDetails.look}}</view>
+</view>
+<!-- 活动报名 -->
+<view class="top_line_2" hidden='{{isImage}}'>
+  <view class="signPeople" data-url="/pages/activity/activity_people/activity_people" data-type="1" bindtap="pageSkip" wx:if='{{false}}'>
+    <view class="people">
+      <view class="count">
+        <view>{{activityDetails.applyImage.length}}</view>
+        <view>人报名</view>
+      </view>
+      <view class="list">
+        <block wx:for="{{activityDetails.applyImage}}" wx:key="head_url">
+          <block wx:if="{{index<=5}}">
+            <image src="{{item}}"></image>
+          </block>
+        </block>
+      </view>
+    </view>
+    <view class="look">
+      <image src="/images/arrows_right.png"></image>
+    </view>
+  </view>
+  <view class="info">
+    <view>
+      <image src="/images/time.png"></image>
+    </view>
+    <view>活动时间：{{activityDetails.generalize_start_time}}~{{activityDetails.end_time}}</view>
+  </view>
+  <view class="info">
+    <view>
+      <image src="/images/position.png" style="width:20rpx;"></image>
+    </view>
+    <view>活动地点：{{activityDetails.stage}}</view>
+  </view>
+</view>
+<!-- 活动详情 -->
+<view class="top_line_2 module">
+  <view class="moduleTitle" style='color:{{appColor}};border-left:6rpx solid {{appColor}}; '>活动详情</view>
+  <view class="wxParse">
+    <template is="wxParse" data="{{wxParseData:details.nodes}}" />
+  </view>
+</view>
+
+<view>
+  <!-- 往期活动-->
+  <view class="top_line_2 module" hidden="{{isHistoryActivity}}">
+    <view class="moduleTitle">往期活动</view>
+    <scroll-view scroll-x="true" class="history">
+      <block wx:for="{{activityDetails.previousActivity}}" wx:key="activity_id">
+        <view class="item" data-url="/pages/activity/activity_details/activity_details?activity_id={{item.activity_id}}&activityType=3" data-type="1" bindtap="pageSkip">
+          <image src="{{item.imgurl}}"></image>
+          <view class="name out_hidden_1">{{item.name}}</view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+
+  <view class="space"></view>
+  <view class="thisBottom" style='background:{{appColor}}' hidden='{{activityDetails.type==2||fromType==2}}'>
+    <view>
+      <image class="sign" src="/images/pen.png"></image>
+    </view>
+    <view>{{signButtonText}}</view>
+
+  </view>
+
+  <button class="phoneButton" bindtap="checkUserSignState" hidden='{{activityDetails.type==2||fromType==2}}'></button>
+</view>
+
+<!--等待的菊花-->
+<view hidden='{{wait}}'>
+  <template is="waitImg" />
+  <!--模态框-->
+  <template is="modalBox" data="{{...modalBox_message}}" />
+</view>

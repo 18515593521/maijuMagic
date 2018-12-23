@@ -1,0 +1,27 @@
+<template name="modalBox">
+  <view class="modalBox" hidden="{{hidden}}">
+    <view class="box">
+      <block wx:for="{{infoList}}" wx:key="*this">
+        <view>{{item}}</view>
+      </block>
+    </view>
+  </view>
+</template>
+<!--底部图-->
+<template name="bottomImg">
+  <view class='bottomImgBox flexColumnH' >
+    <image src='/images/bgm.png' class='images'  bindtap='callPhone2'></image>
+    <view class='flexRow' style='margin-bottom:20rpx'>
+        <!-- <image src='/images/phone_3.png' class='phone3'></image> -->
+        <view class='thisPhone'  bindtap='callPhone2'>点击服务咨询</view>
+    </view>
+  </view>
+</template>
+
+<!--等待中-->
+<template name='waitImg'>
+  <view class='waitImgBox'>
+    <!-- <view class='waitText'>生成中...</view> -->
+    <image src='/images/loading.gif' class='waitText'></image>
+  </view>
+</template>

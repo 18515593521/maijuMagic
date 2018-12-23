@@ -1,0 +1,96 @@
+<import src="../../../template/modalBox/modalBox.wxml" />
+<!-- 媒体资讯 -->
+<view style='width:750rpx;overflow:hidden'>
+  <!-- 搜索 -->
+  <view class='searchBoxs'>
+    <view class="search">
+      <view>
+        <image src="/images/video/searchvideo.png" data-type="1" bindtap="searchMedia"></image>
+        <input type="text" class="searchClass" placeholder="请搜索您想要的内容" placeholder-class="searchTips" value="{{searchMediaText}}" data-type="2" bindconfirm="searchMedia" bindblur="setMediaText" style='border-radius:40rpx' />
+      </view>
+      <!-- <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:710rpx;height:60rpx;top:0;z-index:10000' open-type="getPhoneNumber" data-type='search' data-param='' bindgetphonenumber="authorizePhone"></button> -->
+    </view>
+
+
+    <!-- 导航栏 -->
+    <!-- 大盒子,确定范围,边距 -->
+    <view class='navContainer'>
+      <!-- 滑动盒子,保证盒子可以左右滑动,必须有不换行属性 -->
+      <scroll-view scroll-x="true" style=" white-space: nowrap;">
+        <!-- 循环 -->
+        <block wx:for='{{navlists}}' wx:key='{{index}}'>
+          <!-- 让list在一行显示 -->
+          <view style="width:{{listWidth}};height:88rpx;display:inline-block">
+            <view class='listStyle {{active[index]}}' data-param='{{item}}' data-navIndexs='{{index+1}}' bindtap="navshow">
+              <view style='margin-right:20rpx'>{{item.name}}</view>
+              <image src='/images/video/downArrow.png' class='arrowImg'></image>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+  <!-- 点击弹出层 -->
+  <view class="maskBox" hidden="{{flag}}" bindtap="navhide">
+    <view class="maskBody">
+      <view class="maskContent flex_row" bindtap="navhide">
+        <view class='searchLeft'>
+          <view class='unlimited' bindtap='unlimitedEvent'>不限</view>
+        </view>
+        <!-- 搜索列表 -->
+        <view class='listDatas flexRowH'>
+          <block wx:for='{{searchList}}' wx:key='{{index}}'>
+            <view class='items1 {{searchActive[index]}}' data-param='{{item}}' data-indexs='{{index}}' data-p_id='{{item.p_id}}' bindtap='searchSeries'>
+              <view class='name'>{{item.name}}</view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 瀑布流 -->
+  <view class="content">
+    <view class="left">
+      <block wx:for="{{flowList}}" wx:key="{{index}}">
+        <template is="item" data="{{...item}}" wx:if="{{index%2==0}}"></template>
+      </block>
+    </view>
+    <view class="right">
+      <block wx:for="{{flowList}}" wx:key="{{index}}">
+        <template is="item" data="{{...item}}" wx:if="{{index%2==1}}"></template>
+      </block>
+    </view>
+  </view>
+  <!--  单个卡片内容 -->
+  <template name="item">
+    <view class="item">
+      <image class="item-img" src="{{img_url}}" mode='widthFix' style='width:100%' data-url="/pages/media/videoDetail/videoDetail?name={{name}}&create_time={{create_time}}&look={{look}}&media_url={{media_url}}&id={{id}}&media_url={{media_url}}&img_url={{img_url}}&type={{type}}"
+        data-type="1" bindtap="pageSkip"></image>
+      <image class='videoBtn' src='/images/video/videoBtn.png' mode="widthFix" data-url="/pages/media/videoDetail/videoDetail?name={{name}}&create_time={{create_time}}&look={{look}}&media_url={{media_url}}&id={{id}}&img_url={{img_url}}&type={{type}}" data-type="1"
+        bindtap="pageSkip"></image>
+      <view>
+        <view class="item-title-box">
+
+          <input disabled="true" maxlength='12' class="item-title" value='{{name}}'></input>
+        </view>
+        <view class="name">
+          <image class="item-ava" mode='widthFix' src="/images/video/timer.png"></image>
+          <text class="name-title">{{create_time}}</text>
+          <view class="heart_">
+            <image class="heart" mode='widthFix' src="/images/video/videoNum.png"></image>
+            <text>{{look}}</text>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </template>
+</view>
+
+
+<!--模态框-->
+<import src="../../../template/modalBox/modalBox.wxml" />
+<template is="bottomImg" />
+
+
+<!-- <view class="space"></view> -->

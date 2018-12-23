@@ -1,0 +1,57 @@
+<!--顶部信息-->
+<view>
+  <block wx:if="{{cardDetails}}">
+    <image class="cardImage" src="/images/card/{{cardType[cardDetails.card_tpye].backGroundImage}}"></image>
+  </block>
+  <view class="topInfo {{cardType[cardDetails.card_tpye].backGroundColor}}">
+    <view class="moneyInfo">
+      <block wx:if="{{cardDetails.card_tpye<3}}">
+        <view class="sign">¥</view>
+        <view class="money">{{cardDetails.denomination}}</view>
+      </block>
+      <block wx:else>
+        <view style="font-size:210rpx;">{{cardDetails.denomination}}折</view>
+      </block>
+    </view>
+    <view class="type">{{cardType[cardDetails.card_tpye].name}}</view>
+  </view>
+</view>
+<!--卡券信息-->
+<view class="title">{{cardDetails.card_name}}</view>
+<view class="moneyAndCount">
+  <view class="count">
+    <view class="count1">已领：{{cardDetails.get?cardDetails.get:0}}笔</view>
+    <view class="count2">剩余：{{cardDetails.remaining?cardDetails.remaining:0}}笔</view>
+  </view>
+</view>
+
+<!--详情-->
+<view class="detailsTitle">{{cardType[cardDetails.card_tpye].name}}详情</view>
+<view class="details">
+  <block wx:for="{{cardDetails.explainArr}}" wx:key="*this">
+    <view class="">{{item}}</view>
+  </block>
+</view>
+
+<view class="space"></view>
+<view style='position:relative'>
+  <block wx:if="{{cardDetails.remaining>0}}">
+    <block wx:if="{{cardDetails.isGet==1}}">
+      <view class="bottomButton" style="background-color: #AAAAAA;">已领取</view>
+    </block>
+    <block wx:else>
+      <view class="bottomButton" bindtap="getCoupon">立即领取</view>
+    </block>
+  </block>
+  <block wx:else>
+    <view class="bottomButton" style="background-color: #AAAAAA;">已抢光</view>
+  </block>
+  <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='position:fixed; width:750rpx;height:200rpx;bottom:0rpx' open-type="getPhoneNumber" data-type='card' data-inside='inside' data-param='{{item.couponsId}}' bindgetphonenumber="authorizePhone"></button>
+
+
+</view>
+
+
+<!--模态框-->
+<import src="../../../template/modalBox/modalBox.wxml" />
+<template is="modalBox" data="{{...modalBox_message}}" />

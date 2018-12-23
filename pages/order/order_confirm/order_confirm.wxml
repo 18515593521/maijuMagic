@@ -1,0 +1,226 @@
+<!-- 收货信息 -->
+<view class='people_address' bindtap='chooseAddress'>
+  <view>
+    <image class='position' src='/images/position_3.png'></image>
+  </view>
+  <view class='middle'>
+    <block wx:if="{{showAddress.receiver_name}}">
+      <view>
+        <text class='name'>{{showAddress.receiver_name}}</text>
+        <text class='phone'>{{showAddress.phone_num}}</text>
+      </view>
+      <view class='address'>{{showAddress.province}} {{showAddress.city}} {{showAddress.district}} {{showAddress.address_details}}</view>
+    </block>
+    <block wx:elif="{{showAddress.consignee}}">
+      <view>
+        <text class='name'>{{showAddress.consignee}}</text>
+        <text class='phone'>{{showAddress.consigneePhone}}</text>
+      </view>
+      <view class='address'>{{showAddress.province}} {{showAddress.city}} {{showAddress.district}} {{showAddress.address}}</view>
+    </block>
+    <block wx:else>
+      <view class='noAddress'>请点击选择收货地址</view>
+    </block>
+  </view>
+  <view>
+    <image class='look' src='/images/arrows_right.png'></image>
+  </view>
+</view>
+<image class='bar' src='/images/bar.png'></image>
+<!-- 店铺信息 -->
+<view class='shop'>
+  <image class='logo' src='{{showShopInfo.imgurl}}'></image>
+  <view>{{showShopInfo.name}}</view>
+</view>
+<!-- 产品信息 -->
+<block wx:for="{{productList}}" wx:key="id" wx:if='{{source!=="product_3"}}'>
+  <view class='product'>
+    <view>
+      <image class='picture' src='{{item.color_url}}'></image>
+    </view>
+    <view class='info'>
+      <view>
+        <view class='name out_hidden_2'>{{item.product_title}}</view>
+        <view class='property'>
+          <view>颜色:{{item.color}};型号:{{item.model}};</view>
+          <view>规格:{{item.standard}};</view>
+        </view>
+      </view>
+      <view class='price'>
+        <view>￥{{item.price}}{{item.product_unit}}</view>
+        <view>×{{source=="cart" ? item.number : item.num}}</view>
+      </view>
+    </view>
+  </view>
+</block>
+<!--拼团信息-->
+<block wx:key="id" wx:if='{{source=="product_3"}}'>
+  <view class='product'>
+    <view>
+      <image class='picture' src='{{productList.color_url}}'></image>
+    </view>
+    <view class='info'>
+      <view>
+        <view class='name out_hidden_2'>{{productList.product_title}}</view>
+        <view class='property'>
+          <view>颜色:{{productList.color}};型号:{{productList.model}};</view>
+          <view>规格:{{productList.standard}};</view>
+        </view>
+      </view>
+      <view class='price'>
+        <view>￥{{productList.group_price}}{{productList.product_unit}}</view>
+        <view>×{{productList.num}}</view>
+      </view>
+    </view>
+  </view>
+</block>
+<!-- 红包、优惠券、折扣券 -->
+<view hidden='{{source=="product_1"}}'>
+  <view class="arrowsMenu" data-param='1' bindtap='chooseCard' hidden='{{!(cardInfo.hb.length>0)}}'>
+    <view class="name">红包</view>
+    <view class="look">
+      <text class='cardMoney'>{{choosedCard[1] ? '-'+choosedCard[1].denomination : ''}}</text>
+      <image src="/images/arrows_right.png"></image>
+    </view>
+  </view>
+  <view class="arrowsMenu" data-param='2' bindtap='chooseCard' hidden='{{!(cardInfo.yhq.length>0)}}'>
+    <view class="name">优惠券</view>
+    <view class="look">
+      <text class='cardMoney'>{{choosedCard[2] ? '-'+choosedCard[2].denomination : ''}}</text>
+      <image src="/images/arrows_right.png"></image>
+    </view>
+  </view>
+  <view class="arrowsMenu" data-param='3' bindtap='chooseCard' hidden='{{!(cardInfo.zkq.length>0)}}'>
+    <view class="name">折扣券</view>
+    <view class="look">
+      <text class='cardMoney'>{{choosedCard[3] ? choosedCard[3].denomination+'折' : ''}}</text>
+      <image src="/images/arrows_right.png"></image>
+    </view>
+  </view>
+</view>
+
+<view style='height: 120rpx;'></view>
+
+<!-- 底部 -->
+<view class='thisBottom'>
+  <view class='total'>
+    <text>实付款：</text>
+    <text class='money'>￥{{showPrice}}</text>
+  </view>
+  <form class='pay' report-submit='true' bindsubmit='payMoney'>
+    <button form-type='submit'>立即支付</button>
+  </form>
+</view>
+
+<!--优惠券-->
+<view class='maskPannel' hidden='{{cardHidden}}'>
+  <view class='couponInfo'>
+    <view class='title'>{{cardParam[showCardType].title}}</view>
+    <image class='quitImage' src='/images/quit.png' bindtap='closeCardPannel'></image>
+    <view style='height:420rpx;overflow-y:auto;'>
+      <block wx:for="{{cardInfo[cardParam[showCardType].key]}}" wx:key="id">
+        <view class='coupon'>
+          <block wx:if='{{showCardType==1}}'>
+            <view>减{{item.denomination}}元</view>
+          </block>
+          <block wx:elif='{{showCardType==2}}'>
+            <view>满{{item.use_condition}}元 减{{item.denomination}}元</view>
+          </block>
+          <block wx:else>
+            <view>满{{item.use_condition}}元 {{item.denomination}}折</view>
+          </block>
+          <block wx:if='{{item.choose}}'>
+            <icon type="success" size="16" color='#FB3737' data-param='{{item.id}}' data-operate='0' bindtap='chooseThisCard' />
+          </block>
+          <block wx:else>
+            <view class='noChoose' data-param='{{item.id}}' data-operate='1' bindtap='chooseThisCard'></view>
+          </block>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+<!--分享好友召集参与 -->
+<view class='bgBox' catchtouchmove='true' hidden='{{shareBg1}}'>
+  <view class='images2' bindtap='closeShare' data-types='1'>
+    <image src='/images/close.png'></image>
+  </view>
+  <view class='popUpBox flexColumnH'>
+    <view class='title'>分享好友召集参与</view>
+    <view class='flexRow  prompt'>
+      <view>还差</view>
+      <view style='color:red'>{{payData.remainingNum}}</view>
+      <view>人即可组团成功,</view>
+      <view>{{payData.remainingTime}}</view>
+      <view>后结束</view>
+    </view>
+    <view class='headImage'>
+      <scroll-view scroll-y style='height:200rpx;margin-top:40rpx'>
+        <view class='flexRowH scrollImage'>
+          <block wx:for='{{payData.customerList}}'>
+            <image src='{{item.head_url}}' data-customer_id='{{item.customer_id}}'></image>
+          </block>
+          <block wx:for='{{payData.remainingNum}}'>
+            <image src='/images/group.png'></image>
+          </block>
+        </view>
+
+      </scroll-view>
+    </view>
+    <button class='share' open-type='share'>分享好友参与</button>
+  </view>
+</view>
+<!--拼团即将成功-->
+<view class='bgBox' catchtouchmove='true' hidden='{{shareBg2}}'>
+  <view class='images2' bindtap='closeShare' data-types='1'>
+    <image src='/images/close.png'></image>
+  </view>
+  <view class='popUpBox flexColumnH'>
+    <view class='title'>拼团即将成功</view>
+    <view class='flexRow  prompt'>
+      <view style='color:red'>{{payData.remainingNum}}</view>
+      <view>人付款即可组团成功,</view>
+      <view>{{payData.remainingTime}}</view>
+      <view>后结束</view>
+    </view>
+    <view class='flexRowH headImage'>
+      <scroll-view scroll-y style='height:200rpx;margin-top:40rpx'>
+        <view class='flexRowH scrollImage'>
+        <block wx:for='{{payData.customerList}}'>
+          <image src='{{item.head_url}}' data-customer_id='{{item.customer_id}}'></image>
+        </block>
+        <block wx:for='{{payData.remainingNum}}'>
+          <image src='/images/group.png'></image>
+        </block>
+        </view>
+      </scroll-view>
+    </view>
+
+    <button class='share' bindtap='closeShare' data-types='1'>确定</button>
+  </view>
+</view>
+<!--成功-->
+<view class='bgBox' catchtouchmove='true' hidden='{{shareBg3}}'>
+  <view class='images2' bindtap='closeShare' data-types='1'>
+    <image src='/images/close.png'></image>
+  </view>
+  <view class='popUpBox flexColumnH'>
+    <view class='title'>恭喜组团成功</view>
+    <view class='flexRow  prompt'>
+      <view>历时{{payData.time}}</view>
+    </view>
+    <view class='flexRowH headImage'>
+      <scroll-view scroll-y style='height:200rpx;margin-top:40rpx'>
+         <view class='flexRowH scrollImage'>
+        <block wx:for='{{payData.customerList}}'>
+          <image src='{{item.head_url}}' data-customer_id='{{item.customer_id}}'></image>
+        </block>
+        <block wx:for='{{payData.remainingNum}}'>
+          <image src='/images/group.png'></image>
+        </block>
+        </view>
+      </scroll-view>
+    </view>
+    <button class='share' bindtap='closeShare' data-types='2'>查看更多拼团</button>
+  </view>
+</view>

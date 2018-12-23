@@ -1,0 +1,181 @@
+
+/**index.wxss**/
+ /*模态框*/
+  .activity_img{
+    width:750rpx;
+  }
+  .activity_name{
+  line-height:18px;
+  padding:5rpx 20rpx;
+  box-sizing:border-box;
+  font-size:24rpx;
+  color:#666;
+  float:left;
+}
+.Cover image{
+  width: 750rpx;
+  display: block;
+  z-index:100000;
+}
+  .icon_look_num{
+padding:0 20rpx;
+box-sizing:border-box;
+
+}
+.icon_eye{
+  width:40rpx;
+  height:40rpx;
+  float:left;
+}
+.look_num{
+  float:left;
+  margin-left:10rpx;
+  color:#999;
+  font-size:24rpx;
+}
+.apply_name_list{
+  width:100%;
+  height:100rpx;
+  border-bottom:1rpx solid #eee;
+  overflow:hidden;
+  padding:10rpx 10rpx 10rpx 20rpx;
+  box-sizing:border-box;
+}
+.apply_name_content,.activity_content,.activity_rule{
+  width:750rpx;
+  height:auto;
+  border-bottom:10rpx solid #eee;
+  overflow:hidden;
+}
+.activity_rule{
+  padding:0 20rpx;
+  box-sizing:border-box;
+}
+.apply_name_list{
+  width:100%;
+  height:100rpx;
+  border-bottom:1rpx solid #eee;
+  overflow:hidden;
+  padding:0 10rpx 0 20rpx;
+  box-sizing:border-box;
+}
+.apply_num{
+  width:100rpx;
+  float:left;
+}
+.apply_text{
+  color:#4abdbf;
+  font-size:30rpx;
+  text-align:center;
+}
+head_img_content{
+  width:580rpx;
+  overflow:hidden;
+  float:left;
+
+}
+.headerImgs{
+  width:80rpx;
+  height:80rpx;
+  border-radius:50rpx;
+  margin-left:16rpx;
+}
+.rightTarrows{
+  width:30rpx;
+  float:right;
+  padding:20rpx 0;
+  box-sizing:border-box;
+}
+.rightTarrows image{
+  width:30rpx;
+  height:40rpx;
+
+}
+.activity_timer_icon{
+  width:50rpx;
+  height:100%;
+  padding:15rpx 5rpx;
+  box-sizing:border-box;
+  float: left;
+}
+.activity_timer_icon image{
+  width:30rpx;
+  height:30rpx;
+}
+.activity_time{
+  float:left;
+  padding:22rpx 10rpx;
+  box-sizing:border-box;
+  height:100%;
+  overflow:hidden;
+}
+.activity_text{
+  font-size:24rpx;
+  color:#999;
+  width:560rpx;
+}
+.activity_title{
+  padding:10rpx 0;
+  box-sizing:border-box;
+}
+
+
+/*属性面板*/
+.propertyPannel{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  overflow: hidden;
+  z-index: 100;
+}
+.propertyPannel .top{
+  height: 30%;
+  opacity: 0.5;
+  background: black;
+}
+.propertyPannel .bottom{
+  height: 70%;
+  background-color: #ffffff;
+}
+.menu .menuCell{
+  width: 375rpx;
+  padding: 10rpx 0;
+  text-align: center;
+}
+.menu .active{
+  border-bottom: 4rpx solid #4ABDC2;
+  color: #4ABDC2;
+}
+/* 详情 */
+.activity_box{
+  margin-top:100rpx;
+}
+ .menu{
+  display:flex;
+  flex-direction:row;
+  margin-bottom: 2rpx;
+  padding-bottom: 0;
+  font-size:30rpx;
+  position:fixed;
+  margin:auto;
+  top:0;
+  left:0;
+  right:0;
+  z-index:100000;
+  background:#fff;
+}
+ .menu .menuCell{
+  width: 375rpx;
+  padding: 10rpx 0;
+  text-align: center;
+}
+ .menu .active{
+  border-bottom: 4rpx solid ;
+  /* color: #4ABDC2; */
+}
+.joins{
+  width:510rpx;
+  /* height:466rpx; */
+  margin:100rpx auto;
+}

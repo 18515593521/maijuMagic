@@ -1,0 +1,183 @@
+<!-- 店铺信息 -->
+<view class='shop'>
+  <image class='logo' src='{{shopInfo}}'></image>
+  <view>{{groupData.shopName}}</view>
+</view>
+<!-- 产品信息 -->
+
+<view class='product'>
+  <view>
+    <image class='picture' src='{{groupData.imgurl}}'></image>
+  </view>
+  <view class='info'>
+    <view>
+      <view class='name out_hidden_2'>{{groupData.product_title}}</view>
+      <view class='property'>{{groupData.joinNum}}人拼团 已拼{{groupData.buy_num}}件 </view>
+      <view class='flexRow' style='margin-top:20rpx'>
+        <view class='minPirce'>￥{{groupData.group_price}}</view>
+        <view class='manxPirce'>原价￥{{groupData.max_price}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<!--我也要参团0和差人分享-->
+<view class='flexColumnH' style='margin-top:40rpx' wx:if='{{status==0||status==2}}'>
+  <view class='flexRow titles'>
+    <view>还差</view>
+    <view style='color:red'>{{gapNum}}</view>
+    <view>人即可组团成功</view>
+  </view>
+  <view class='end'>剩余{{groupData.remainingTime}}后结束</view>
+
+  <view class='headList flexRowH'>
+    <block wx:for='{{groupData.joinCustomer}}'>
+      <image src='{{item.head_url}}' class='headImg'></image>
+    </block>
+    <block wx:for='{{residueNum}}'>
+      <image src='/images/group.png' class='headImg'></image>
+    </block>
+
+  </view>
+  <view style='position:relative'>
+    <block wx:if='{{status==2&&payState==1}}'>
+      <button class='goGrounp' open-type='share'>分享好友参与</button>
+    </block>
+    <block wx:if='{{status==2&&payState==2}}'>
+      <form report-submit='true' bindsubmit='aginPayTo'>
+        <button form-type='submit' class='state'>待支付,点击支付</button>
+      </form>
+    </block>
+
+
+    <view class='goGrounp' bindtap='goToGroup' data-isJoin='{{groupData.isJoin}}' data-type='1' wx:if='{{status==0}}'>我也参团</view>
+    <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:160rpx;z-index:10000;top:0' open-type="getPhoneNumber" data-type='' bindgetphonenumber="authorizePhone"></button>
+  </view>
+
+
+</view>
+<!--拼团失败-->
+<view class='flexColumnH' style='margin-top:40rpx' wx:if='{{status==3||status==1||status==4}}'>
+  <view class='headList flexRowH'>
+    <block wx:for='{{groupData.joinCustomer}}'>
+      <image src='{{item.head_url}}' class='headImg'></image>
+    </block>
+    <image src='/images/group.png' class='headImg' wx:if='{{gapNum>0}}'></image>
+  </view>
+
+  <view wx:if='{{status==3}}'>
+    <view class='titles'>很遗憾,拼团失败</view>
+    <view class='titles' wx:if="{{groupType==1}}">退款将在1-2个工作日内原渠道返回!</view>
+    <view class='titles' wx:if="{{groupType==2}}">没关系,还有更多优惠等你发现！</view>
+    <view class='goGrounp' bindtap='goToGroup' data-type='2'>查看更多拼团</view>
+  </view>
+
+  <view wx:if='{{status==1}}'>
+    <view class='titles'>恭喜您,拼团成功啦!</view>
+    <view class='end'>历时{{groupData.time}}成团</view>
+    <view class='titles' wx:if="{{groupType==2}}">可随时到店按拼团价格消费观对应产品</view>
+    <view class='goGrounp' bindtap='goToGroup' data-type='3'>点击查看订单</view>
+  </view>
+
+  <view wx:if='{{status==1}}'>
+    <view class='flexColumnH shopAddress'>
+      <view>店铺地址:{{showShopInfo.addr}}</view>
+      <view class='addrImage flexRow'>
+        <image src='/images/phone_4.png'></image>
+        <view>{{showShopInfo.phone_num}}</view>
+      </view>
+    </view>
+
+  </view>
+
+  <view wx:if='{{status==4}}'>
+    <view class='titles'>拼团即将成功！</view>
+    <view class='flexRow titles'>
+      <view style='color:red'>{{notPayNum}}</view>
+      <view>人付款即可组团成功,</view>
+    </view>
+    <view class='end'>剩余{{groupData.remainingTime}}后结束</view>
+    <view class='goGrounp' bindtap='goToGroup' data-type='3'>确定</view>
+  </view>
+</view>
+<!--拼团规则-->
+<view class="chooseMenu" bindtap="pageSkip" data-type='1' data-url='/pages/group/rule_list/rule_list'>
+  <view class="name justBetween flexRow names">
+    <text style="font-size:22rpx;color:#A0A0A0">开团/参团>凑齐拼单人数发货/凑不齐退款</text>
+    <text class="mustSelect2" style='color:#fe6665'>拼团规则</text>
+  </view>
+  <view class="look">
+    <image src="/images/arrows_right.png"></image>
+  </view>
+</view>
+<!--参加-->
+<!--属性面板-->
+<view class="propertyPannel" hidden="{{propertyPannelHidden}}">
+  <view class="top"></view>
+  <view class="bottom">
+    <view class="flex_row info">
+      <view class="flex_1">
+        <view class="pictureContainer">
+          <image class="picture" src="{{saleInfo.color_url}}" mode="scaleToFill"></image>
+        </view>
+      </view>
+      <view class="flex_2">
+        <view class="productPrice">
+          <block wx:if="{{isHot==1}}">
+            <block wx:if="{{productInfo.info.residue_num>0 && productInfo.buyNum<productInfo.info.limitation_num}}">
+              <text class='now'>￥{{productInfo.info.hot_price}}</text>
+              <text class='old'>￥{{productInfo.info.max_price}}</text>
+            </block>
+            <block wx:else>
+              <text>￥{{saleInfo.price}}</text>
+            </block>
+          </block>
+          <block wx:else>
+            <block wx:if="{{isShowPrice==1}}">
+              <text>￥{{saleInfo.price}}</text>
+            </block>
+            <block wx:else>
+              <text>到店咨询</text>
+            </block>
+          </block>
+        </view>
+        <view style="color:#666666;">库存{{(isHot==1 && productInfo.info.residue_num && productInfo.buyNum
+          <productInfo.info.limitation_num) ? productInfo.info.residue_num : saleInfo.stock}}件</view>
+            <view style="color:#666666;">请选择颜色</view>
+        </view>
+        <view class="flex_3" bindtap="closeProperty">
+          <image class="quitImage" src="/images/quit.png"></image>
+        </view>
+      </view>
+
+      <view style="height:calc(100% - 340rpx);overflow-y:auto;">
+
+        <view class="pannel color">
+          <view class="">颜色</view>
+          <view>
+            <block wx:for="{{colorArr}}" wx:key="*this">
+              <view class="colorItem {{colorActiveArr[index]}}" data-param="{{item}}" bindtap="chooseColor">{{item}}</view>
+            </block>
+          </view>
+        </view>
+
+        <view class="pannel color">
+          <view class="">规格</view>
+          <view>
+            <block wx:for="{{modelArr}}" wx:key="id">
+              <view class="colorItem {{modelActiveArr[index]}}" data-param="{{item.id}}" bindtap="chooseModel">{{item.standard}}</view>
+            </block>
+          </view>
+        </view>
+
+        <view class="pannel flex_row count">
+          <view class="countText">数量</view>
+          <view class="flex_row countOperate">
+            <view data-param="-1" bindtap="changeProductCount">-</view>
+            <view>{{buyCount}}</view>
+            <view data-param="1" bindtap="changeProductCount">+</view>
+          </view>
+        </view>
+      </view>
+      <view class='goGrounp2' data-isHot='3' data-type='1' bindtap='goGrounp'>参与拼团</view>
+    </view>
+  </view>

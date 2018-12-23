@@ -1,0 +1,53 @@
+<view class='container'>
+  <block wx:for="{{hotProductList}}" wx:key="id">
+    <view class='item'>
+      <view class='left'>
+        <image src='{{item.imgurl}}'></image>
+      </view>
+      <view class='right'>
+        <view>
+          <view class='name out_hidden_2'>{{item.product_title}}</view>
+          <view class='count'>
+            <view class='percent'>
+              <view class='all'>
+                <block wx:if="{{item.pmgressbar>0}}">
+                  <view class='remain' style='width:{{item.pmgressbar*300}}rpx;'></view>
+                </block>
+              </view>
+              <view class='remain_title'>{{item.percent}}%</view>
+            </view>
+            <view class='sale'>{{isCanBuy && item.pay_status==1 ? '已售' : '预订'}}{{item.total_num}}</view>
+          </view>
+        </view>
+        <view class='price'>
+          <view>
+            <text class='now'>￥{{item.hot_price}}</text>
+            <text class='old'>￥{{item.max_price}}</text>
+          </view>
+          <block wx:if="{{item.residue_num>0}}">
+            <block wx:if="{{payState==1&&payStatusInfo.isOpen==1&&payStatusInfo.pay_status==1&&item.isOpen==1&&item.pay_status==1}}">
+              <block wx:if="{{item.reserveNum<=0}}">
+                <view class='look' data-url="/pages/product/product_details/product_details?productId={{item.id}}&hotProductVersion={{item.hot_version}}" data-type="1" bindtap="pageSkip">马上抢购</view>
+              </block>
+              <block wx:else>
+                <view class='look' style='background-color: #EEEEEE;color: #999999;'>已抢购</view>
+              </block>
+            </block>
+            <block wx:else>
+              <block wx:if="{{item.reserveNum<=0}}">
+                <view class='look' data-url="/pages/product/product_details/product_details?productId={{item.id}}&hotProductVersion={{item.hot_version}}" data-type="1" bindtap="pageSkip">预订到店</view>
+              </block>
+              <block wx:else>
+                <view class='look' style='background-color: #EEEEEE;color: #999999;'>已预订</view>
+              </block>
+            </block>
+          </block>
+          <block wx:else>
+            <view class='look' style='background-color: #EEEEEE;color: #999999;'>已抢光</view>
+          </block>
+        </view>
+      </view>
+      <button hidden='{{isAuthorizePhone}}' class="phoneButton" style='width:750rpx;height:260rpx;top:0' open-type="getPhoneNumber" data-type='' data-param='' bindgetphonenumber="authorizePhone"></button>
+    </view>
+  </block>
+</view>

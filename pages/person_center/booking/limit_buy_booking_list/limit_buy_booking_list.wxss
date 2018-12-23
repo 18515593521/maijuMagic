@@ -1,0 +1,101 @@
+page {
+  background-color: #EEEEEE;
+}
+
+/*菜单*/
+.menu {
+    display: flex;
+    justify-content: space-around;
+    line-height: 70rpx;
+    background-color: #FFFFFF;
+    margin-top: 2rpx;
+}
+.menu .item{
+    font-size: 28rpx;
+    color: #4C4C4C;
+    text-align: center;
+    width: 20%;
+}
+.menu .active{
+    color: #4ABDC2;
+    border-bottom: 4rpx solid #4ABDC2;
+}
+/* 预约信息 */
+.booking{
+  margin-top: 2rpx;
+  background-color: #FFFFFF;
+  padding: 20rpx 0;
+}
+/* 店铺信息 */
+.booking .shop{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20rpx 10rpx;
+}
+.booking .shop .logo_name{
+  display: flex;
+  align-items: center;
+}
+.booking .shop .logo_name image{
+  width: 30rpx;
+  height: 30rpx;
+  display: block;
+  margin-right: 20rpx;
+}
+.booking .shop .logo_name .shopName{
+  font-size: 24rpx;
+  color: #6F6F6F;
+}
+.booking .shop .state{
+  font-size: 24rpx;
+  color: #FD9091;
+}
+/* 预约时间 */
+.booking .time{
+  padding: 0 10rpx 10rpx 70rpx;
+  font-size: 22rpx;
+  color: #6F6F6F;
+  line-height: 40rpx;
+}
+/* 产品信息 */
+.booking .product{
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx 0 70rpx;
+  background-color: #F5F5F5;
+}
+.booking .product image{
+  width: 150rpx;
+  height: 150rpx;
+  display: block;
+  margin-right: 10rpx;
+}
+.booking .product .info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 150rpx;
+  font-size: 18rpx;
+}
+.booking .product .info .name{
+  font-size: 24rpx;
+  color: #525252;
+}
+.booking .product .info .property{
+  color: #A2A2A2;
+}
+.booking .product .info .count{
+  color: #A2A2A2;
+}
+.booking .product .info .price{
+  text-align: right;
+}
+.booking .product .info .price .now{
+  font-size: 26rpx;
+  color: #EB3B3B;
+}
+.booking .product .info .price .old{
+  color: #A2A2A2;
+  text-decoration: line-through;
+}

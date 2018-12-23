@@ -1,0 +1,121 @@
+<block wx:if='{{productList.length>0}}'>
+    <!-- 店铺信息 -->
+    <view class='shopInfo'>
+      <view>
+        <image src="/images/order.png"></image>
+      </view>
+      <view class='shopName'>{{showShopInfo.name}}</view>
+      <view class='operate'>
+        <block wx:if='{{operateState=="show"}}'>
+            <view class='edit' bindtap='editProduct'>编辑</view>  
+            <view class='getCoupon' bindtap='openCouponPannel'>领券</view>
+        </block>
+        <block wx:else>
+            <view class='edit' bindtap='updateProductCount'>完成</view>  
+        </block> 
+      </view>
+    </view>
+    <!-- 产品信息 -->
+    <block wx:for="{{productList}}" wx:key="id">
+      <view class='productInfo'>
+        <view>
+            <block wx:if='{{item.choose}}'>
+                <image class='yesChoose' src='/images/yes.png' data-type='1' data-param='{{item.id}}' data-operate='0' bindtap='isChooseProduct'></image>
+            </block>
+            <block wx:else>
+                <view class='noChoose' data-type='1' data-param='{{item.id}}' data-operate='1' bindtap='isChooseProduct'></view>
+            </block>
+        </view>
+        <view>
+          <image class='image' src="{{item.color_url}}"></image>
+        </view>
+        <view class='info'>
+          <view>
+            <block wx:if='{{operateState=="show"}}'>
+                <view class='title out_hidden_2'>{{item.product_title}}</view>
+            </block>
+            <block wx:else>
+                <view class='countOperate'>
+                  <view class='reduce' data-param='{{item.id}}' data-value='-1' bindtap='thisProductNumberChange'>-</view>
+                  <view class='count'>{{item.number}}</view>
+                  <view class='add' data-param='{{item.id}}' data-value='1' bindtap='thisProductNumberChange'>+</view>
+                </view>       
+            </block>
+            <view class='property'>
+              <view>颜色:{{item.color}};  单位:{{item.product_unit}};  型号:{{item.model}};</view>
+              <view>规格:{{item.standard}};</view>
+              <view wx:if='{{item.presell==2}}'>[{{item.presellTime}}]日发</view>
+            </view>
+          </view>
+          <view class='price'>
+            <view class='color_red'>￥<text style='font-size:34rpx;'>{{item.price}}</text></view>
+            <block wx:if='{{operateState=="show"}}'>
+                <view class='count'>×{{item.number}}</view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view class='space'></view>
+
+    <!-- 底部 -->
+    <view class='bottomArea'>
+      <view class='allChoose' data-type='2' bindtap='isChooseProduct'>
+          <block wx:if='{{allChoose}}'>
+              <image class='yesChoose' src='/images/yes.png'></image>
+          </block>
+          <block wx:else>
+              <view class='noChoose' ></view>
+          </block>
+        <view>全选</view>
+      </view>
+      <view class='money'>
+        <text>合计:</text>
+        <text class='color_red'>￥{{allPrice}}</text>
+      </view>
+      <block wx:if='{{operateState=="show"}}'>
+          <view class='payMoney' bindtap='payMoney'>结算</view>
+      </block>
+      <block wx:else>
+          <view class='payMoney' bindtap='deleteProduct'>删除</view>  
+      </block> 
+    </view>
+</block>
+<block wx:else>
+    <image class='car' src="/images/nodata/car.png"></image>
+    <view class='tips'>购物车空空如也，快去挑选产品吧！</view>
+    <!-- <view class='goLook'>去逛逛</view> -->
+</block>
+
+<!--优惠券-->
+<view class='maskPannel' hidden='{{couponHidden}}'>
+  <view class='couponInfo'>
+    <view class='title'>卡券领取</view>
+    <image class='quitImage' src='/images/quit.png' bindtap='closeCouponPannel'></image>
+    <view style='height:420rpx;overflow-y:auto;'>
+        <block wx:for="{{cardList}}" wx:key="couponsId">
+            <view class='coupon'>
+              <view class='value'>
+                <image class="card" src="/images/coupon/{{item.card_tpye}}.png"></image>
+                <view>{{item.denomination}}<text style='font-size:20rpx;'>{{item.card_tpye==3 ? '折' : '元'}}</text></view>
+              </view>
+              <view class='info'>
+                <view>
+                  <block wx:if='{{item.card_tpye==1 || item.card_tpye==3}}'>
+                      <view class='condition'>订单满{{item.use_condition}}元使用</view>
+                  </block>
+                  <view class='timeRange'>使用期限 {{item.start_time}}至{{item.end_time}}</view>
+                </view>
+                <block wx:if='{{item.isGet==1}}'>
+                    <view class='haveGet'>已领取</view>
+                </block>
+                <block wx:else>
+                    <view class='get' data-param='{{item.couponsId}}' bindtap='getCoupon'>领取</view>
+                </block>
+              </view>
+            </view>
+        </block> 
+    </view>
+  </view>
+</view>

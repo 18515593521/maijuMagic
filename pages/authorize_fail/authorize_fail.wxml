@@ -1,0 +1,6 @@
+<view>
+  <image class='fail' src='/images/nodata/fail.png'></image>
+  <view class='text1'>{{failMessage}}</view>
+  <view class='text2'>需重新根据弹出框的提示点击允许相应授权</view>
+  <button open-type='openSetting' class='authorize' bindtap='reAuthorize'>重新授权</button>
+</view>
