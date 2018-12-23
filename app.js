@@ -13,8 +13,8 @@ App({
     },
     //【域名】//
     // domainName: 'http://192.168.1.6:8080/shop-web',   //域名
-     domainName: 'https://www.kaolaj.com/magicCloud',   //域名（线上）
-   //  domainName: 'https://www.kaolaj.com/magic_cloud2.0_test',   //域名（测试）
+     //domainName: 'https://www.kaolaj.com/magicCloud',   //域名（线上）
+     domainName: 'https://www.kaolaj.com/magic_cloud2.0_test',   //域名（测试）
     // domainName: 'https://www.kaolaj.com/magic_cloud2.0_shenhe',   //域名（测试）
 
     //【设备信息】

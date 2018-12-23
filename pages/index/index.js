@@ -1073,8 +1073,8 @@ Page({
   //获取访问域名路径
   getVisitDomainUrl: function () {
     var thisPage = this;
-    var domainName_onLine = 'https://www.kaolaj.com/magicCloud';
-    //var domainName_onLine = 'https://www.kaolaj.com/magic_cloud2.0_test';
+    //var domainName_onLine = 'https://www.kaolaj.com/magicCloud';
+    var domainName_onLine = 'https://www.kaolaj.com/magic_cloud2.0_test';
     //var domainName_onLine = 'https://www.kaolaj.com/magic_cloud2.0_shenhe';
     // var domainName_onLine = 'http://192.168.1.6:8080/shop-web';
     // var domainName_outLine = 'https://www.kaolaj.com/magic_cloud2.0_test';
