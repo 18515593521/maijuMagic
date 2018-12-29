@@ -27,7 +27,7 @@
     <view class='getToMoneys1' >少于 1 元 不可提现</view>
     </block>
     <block wx:elif="{{status==1 && payState==1 }}">
-    <view class='getToMoneys' data-urls="/pages/person_center/reflect_value/reflect_value?money={{canCarryMoney}}" data-types="1" bindtap='pageSkipTo'>立即提现</view>
+    <view class='getToMoneys' data-urls="/pages/person_center/reflect_value/reflect_value?money={{canCarryMoney}}&scene=1" data-types="1" bindtap='pageSkipTo'>立即提现</view>
     </block>
     <block wx:elif="{{status==2 && payState==1 }}">
         <view class='getToMoneys' >{{num}}天后可提现</view>
@@ -36,7 +36,7 @@
       <view class='getToMoneys1' >{{num}}天后 提交线下提现请求</view>
     </block>
   <block wx:elif="{{status==1 && payState==2 }}">
-      <view class='getToMoneys1'data-urls="/pages/person_center/reflect_value/reflect_value?money={{canCarryMoney}}" data-types="1" bindtap='pageSkipTo' >今日可提现 请提交线下提现请求</view>
+      <view class='getToMoneys1'data-urls="/pages/person_center/reflect_value/reflect_value?money={{canCarryMoney}}&scene=2" data-types="1" bindtap='pageSkipTo' >今日可提现 请提交线下提现请求</view>
     </block>
     <view class='getToMoneys goOutDetail' data-urls="/pages/person_center/details/details" data-types="1" bindtap='pageSkipTo' style='background:none'>提现明细</view>
 

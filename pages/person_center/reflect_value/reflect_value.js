@@ -18,7 +18,8 @@ Page({
     var thisPage = this;
     if (parseFloat(options.money) > 0){
       thisPage.setData({
-        money: options.money
+        money: options.money,
+        scene: options.scene
       })
     }
     

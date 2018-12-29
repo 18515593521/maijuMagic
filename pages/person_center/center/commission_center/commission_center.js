@@ -274,6 +274,7 @@ Page({
     data.inviter = app.globalData.customerInfo.id;
     data.appid = app.globalData.appInfo.appId;
     data.node3 = app.globalData.customerInfo.factoryId;
+    data.scene = app.globalData.customerInfo.payState
     if (app.globalData.customerInfo.is_horizontal_alliances == 1) {
 
         thisPage.setData({
